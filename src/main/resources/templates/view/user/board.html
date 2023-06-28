@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+
+    <div class="auto board-wrap">
+        <div class="subP-title">
+            <p class="title">게시판</p>
+            <ul class="menuPath">
+                <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="">게시판</a></li>
+            </ul>
+        </div>
+
+
+        <div id="search-wrap" class="search-wrap">
+            <div class="select-wrap">
+                <select id="size" class="mr10">
+                    <option value=10 selected>10</option>
+                    <option value=20>20</option>
+                    <option value=50>50</option>
+                    <option value=100>100</option>
+                </select>
+                <!--<select id="searchType">
+                    <option value="전체">전체</option>
+                    <option value="공지">공지</option>
+                    <option value="일반">일반</option>
+                </select>-->
+            </div>
+            <div class="search">
+                <select id="queryType" class="mr10">
+                    <option value="전체">전체</option>
+                    <option value="제목">제목</option>
+                    <option value="내용">내용</option>
+                </select>
+
+                <div class="searchBox">
+                    <input type="text" placeholder="검색어를 입력해주세요." id="query">
+                    <span id="search-icon" class="search-icon"></span>
+                </div>
+            </div>
+        </div>
+
+
+        <!--PC버전-->
+        <div class="inventList page-tableBox pc768-wrap">
+            <table class="page-table1 table-hover">
+                <colgroup>
+                    <col style = "width:10%">
+                    <col style = "width:*">
+                    <col style = "width:58%">
+                    <col style = "width:*">
+                </colgroup>
+
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>종류</th>
+                        <th>제목</th>
+                        <th>작성일</th>
+                    </tr>
+                </thead>
+                <tbody id="boardListTbody">
+                    <!--<tr onclick="location.href='/notice-view'">
+                        <td>50</td>
+                        <td><p class="notice">공지사항</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-10</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>49</td>
+                        <td><p class="notice">공지사항</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 수익배분 공지사항 게시판 제목포인트 수익배분 공지사항 게시판 제목포인트 수익배분 공지사항 게시판 제목포인트 수익배분 공지사항 게시판 제목포인트 수익배분 공지사항 게시판 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>48</td>
+                        <td><p class="notice">공지사항</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-07-10</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>47</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-07-10</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>46</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목포인트 수익배분 일반 게시판 제목포인트 수익배분 일반 게시판 제목포인트 수익배분 일반 게시판 제목</p></td>
+                        <td>2022-08-10</td>
+
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>45</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>44</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>43</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>42</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>41</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>40</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>39</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>38</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>37</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>36</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>35</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>34</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>33</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>32</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>
+                    <tr onclick="location.href='/notice-view'">
+                        <td>31</td>
+                        <td><p>일반</p></td>
+                        <td><p class="title">공유경제 공동체 천인방 공지사항 제목</p></td>
+                        <td>2022-08-09</td>
+                    </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <!--M 768px ~ -->
+        <ul id="boardListMobile" class="boardList m768-wrap">
+            <!--<li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판 포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+                <a href="./board_view">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>-->
+        </ul>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!--<a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+            <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+            <div class="page-num">
+                <a href="#" class="actived">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+            </div>
+            <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+            <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+
+
+
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <script>
+        let size=20;
+        let page=1;
+        let sort = "createdAt,desc";
+
+        $('.invent-btn').click(function(){
+            $('.invent-modal').css('display','block');
+        });
+
+        if (matchMedia("screen and (max-width: 768px)").matches) {
+            getBoardMobile();
+        } else {
+            getBoard();
+        }
+
+        window.onresize = function(event){
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getBoardMobile();
+            }else {
+                getBoard();
+            }
+        };
+
+        $("#size").on("change", function(){
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getBoardMobile();
+            }else {
+                getBoard();
+            }
+        });
+
+        $("#query").on("keydown", function(e){
+            if(e.keyCode==13) {
+                $("#search-icon").click();
+            }
+        });
+
+        $("#search-icon").on("click", function(){
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getBoardMobile();
+            }else {
+                getBoard();
+            }
+        });
+
+
+
+        function getBoard() {
+            let query = $("#query").val();
+            let queryType = $("#queryType").val();
+            $.ajax({
+                type:"get",
+                url:"/api/common/board",
+                data:{
+                    "page":page-1,
+                    "sort":sort,
+                    "size":size,
+                    "query":query,
+                    "queryType":queryType
+                },
+                success:function(data) {
+                    let normalData = data.normalList;
+                    let normalList = normalData.content;
+                    let noticeList = data.noticeList;
+
+                    let tag = '';
+                    if(noticeList!=null && noticeList.length!=0) {
+                        noticeList.forEach(function(arg){
+                            tag += '<tr onclick="location.href=\'/board-view?no='+arg.boardSeq+'\'">' +
+                                '<td>'+arg.boardNo+'</td>' +
+                                '<td><p class="notice">공지사항</p></td>' +
+                                '<td><p class="title">'+arg.title+'</p></td>' +
+                                '<td>'+arg.createdAt+'</td>' +
+                                '</tr>';
+                        });
+                    }
+                    if(normalList!=null && normalList.length!=0) {
+                        normalList.forEach(function(arg){
+                            tag += '<tr onclick="location.href=\'/board-view?no='+arg.boardSeq+'\'">' +
+                                '<td>'+arg.boardNo+'</td>' +
+                                '<td><p>일반</p></td>' +
+                                '<td><p class="title">'+arg.title+'</p></td>' +
+                                '<td>'+arg.createdAt+'</td>' +
+                                '</tr>';
+                        });
+                    }
+
+                    if(noticeList==null || noticeList.length==0) {
+                        if(normalList.length==0) {
+                            tag = '<tr><td colspan="4" style="text-align: center;">게시글이 존재하지 않습니다.</td></tr>';
+                        }
+                    }
+
+                    $("#boardListTbody").html(tag);
+                    fPagination2(normalData, page);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        function getBoardMobile() {
+            let query = $("#query").val();
+            let queryType = $("#queryType").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/common/board",
+                data:{
+                    "page":page-1,
+                    "sort":sort,
+                    "size":size,
+                    "query":query,
+                    "queryType":queryType
+                },
+                success:function(data) {
+                    let normalData = data.normalList;
+                    let normalList = normalData.content;
+                    let noticeList = data.noticeList;
+
+                    let tag = '';
+                    if(noticeList!=null && noticeList.length!=0) {
+                        noticeList.forEach(function(arg){
+                            tag += '<li>' +
+                                '<a href="/board-view?no='+arg.boardSeq+'">' +
+                                '<div class="text-wrap">' +
+                                '<p class="date">'+arg.createdAt+'</p>' +
+                                '<p class="notice notice1">공지</p>' +
+                                '</div>' +
+                                '<p class="title">'+arg.title+'</p>' +
+                                '</a>' +
+                                '</li>';
+                        });
+                    }
+                    if(normalList!=null && normalList.length!=0) {
+                        normalList.forEach(function(arg){
+                            tag += '<li>' +
+                                '<a href="/board-view?no='+arg.boardSeq+'">' +
+                                '<div class="text-wrap">' +
+                                '<p class="date">'+arg.createdAt+'</p>' +
+                                '<p class="notice">일반</p>' +
+                                '</div>' +
+                                '<p class="title">'+arg.title+'</p>' +
+                                '</a>' +
+                                '</li>';
+                        });
+                    }
+
+                    if(noticeList==null || noticeList.length==0) {
+                        if(normalList.length==0) {
+                            tag = '<tr><td colspan="4" style="text-align: center;">게시글이 존재하지 않습니다.</td></tr>';
+                        }
+                    }
+
+                    $("#boardListMobile").html(tag);
+                    fMobilePagination(normalData, page);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+    </script>
+</div>
+
+</html>

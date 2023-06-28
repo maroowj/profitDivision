@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>공유경제공동체 천인방</title>
+</head>
+<body>
+<script th:inline="javascript">
+    window.onload = function () {
+        alert("관리자 등급이 설정되지 않았습니다.\n대표 관리자에게 문의하시기 바랍니다.");
+        location.href = "/management/login";
+    }
+</script>
+</body>
+</html>

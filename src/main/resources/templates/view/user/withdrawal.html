@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+
+    <div class="gray-bg">
+        <div class="auto profit-wrap withdrawal-wrap">
+            <div class="subP-title">
+                <p class="title">출금 신청하기</p>
+                <ul class="menuPath">
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="/profit">수익관리</a></li>
+                    <li><a href="">출금신청하기</a></li>
+                </ul>
+            </div>
+
+            <p class="wd-text">
+                ※ 출금 지급은 관리자의 승인 후 입금이 됩니다. ( 출금 신청 후 2일 ~ 5일 소요 )<br>
+                ※ 관리자에 의해 처리되지 않은 신청이 있을 경우 중복으로 신청할 수 없습니다.<br>
+                ※ 출금 신청 시 회원님의 계좌정보가 일치하지 않을 경우 미승인 처리가 될 수 있습니다.<br>
+                ※ 회원님의 계좌정보는 마이페이지 - 회원정보수정 또는 내 계좌정보 변경하기 버튼을 클릭하여 변경하실 수 있으며, 본인 명의의 계좌정보만 출금할 수 있습니다.
+            </p>
+
+            <div class="withdrawal-textWrap">
+                <div class="price-wrap">
+                    <div class="price">
+                        <p class="title">나의 총 금액</p>
+                        <p id="total" class="point"></p>
+                    </div>
+                    <div class="price">
+                        <p class="title">출금 가능 금액</p>
+                        <p id="available" class="point"></p>
+                    </div>
+                    <div class="price">
+                        <p class="title">연간 출금 금액</p>
+                        <p id="amountPerYear" class="point"></p>
+                    </div>
+                    <div class="btn-wrap"><a href="/profit" class="comm-btn gray-btn">수익내역 보기</a></div>
+                </div>
+
+                <div class="account-wrap">
+                    <div class="text">
+                        <p class="title">출금 신청 금액 <span class="yellow">*</span></p>
+                        <input type="text" id="amount" class="all-price" placeholder="1만 단위로 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                    </div>
+
+                    <div class="text2 text">
+                        <p class="title">예금주 <span class="yellow">*</span></p>
+                        <input type="text" id="name" readonly>
+                    </div>
+                    <div class="text2 text">
+                        <p class="title">은행명 <span class="yellow">*</span></p>
+                        <input type="text" id="bankName" readonly>
+                    </div>
+                    <div class="text">
+                        <p class="title">계좌번호 <span class="yellow">*</span></p>
+                        <input type="number" id="accountNumber" readonly>
+                    </div>
+
+                    <div class="btn-wrap">
+                        <a href="/mypage" class="comm-btn gray-btn mr10">내 계좌정보 변경하기</a>
+                        <a id="btn-withdrawal" class="comm-btn yellow-btn cupoint">출금 신청하기</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="auto profitList-wrap withdrawal-wrap">
+        <div class="subTitle2">
+            <p class="title">출금 지급 내역</p>
+        </div>
+
+        <div id="search-wrap" class="search-wrap">
+            <select id="type">
+                <option value="전체" selected>전체</option>
+                <option value="승인">승인</option>
+                <option value="미승인">미승인</option>
+            </select>
+            <input type="date" id="dateFrom" class="date">
+            <span>~</span>
+            <input type="date" id="dateTo" class="date">
+
+            <ul id="month-gap" class="period-wrap">
+                <li><a class="cupoint" val=1>1개월</a></li>
+                <li class="actived"><a class="cupoint" val="3">3개월</a></li>
+                <li><a class="cupoint" val="6">6개월</a></li>
+                <li><a class="cupoint" val="12">1년</a></li>
+            </ul>
+        </div>
+
+
+        <!--PC버전-->
+        <div class="withDrawalList page-tableBox pc768-wrap">
+            <table class="page-table1">
+                <colgroup>
+                    <col style = "width:10%">
+                    <col style = "width:*">
+                    <col style = "width:*">
+                    <col style = "width:*">
+                    <col style = "width:20%">
+                    <col style = "width:*">
+
+                </colgroup>
+
+                <thead id="withdrawalListThead">
+                <tr>
+                    <th>번호</th>
+                    <th><p class="sort" sort="createdAt">날짜</p></th>
+                    <th><p class="sort" sort="amount">출금 신청 금액</p></th>
+                    <th><p class="sort" sort="accepted">승인여부</p></th>
+                    <th>비고</th>
+                    <th><p class="sort" sort="totalBalance">잔액</p></th>
+                </tr>
+                </thead>
+                <tbody id="withdrawalListTbody">
+                <!--<tr>
+                    <td>50</td>
+                    <td>2022-08-10 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><a href="#" class="white-btn">출금 취소</a></td>
+                    <td>-</td>
+                    <td><p class="price">-</p></td>
+                </tr>
+                <tr>
+                    <td>49</td>
+                    <td>2022-08-09 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text2">출금 미승인</p></td>
+                    <td>계좌정보 불일치</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">5,000,000P</p></td>
+                    <td><p class="wd-text wd-text3">신청 취소</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>47</td>
+                    <td>2022-08-06 18:10:23</td>
+                    <td><p class="price">10,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>-->
+                <!--<tr>
+                    <td>46</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">1,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">1,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">1,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">3,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">10,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">4,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">1,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">5,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">1,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td><p class="price">2,000,000P</p></td>
+                    <td><p class="wd-text wd-text1">출금 승인</p></td>
+                    <td>-</td>
+                    <td><p class="price">1,156,789,483P</p></td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+
+        <!--M 768px ~ -->
+        <ul id="mobileWithdrawalList" class="withDrawalList m768-wrap">
+            <!--<li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <a href="#" class="white-btn">출금 취소</a>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+
+                    </div>
+                    <p class="approval approval2">출금 미승인</p>
+                </div>
+                <p class="info-text">계좌정보 불일치 계좌정보 불일치 계좌정보 불일치 계좌정보 불일치 계좌정보 불일치 계좌정보 불일치 계좌정보 불일치</p>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+
+                    </div>
+                    <p class="approval approval2">출금 미승인</p>
+
+                </div>
+                <p class="info-text">계좌정보 불일치</p>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>
+            <li>
+                <div class="wdText-wrap">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-08 18:10:23</p>
+                        <p class="wd-text">2,000,000P</p>
+                        <p class="all-price">1,156,789,483P</p>
+                    </div>
+                    <p class="approval approval1">출금승인</p>
+                </div>
+            </li>-->
+        </ul>
+
+
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!--<a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+            <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+            <div class="page-num">
+                <a href="#" class="actived">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+            </div>
+            <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+            <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <script>
+        let page = 1;
+        let size = 20;
+        let sort = "createdAt,desc";
+        let today = new Date();
+        let preDay = new Date(new Date().setMonth(new Date().getMonth()-3));
+        $("#dateFrom").val(strDate(preDay));
+        $("#dateTo").val(strDate(today));
+        let available;
+
+
+        getWithdrawalOverview();
+        if (matchMedia("screen and (max-width: 768px)").matches) {
+            getWithdrawalListMobile();
+        } else {
+            getWithdrawalList();
+        }
+
+        // 출금 취소 버튼 클릭 시
+        $("#withdrawalListTbody").on("click", ".white-btn", function(){
+            let seq = $(this).parent().parent().attr("seq");
+            if(!confirm("출금 신청을 취소하시겠습니까?")) return;
+
+            $.ajax({
+                type:"put",
+                url:"/api/user/withdrawals/cancel/"+seq,
+                success:function(){
+                    toastModal("출금 신청이 취소되었습니다.");
+                    setTimeout(() => location.reload(), 700);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        });
+
+        // 출금 리스트 불러오기 (모바일)
+        function getWithdrawalListMobile() {
+            let type = $("#type").val();
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/withdrawals",
+                data:{
+                    "type":type,
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":10
+                },
+                async:false,
+                success:function(data) {
+                    // console.log(data);
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg){
+                            let acceptedTag = '';
+                            if(arg.accepted==0) {
+                                acceptedTag = '<a class="white-btn cupoint">출금 취소</a>';
+                            }else if(arg.accepted==1) {
+                                acceptedTag = '<p class="approval approval1">출금 승인</p>';
+                            }else if(arg.accepted==2) {
+                                acceptedTag = '<p class="approval approval2">출금 미승인</p>';
+                            }else if(arg.accepted==3) {
+                                acceptedTag = '<p class="approval">신청 취소 </p>';
+                            }
+                            let commentTag = '';
+                            if(arg.comment==null || arg.comment=="" || arg.comment==undefined) {
+                                commentTag = '';
+                            }else {
+                                commentTag = '<p class="info-text">'+arg.comment+'</p>';
+                            }
+
+                            tag += '<li seq="'+arg.seq+'">' +
+                                        '<div class="wdText-wrap">' +
+                                        '<div class="text-wrap">' +
+                                        '<p class="date">'+arg.createdAt+'</p>' +
+                                        '<p class="wd-text">'+fcomma(arg.amount)+'P</p>' +
+                                        '<p class="all-price">'+fcomma(arg.totalBalance)+'P</p>' +
+                                        '</div>' +
+                                        acceptedTag +
+                                        '</div>' +
+                                        commentTag +
+                                '</li>';
+                        });
+                    }else {
+                        tag = '<li><div style="text-align: center;">출급 지급 내역이 존재하지 않습니다.</div></li>';
+                    }
+                    fMobilePagination(data, page);
+                    $("#mobileWithdrawalList").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 출금 리스트 불러오기
+        function getWithdrawalList() {
+            let type = $("#type").val();
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/withdrawals",
+                data:{
+                    "type":type,
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                async:false,
+                success:function(data) {
+                    // console.log(data);
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg){
+                            let acceptedTag = '';
+                            if(arg.accepted==0) {
+                                acceptedTag = '<td><a class="white-btn cupoint">출금 취소</a></td>';
+                            }else if(arg.accepted==1) {
+                                acceptedTag = '<td><p class="wd-text wd-text1">출금 승인</p></td>';
+                            }else if(arg.accepted==2) {
+                                acceptedTag = '<td><p class="wd-text wd-text2">출금 미승인</p></td>';
+                            }else if(arg.accepted==3) {
+                                acceptedTag = '<<td><p class="wd-text wd-text3">신청 취소</p></td>';
+                            }
+                            let commentTag = '';
+                            if(arg.comment==null || arg.comment=="" || arg.comment==undefined) {
+                                commentTag = '<td>-</td>';
+                            }else {
+                                commentTag = '<td>'+arg.comment+'</td>';
+                            }
+                            let totalTag = '';
+                            if(arg.accepted==0) {
+                                totalTag = '<td><p class="price">-</p></td>';
+                            }else {
+                                totalTag = '<td><p class="price">'+fcomma(arg.totalBalance)+'P</p></td>';
+                            }
+
+                           tag += '<tr seq="'+arg.seq+'">' +
+                                    '<td>'+arg.rowNum+'</td>' +
+                                    '<td>'+arg.createdAt+'</td>' +
+                                    '<td><p class="price">'+fcomma(arg.amount)+'P</p></td>' +
+                                    acceptedTag +
+                                    commentTag +
+                                    totalTag +
+                                    '</tr>';
+                        });
+                    }else {
+                        tag = '<tr><td colspan="6" class="price">출급 지급 내역이 존재하지 않습니다.</td></tr>';
+                    }
+                    fPagination2(data, page);
+                    $("#withdrawalListTbody").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 출금 신청하기
+        $("#btn-withdrawal").on("click", function() {
+            let amount = uncomma($("#amount").val());
+            let bankName = $("#bankName").val();
+            let accountNumber = $("#accountNumber").val();
+
+            if(amount==0 || amount.length<5) {
+                toastModal("출금 신청 금액을 확인해주세요.");
+                return;
+            }
+            if(bankName=="" || accountNumber=="") {
+                toastModal("내 계좌정보를 변경해주세요.");
+                return;
+            }
+            let odd = Number(amount.slice(-4, amount.length));
+            if(odd>0) {
+                toastModal("출금 신청 금액은 1만 단위로 입력해주세요.");
+                return;
+            }
+            if(amount > available) {
+                toastModal("출금 가능 금액을 초과 할 수 없습니다.");
+                return;
+            }
+
+            if(!confirm("입력하신 금액은 "+fcomma(amount)+"P 입니다.\n출금을 신청하시겠습니까?")) return;
+
+            $.ajax({
+                type:"post",
+                url:"/api/user/withdrawals",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "amount":amount,
+                    "bankName":bankName,
+                    "accountNumber":accountNumber
+                }),
+                success:function() {
+                    toastModal("출금이 신청되었습니다.");
+                    setTimeout(() => location.reload(), 700);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                    let errorJson = JSON.parse(request.responseText)
+                    if(errorJson.code == "MZS-1020"){
+                        toastModal("아직 처리가 되지 않은 요청이 있습니다.");
+                        setTimeout(() => location.reload(), 700);
+                    }
+                }
+            });
+        });
+
+        // 개요 불러오기
+        function getWithdrawalOverview() {
+            $.ajax({
+                type:"get",
+                url:"/api/user/withdrawals/overview",
+                success:function(data) {
+                    available = Number(data.available);
+                    $("#total").text(fcomma(data.total)+"P");
+                    $("#available").text(fcomma(data.available)+"P");
+                    $("#amountPerYear").text(fcomma(data.amountPerYear)+"P");
+                    $("#name").val(data.name);
+                    $("#bankName").val(data.bankName);
+                    $("#accountNumber").val(data.accountNumber);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        $("#amount").on("keyup", function(){
+            if($(this).val()>available) {
+                toastModal("출금 가능 금액을 초과 할 수 없습니다.");
+                $(this).val(fcomma(available));
+                return;
+            }
+            $("#amount").val(fcomma($(this).val()));
+        });
+
+        // 전체, 승인, 미승인 필터링
+        $("#type").on("change", function(){
+            page=1;
+            sort="createdAt,desc";
+            $(".sort").removeClass("actived");
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getWithdrawalListMobile();
+            } else {
+                getWithdrawalList();
+            }
+        });
+
+        // 날짜 단위 변경 시
+        $("#month-gap").on("click", "a", function(){
+            let dateTo = $("#dateTo").val();
+            let gap = Number($(this).attr("val"));
+            let dateFrom = new Date(dateTo);
+            dateFrom = new Date(dateFrom.setMonth(dateFrom.getMonth()-gap));
+            $("#dateFrom").val(strDate(dateFrom));
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getWithdrawalListMobile();
+            } else {
+                getWithdrawalList();
+            }
+        });
+
+        // 날짜 직접 선택 시
+        $("#search-wrap").on("change", ".date", function(){
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+            if(dateTo < dateFrom) {
+                toastModal("조회 시작 날짜가 종료 날짜를 넘길 수 없습니다.");
+                $("#dateFrom").val(dateTo);
+            }
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getWithdrawalListMobile();
+            } else {
+                getWithdrawalList();
+            }
+        });
+
+        // 페이지 클릭 시
+        $("#pagination").on("click", "a", function(){
+            page = $(this).attr("gopage");
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getWithdrawalListMobile();
+            } else {
+                getWithdrawalList();
+            }
+        });
+
+        window.onresize = function(event){
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getWithdrawalListMobile();
+            }else {
+                page = Math.round(page/2);
+                getWithdrawalList();
+            }
+        };
+
+        // 정렬
+        $("#withdrawalListThead").on("click", ".sort", function() {
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                sort="createdAt,desc";
+                getWithdrawalListMobile();
+            } else {
+                getWithdrawalList();
+            }
+        });
+
+        function strDate(date) {
+            let year = date.getFullYear() + "";
+            let month = (date.getMonth()+1) + "";
+            let day = date.getDate() + "";
+
+            if(month.length==1) {
+                month = "0" + month;
+            }
+            if(day.length==1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
+        }
+    </script>
+</div>
+</html>

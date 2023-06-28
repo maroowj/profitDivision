@@ -1,0 +1,55 @@
+@font-face {
+    font-family: "Noto Sans KR";
+    src: url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+         unicode-range: U+AC00-D7A3;
+        }
+
+@font-face {
+    font-family: 'roboto';
+    src: url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
+         unicode-range: U+0030-0039;
+}
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+
+@font-face {
+    font-family: "Gmarket-L";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansLight.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gmarket-m";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Gmarket-B";
+    src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansBold.woff")
+        format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+html, body, table, input, textarea, nav, button, div, p, span,
+#main_wrap span, h1, h2, h3, h4, h6, tr, td, ol, ul, li, select, pre {
+    font-size:16px;
+    font-family:"Noto Sans KR","roboto","Open Sans",Malgun Gothic,"맑은 고딕",AppleGothic,Dotum,"돋움",sans-serif;
+    color:#666;letter-spacing: -0.3px; font-weight: 400;
+}
+
+
+.notosanskr { 
+ font-family: 'Noto Sans KR', sans-serif;
+}
+
+.roboto { 
+ font-family: 'roboto', sans-serif;
+}

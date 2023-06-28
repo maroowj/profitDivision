@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">회비입금 확인</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/members">회원관리</a></li>
+                <li><a href="/management/managers">회비입금 확인</a></li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap">
+            <div class="admin-dueTitle-wrap">
+                <div class="title-wrap">
+                    <p class="dueTitle"><span id="statMonth" class="yellow"></span> 회비입금 통계</p>
+                    <a href="#" id="beforeMonth" class="arrow arrow-left">이전달</a>
+                    <a href="#" id="afterMonth" class="arrow arrow-right">다음달</a>
+                </div>
+                <a href="#" class="comm-btn yellow-btn dues-alram">납부 알림보내기</a>
+            </div>
+
+            <ul class="admin-dueTotal">
+                <li>
+                    <p class="title">전체인원</p>
+                    <p class="text"><span id="total" class="num"></span> 명</p>
+                </li>
+                <li>
+                    <p class="title">납부인원</p>
+                    <p class="text"><span id="paid" class="num blue"></span> 명</p>
+                </li>
+                <li>
+                    <p class="title">미납인원</p>
+                    <p class="text"><span id="unpaid" class="num red"></span> 명</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap profitList">
+            <div class="admin-dueTitle-wrap">
+                <div class="title-wrap">
+                    <p class="dueTitle">
+                        <span class="yellow">확인 요청</span>
+                        회비 리스트 <em>요청 수 3개</em>
+                    </p>
+                </div>
+                <a href="/management/dues" class="comm-btn yellow-btn">전체 리스트 보기</a>
+            </div>
+
+            <div class="box-inner">
+                <div class="selectBox">
+                    <select id="size" class="mr10">
+                        <option value=20 selected>20</option>
+                        <option value=40>40</option>
+                        <option value=60>60</option>
+                    </select>
+                </div>
+                <div class="searchBox profit-searchBox">
+                    <select id="queryType" class="mr10" style="width: 125px;">
+                        <option value="전체" selected>전체</option>
+                        <option value="회원번호">회원번호</option>
+                        <option value="아이디">아이디</option>
+                        <option value="이름">이름</option>
+                    </select>
+                    <input type="text" placeholder="검색어를 입력하세요" id="query">
+                    <span id="search-icon" class="search-icon"></span>
+                </div>
+            </div>
+            <table class="page-table1 table-hover2 due-table">
+                <colgroup>
+                    <col style="width:10%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                    <col style="width:*%">
+                </colgroup>
+
+                <thead id="duesListThead">
+                <tr>
+                    <th><p class="sort" sort="membershipNumber">회원번호</p></th>
+                    <th><p class="sort" sort="userId">아이디</p></th>
+                    <th><p class="sort" sort="name">이름</p></th>
+                    <th><p class="sort" sort="mobile">연락처</p></th>
+                    <th><p class="sort" sort="bankName">은행명</p></th>
+                    <th><p class="sort" sort="accountNumber">계좌번호</p></th>
+                    <th><p class="sort" sort="amount">회비</p></th>
+                    <th><p class="sort" sort="amount">회비납부금액</p></th>
+                    <th><p class="sort" sort="paidAt">입금일</p></th>
+                    <th><p class="sort" sort="paymentState">납부확인</p></th>
+                </tr>
+                </thead>
+                <tbody id="duesListTbody">
+                <!--<tr class="dues-detail">
+                    <td>00001</td>
+                    <td>rkaskan@gmail.com</td>
+                    <td>김지영</td>
+                    <td>100,000,000</td>
+                    <td>100,000</td>
+                    <td>국민은행</td>
+                    <td>000-0000-00-000</td>
+                    <td>2022-09-06</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>rkaskan@gmail.com</td>
+                    <td>김지영</td>
+                    <td>100,000,000</td>
+                    <td>100,000</td>
+                    <td>국민은행</td>
+                    <td>000-0000-00-000</td>
+                    <td>2022-09-06</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>
+                <tr>
+                    <td>00001</td>
+                    <td>rkaskan@gmail.com</td>
+                    <td>김지영</td>
+                    <td>100,000,000</td>
+                    <td>100,000</td>
+                    <td>국민은행</td>
+                    <td>000-0000-00-000</td>
+                    <td>2022-09-06</td>
+                    <td>
+                        <input type="text">
+                    </td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!--            <a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>-->
+            <!--<a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+            <div class="page-num">
+                <a href="#" class="actived">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+            </div>
+            <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>-->
+            <!--<a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+
+        <!-- 회비상세내역/미납사유 모달 -->
+        <div class="invent-modal modal dues-detail-modal">
+            <div class="modal-inner">
+                <div class="modal-title">
+                    <p class="title"><span id="modalTitle" class="yellow"><!--2022년 8월--></span>&nbsp;회비 상세내역</p>
+                    <a href="#" class="close-btn">닫기</a>
+                </div>
+
+                <div class="modal-text">
+                    <div class="text">
+                        <p class="title">납부확인</p>
+                        <select name="" id="modalPaymentState">
+                            <option value=1>확인대기</option>
+                            <option value=2>납부</option>
+                            <option value=0>미납</option>
+                        </select>
+                    </div>
+                    <div id="dues-detail-div" class="text d-none">
+                        <p class="title">미납사유</p>
+                        <input type="text" id="notPaidReason" placeholder="미납사유를 입력하세요">
+                    </div>
+                    <div class="text userList-modal-text">
+                        <p class="title">회원번호</p>
+                        <p id="membershipNumber"></p>
+                    </div>
+                    <div class="text">
+                        <p class="title">아이디</p>
+                        <p id="userId"></p>
+                    </div>
+                    <div class="text">
+                        <p class="title">이름</p>
+                        <p id="name"></p>
+                    </div>
+                    <div class="text">
+                        <p class="title">연락처</p>
+                        <p id="mobile"></p>
+                    </div>
+                    <div class="text">
+                        <p class="title">계좌정보</p>
+                        <p  id="account"></p>
+                    </div>
+                    <div class="text">
+                        <p class="title">회비</p>
+                        <p class="yellow" id="amount"></p>
+                    </div>
+                    <div class="text">
+                        <p class="title">회비납부금액</p>
+                        <p class="yellow" id="paidAmount"></p>
+                    </div>
+                </div>
+                <div class="modal-btn">
+                    <a href="#" class="white-btn close-btn mr10">닫기</a>
+                    <a href="#" id="btnUpdateDues" class="yellow-btn userList-register">수정</a>
+                </div>
+            </div>
+            <div class="modal-bg"></div>
+        </div>
+
+        <!-- 납부알림 모달 -->
+        <div class="invent-modal modal saved-modal dues-alram-modal">
+            <div class="modal-inner">
+                <div class="modal-title">
+                    <p class="title"></p>
+                    <a href="#" class="close-btn">닫기</a>
+                </div>
+
+                <div class="modal-text">
+                    <div class="text">
+                        <h3><span id="alarmMonth" class="yellow"></span>에게 납부 알림을 보내시겠습니까?</h3>
+                    </div>
+                    <div class="text">
+                        <textarea id="alarmContents" placeholder="내용을 입력해주세요" style="padding: 10px;"></textarea>
+                    </div>
+                </div>
+                <div class="modal-btn">
+                    <a href="#" class="white-btn close-btn mr10">닫기</a>
+                    <a href="#" id="btnSendAlarm" class="yellow-btn">보내기</a>
+                </div>
+            </div>
+            <div class="modal-bg"></div>
+        </div>
+    </div>
+
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+    <script>
+        let queryType = '전체';
+        let query = '';
+        let page = 1;
+        let sort = 'createdAt,desc';
+        let size = $("#size").val();
+
+        let modalDuesSeq;
+        let statYear = new Date().getFullYear();
+        let statMonth = new Date().getMonth() + 1;
+        $("#statMonth").html(statYear + "년 " + statMonth + "월 ");
+        getDuesStat();
+
+        getDuesWaitingList();
+
+        $("#beforeMonth").on("click", function (e) {
+            e.preventDefault();
+            if (statMonth == 1) {
+                statYear = statYear - 1;
+                statMonth = 12;
+            } else {
+                statMonth = statMonth - 1;
+            }
+            $("#statMonth").html(statYear + "년 " + statMonth + "월 ");
+            getDuesStat();
+        });
+        $("#afterMonth").on("click", function (e) {
+            e.preventDefault();
+            let thisMonth = new Date().getMonth() + 1;
+            if (thisMonth < statMonth + 1) {
+                toastModal("이번달 이후로 조회할 수 없습니다.");
+                return;
+            }
+            if (statMonth == 12) {
+                statYear = statYear + 1;
+                statMonth = 1;
+            } else {
+                statMonth = statMonth + 1;
+            }
+            $("#statMonth").html(statYear + "년 " + statMonth + "월 ");
+            getDuesStat();
+        });
+
+        //모달
+        $('.dues-alram').click(function () {
+            $("#alarmMonth").text(statYear.toString().substring(2,4)+"년 "+statMonth+"월 미납회원");
+            $("#alarmContents").val("");
+            $('.dues-alram-modal').css('display', 'block');
+        });
+
+        // 알람 보내기
+        $("#btnSendAlarm").on("click", function(e){
+            e.preventDefault();
+            let contents = $("#alarmContents").val();
+            if(contents=="") {
+                toastModal("내용을 입력해주세요");
+                return;
+            }
+
+            $.ajax({
+                type:"post",
+                url:"/api/admin/members/dues/alarm",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "year":statYear,
+                    "month":statMonth,
+                    "contents":contents
+                }),
+                success:function(data) {
+                    toastModal("미납회원에게 알람을 보냈습니다.");
+                    $(".close-btn").click();
+                },
+                error:function(request, status, error) {
+                    toastModal("알람 보내기를 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        });
+
+        $("#modalPaymentState").on("change", function () {
+            let sel = $(this).val();
+            if (sel == 0) {
+                $("#dues-detail-div").removeClass("d-none");
+            } else {
+                $("#dues-detail-div").addClass("d-none");
+            }
+        })
+
+        // 회비 통계
+        function getDuesStat() {
+            $.ajax({
+                type: "get",
+                url: "/api/admin/members/dues/total",
+                data: {
+                    "year": statYear,
+                    "month": statMonth
+                },
+                async: false,
+                success: function (data) {
+                    $("#total").text(data.total);
+                    $("#paid").text(data.paid);
+                    $("#unpaid").text(data.unpaid);
+                },
+                error: function (request, status, error) {
+                    toastModal("회비 내역이 존재하지 않습니다.");
+                    $("#total").text(0);
+                    $("#paid").text(0);
+                    $("#unpaid").text(0);
+                }
+            });
+        }
+
+        // 확인 요청 리스트
+        function getDuesWaitingList() {
+            queryType = $("#queryType").val();
+            query = $("#query").val();
+            size = $("#size").val();
+            $.ajax({
+                type: "get",
+                url: "/api/admin/members/dues/waiting",
+                data: {
+                    "queryType":queryType,
+                    "query": query,
+                    "size": size,
+                    "page": page - 1,
+                    "sort":sort
+                },
+                async: false,
+                success: function (data) {
+                    console.log(data);
+                    let waitingList = data.content;
+
+                    let dTag = '';
+                    if (waitingList != null && waitingList.length != 0) {
+                        for (i = 0; i < waitingList.length; i++) {
+                            let bankName = '-';
+                            if(waitingList[i].bankName!=null && waitingList[i].bankName!="") {
+                                bankName = waitingList[i].bankName;
+                            }
+                            let accountNumber = '-';
+                            if(waitingList[i].accountNumber!=null && waitingList[i].accountNumber!="") {
+                                accountNumber = waitingList[i].accountNumber;
+                            }
+                            let paidAt = '-';
+                            if(waitingList[i].paidAt!=null && waitingList[i].paidAt!="") {
+                                paidAt = waitingList[i].paidAt;
+                            }
+                            let paymentState = '-';
+                            if(waitingList[i].paymentState==0) {
+                                paymentState = "미납";
+                            }else if(waitingList[i].paymentState==1) {
+                                paymentState = "확인대기";
+                            }else if(waitingList[i].paymentState==2) {
+                                paymentState = "납부";
+                            }
+
+                            dTag += '<tr seq="' + waitingList[i].duesSeq + '">' +
+                                '<td>' + waitingList[i].membershipNumber + '</td>' +
+                                '<td>' + waitingList[i].userId + '</td>' +
+                                '<td>' + waitingList[i].name + '</td>' +
+                                '<td>' + waitingList[i].mobile + '</td>' +
+                                '<td>' + bankName + '</td>' +
+                                '<td>' + accountNumber + '</td>' +
+                                '<td>' + waitingList[i].amount + '</td>' +
+                                '<td>' + waitingList[i].paidAmount + '</td>' +
+                                '<td>' + paidAt + '</td>' +
+                                '<td class="dues-detail"><div class="select-arrow">'+paymentState+'</div></td>' +
+                                '</tr>';
+                        }
+                        fPagination(data, page);
+                    }
+                    $("#duesListTbody").html(dTag);
+
+                    $("#duesListTbody").on("click", ".select-arrow", function(){
+                        modalDuesSeq = $(this).parent().parent().attr("seq") ;
+                        getDuesDetails();
+                        $('.dues-detail-modal').css('display', 'block');
+                    });
+                },
+                error: function (request, status, error) {
+                    toastModal("회비 내역이 존재하지 않습니다.");
+                    $("#duesListTbody").html('');
+                }
+            });
+        }
+
+        // 회비 상세 (모달)
+        function getDuesDetails() {
+            $.ajax({
+                type:"get",
+                url:"/api/admin/members/dues/"+modalDuesSeq,
+                data:{},
+                success:function(data) {
+                    console.log(data);
+                    let modalTitle = data.year+"년 "+data.month+"월 ";
+                    $("#modalTitle").text(modalTitle);
+                    let account = "-";
+                    if(data.bankName!=null && data.bankName!="") {
+                        account = data.bankName + " " + data.accountNumber;
+                    }
+                    if(data.paymentState==0) {
+                        $("#dues-detail-div").removeClass("d-none");
+                    }else {
+                        $("#dues-detail-div").addClass("d-none");
+                    }
+                    $("#modalPaymentState").val(data.paymentState).prop('selected', true);
+                    $("#notPaidReason").val(data.comment);
+                    $("#membershipNumber").text(data.membershipNumber);
+                    $("#userId").text(data.userId);
+                    $("#name").text(data.name);
+                    $("#mobile").text(data.mobile);
+                    $("#account").text(account);
+                    $("#amount").text(data.amount);
+                    $("#paidAmount").text(data.paidAmount);
+                },
+                error:function(request, status, error) {
+                    toastModal("회비 정보를 불러오는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 모달 내 납부확인 수정하기
+        $("#btnUpdateDues").on("click", function(e){
+            e.preventDefault();
+            let paymentState = $("#modalPaymentState").val();
+            let comment;
+            if(paymentState==0) {
+                comment = $("#notPaidReason").val();
+            }else {
+                comment = null;
+            }
+
+            $.ajax({
+                type:"put",
+                url:"/api/admin/members/dues/"+modalDuesSeq,
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "paymentState":paymentState,
+                    "comment":comment
+                }),
+                success:function(data) {
+                    toastModal("납부 상태가 변경되었습니다.");
+                    $(".close-btn").click();
+                    getDuesWaitingList();
+                },
+                error:function(request, status, error) {
+                    toastModal("납부 상태를 변경하는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        });
+
+        // 페이징 클릭 시 실행
+        $("#pagination").on("click", "a", function () {
+            page = parseInt($(this).attr("gopage"));
+            getDuesWaitingList();
+        });
+
+        // 출력 개수 select 변경 시
+        $("#size").on("change", function () {
+            size = $(this).val();
+            page = 1
+            getDuesWaitingList();
+        });
+
+        // 검색종류 select 변경 시
+        $("#queryType").on("change", function () {
+            queryType = $(this).val();
+            page = 1
+            getDuesWaitingList();
+        });
+
+        // 키워드 입력 후 Enter 눌렀을 경우
+        $("#query").on("keydown", function (e) {
+            if (e.keyCode == 13) {
+                $("#search-icon").click();
+            }
+        });
+
+        // 돋보기 아이콘 클릭 시 검색
+        $("#search-icon").on("click", function () {
+            page = 1
+            getDuesWaitingList();
+        });
+
+        // 정렬
+        $("#duesListThead").on("click", ".sort", function(){
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            getDuesWaitingList();
+        });
+    </script>
+
+</div>
+</html>

@@ -1,0 +1,1394 @@
+@media screen and (max-width: 1680px) {
+    /* ruleset for 1401px - 1680px */
+    /*header*/
+    .header-wrap .header-inner{width: 94%;}
+    .header-wrap .header-inner .nav-wrap{justify-content: flex-start;}
+    .header-wrap .header-inner .nav-wrap .nav > li > a{width: 130px; font-size: 17px; }
+    .header-wrap .header-inner .nav-wrap .nav > li:nth-child(4) > a{ width: 150px;}
+    
+    /*footer*/
+    .footer-wrap .footer-inner{width: 94%;}
+    
+    /*공통사항*/
+    .auto{width: 94%;}
+    
+    /*메인 index.html*/
+    .mainWrap .titleWrap1 .title{font-size: 50px;}
+    .mainWrap .titleWrap1 .text{font-size: 18px; line-height: 1.3; padding-top: 70px;}
+    .mainWrap .titleWrap1 .text span{font-size: 18px;}
+    .mainWrap .titleWrap1 .text:after{height: 40px;}
+    
+    .mainWrap .sec1-wrap .chart{margin-top: 80px;}
+    .mainWrap .sec1-wrap .chart li{width: 300px;height: 300px;}
+    .mainWrap .sec1-wrap .chart li:after{width: 340px;height: 340px;}
+    .mainWrap .sec1-wrap .chart li .title{font-size: 28px; line-height: 1.1em; height: 2.2em;}
+    .mainWrap .sec1-wrap .chart li .text{font-size: 18px;}
+    .mainWrap .sec1-wrap .chart li.dot{margin: 0 40px;}
+    
+    .mainWrap .titleWrap2 .title{font-size: 42px;}
+    .mainWrap .titleWrap2 .title span{font-size: 42px;}
+    .mainWrap .titleWrap2 .text{font-size: 18px; line-height: 1.3;}
+    .mainWrap .titleWrap2 .text span{font-size: 18px;}
+    
+    
+    .mainWrap .sec2-wrap .chart .centerTitle{width: 550px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li{width: 230px;height: 230px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li p.tit{font-size: 28px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li p.txt{font-size: 18px;}
+    
+    .mainWrap .sec2-wrap .chart .list li{width: 380px;}
+    .mainWrap .sec2-wrap .chart .list li.left{left:-380px;}
+    .mainWrap .sec2-wrap .chart .list li.right{right:-380px;}
+    .mainWrap .sec2-wrap .chart .list li.bottom{top:224px;}
+    
+    .mainWrap .sec2-wrap .chart .list li.left:after{right:-47px;}
+    .mainWrap .sec2-wrap .chart .list li.right:after{left:-47px;}
+    
+    
+    .mainWrap .sec2-wrap .chart .list li .txt{font-size: 18px;}
+    .mainWrap .sec2-wrap .chart .centerWrap span.arrow{font-size: 20px;}
+    .mainWrap .sec2-wrap .chart .centerWrap span.a-left{left:-5px;}
+    .mainWrap .sec2-wrap .chart .centerWrap span.a-bottom{bottom:-10px;}
+    .mainWrap .sec2-wrap .chart .centerWrap span.a-right{right:-5px;}
+    
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):before{width: calc(50vw + 500px);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(2):before{width: 1000px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):before{width: calc(50vw + 500px);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):after{left:calc(50vw + 500px);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):after{right:calc(50vw + 500px)}
+    
+    .mainWrap .sec3-wrap .list2Wrap li{font-size: 18px;}
+    
+    
+    .mainWrap .sec4-wrap .textBox{margin-top: 20px; padding: 60px 40px;}
+    .mainWrap .sec4-wrap .textBox .title{font-size: 28px;}
+    .mainWrap .sec4-wrap .textBox ul.list li{width: calc(33.33% - 13.33px); font-size: 18px;}
+    .mainWrap .sec4-wrap .text{font-size: 18px; margin-top: 20px;}
+    
+    .mainWrap .sec5-wrap .listWrap{margin-top: 10px;}
+    .mainWrap .sec5-wrap .listWrap li .text{font-size: 18px;}
+    .mainWrap .sec5-wrap .listWrap li .number{margin-bottom: 15px;}
+    
+    .mainWrap .sec5-wrap .listWrap li{height:145px; padding: 25px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list .title{font-size: 32px; height: 70px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .tit{font-size: 18px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .txt{font-size: 18px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textBox .info{font-size: 15px;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .textInfo{font-size: 15px;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .btnWrap{margin-top: 30px;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .comm-btn{font-size: 18px; width: 260px;}
+    
+    .mainWrap .bannerWrap .textWrap .title{font-size: 45px;}
+    .mainWrap .bannerWrap .textWrap .title span{font-size: 45px;}
+    .mainWrap .bannerWrap .textWrap .list li{padding: 30px 0;}
+    .mainWrap .bannerWrap .textWrap .list li .tit{font-size: 18px;}
+    .mainWrap .bannerWrap .textWrap .list li .text{font-size: 28px;}
+    .mainWrap .bannerWrap .textWrap .info{font-size: 15px;}
+    .mainWrap .bannerWrap img{width: 110vw; margin-left: -8vw;}
+    
+    
+    .mainWrap .sec7-wrap .listWrap li{width: calc(50% - 10px);}
+    .mainWrap .sec7-wrap .listWrap li:nth-child(3n){margin-right: 20px;}
+    .mainWrap .sec7-wrap .listWrap li:nth-child(2n){margin-right: 0;}
+    .mainWrap .sec7-wrap .listWrap li:nth-last-child(-n + 3){margin-bottom: 20px;}
+    .mainWrap .sec7-wrap .listWrap li:nth-last-child(-n + 2){margin-bottom: 0px;}
+    .mainWrap .sec7-wrap .listWrap li .number{font-size: 18px; width: 55px;height: 55px;}
+    .mainWrap .sec7-wrap .listWrap li .text{font-size: 18px; height: 55px; width: calc(100% - 65px); line-height: 57px;}
+    .mainWrap .sec7-wrap .listWrap li .info{font-size: 15px;}
+    
+    .mainWrap .sec7-wrap .callWrap{height: 70px;}
+    .mainWrap .sec7-wrap .callWrap .number{font-size: 28px;}
+    
+
+    .mainWrap .sec8-wrap .listWrap .text{font-size: 18px;}
+    .mainWrap .sec8-wrap .btnWrap{margin-top: 30px;}
+    .mainWrap .sec8-wrap .btnWrap a{width: 260px; font-size: 18px;}
+    
+    .mainWrap .sec9-wrap .bankWrap .title{font-size: 18px;}
+    .mainWrap .sec9-wrap .bankWrap .account{font-size: 28px;}
+    
+    
+}
+
+@media screen and (max-width: 1400px) {
+    /* ruleset for 1201px - 1400px */
+    /*header*/
+    .header-wrap .header-inner{justify-content: flex-start;}
+    .header-wrap .header-inner .logo-wrap a{width: 130px; font-size: 20px;}
+    .header-wrap .header-inner .nav-wrap{width: calc(100% - 270px);}
+    .header-wrap .header-inner .nav-wrap .nav > li > a{font-size: 17px; width: 110px;}
+    .header-wrap .header-inner .nav-wrap .nav > li:nth-child(4) > a{width: 140px;}
+    .header-wrap .header-inner .user-wrap{width: 140px;}
+    .header-wrap .header-inner .user-wrap > li .depth2{width: 130px;}
+    
+    
+    
+    
+    /*footer*/
+    .footer-wrap .footer-inner{height: 100px;}
+    .footer-wrap .footer-inner p{font-size: 13px;}
+    
+    
+    /*공통사항*/
+    .auto{min-height:calc(100vh - 186px);}
+    
+    
+    /*수익관리 profit*/
+    .subP-title .title{font-size: 30px;}
+    .profit-wrap .total-price .price-wrap{width: calc(100% - 360px); }
+    .profit-wrap .total-price .price-wrap .title{font-size: 22px;}
+    .profit-wrap .total-price .price-wrap .price{font-size: 22px;}
+    .profit-wrap .total-price .btn-wrap a{width: 160px;}
+
+
+    /*출금 신청하기 withdrawal*/
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .price .title{font-size: 15px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .price .point{font-size: 18px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text p.title{font-size: 15px;}
+    
+    
+    /*적립금 관리 point*/
+    .point-wrap .point-infoWrap{flex-wrap:wrap;}
+    .point-wrap .point-infoWrap .level-wrap{width: 100%; padding: 30px 60px; margin-bottom: 20px; }
+    .point-wrap .point-infoWrap .level-wrap h5.title{font-size: 24px; }
+    .point-wrap .point-infoWrap .level-wrap h5.title span{font-size: 24px; }
+    .point-wrap .point-infoWrap .pointInfo-list{width: calc(50% - 10px); height:auto !important; padding: 30px;}
+    .point-wrap .point-infoWrap .pointInfo-list h5.title{font-size: 24px;}
+    .point-wrap .point-infoWrap .pointInfo-list p.info{font-size: 32px; margin: 20px 0; }
+    
+    
+    /*메인 index.html*/
+    .mainWrap .titleWrap1 .title{font-size: 45px; margin-bottom: 20px;}
+    .mainWrap .titleWrap1 .text{font-size: 17px; padding-top: 65px;}
+    .mainWrap .titleWrap1 .text span{font-size: 17px;}
+    
+    
+    .mainWrap .sec1-wrap .chart li{width: 260px;height: 260px;}
+    .mainWrap .sec1-wrap .chart li:after{width: 300px;height: 300px;}
+    .mainWrap .sec1-wrap .chart li .title{font-size: 24px;}
+    .mainWrap .sec1-wrap .chart li .text{font-size: 17px;}
+    .mainWrap .sec1-wrap .chart li.dot{width: 8px;height: 8px;}
+    
+    .mainWrap .titleWrap2 .title{font-size: 38px;}
+    .mainWrap .titleWrap2 .title span{font-size: 38px;}
+    .mainWrap .titleWrap2 .text{font-size: 17px;}
+    .mainWrap .titleWrap2 .text span{font-size: 17px;}
+    
+    .mainWrap .sec2-wrap .chart{margin: 80px 0 40px;}
+    .mainWrap .sec2-wrap .chart .centerTitle{width: 490px;}
+    .mainWrap .sec2-wrap .chart .centerWrap .centerTitle:after{width: 560px; height: calc(100% + 60px);}
+    .mainWrap .sec2-wrap .chart .centerTitle li{width: 200px;height: 200px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li p.tit{font-size: 24px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li p.txt{font-size: 17px;}
+    
+    .mainWrap .sec2-wrap .chart .list li .tit{font-size: 18px; height: 46px; width: 240px;}
+    .mainWrap .sec2-wrap .chart .list li.left .txt{font-size: 17px;}
+    
+    
+    .mainWrap .sec2-wrap .chart .list li{width: 320px;}
+    .mainWrap .sec2-wrap .chart .list li.left{left:-320px;}
+    .mainWrap .sec2-wrap .chart .list li.right{right:-320px;}
+    
+    .mainWrap .sec2-wrap .chart .list li.right:after{left:-38px;}
+    .mainWrap .sec2-wrap .chart .list li.left:after{right:-38px;}
+    .mainWrap .sec2-wrap .chart .list li.bottom{top:192px;}
+    
+    .mainWrap .sec3-wrap .listWrap{margin-top: 10px;}
+    .mainWrap .sec3-wrap .listWrap li{font-size: 18px;width: 200px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(2):before{width: 800px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):before{width: calc(50vw + 400px);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):before{width: calc(50vw + 400px);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):after{left: calc(50vw + 400px); z-index: -1;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):after{right: calc(50vw + 400px); z-index: -1;}
+    .mainWrap .sec3-wrap .list2Wrap{margin-top: 40px;}
+    .mainWrap .sec3-wrap .list2Wrap li{font-size: 17px;}
+    
+    .mainWrap .sec4-wrap .textBox{padding: 50px 30px;}
+    .mainWrap .sec4-wrap .textBox .title{font-size: 24px;}
+    .mainWrap .sec4-wrap .textBox ul.list li{font-size: 17px; width: calc(33.33% - 6.667px); margin-right: 10px; height: 70px;}
+    .mainWrap .sec4-wrap .text{font-size: 17px;}
+    
+    .mainWrap .sec5-wrap .listWrap{margin-top: 0;}
+    .mainWrap .sec5-wrap .listWrap li .text{font-size: 17px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list .title{font-size: 28px; height: 65px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .tit{font-size: 17px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .txt{font-size: 17px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap{height: 320px; padding: 0 30px;}
+    .mainWrap .sec6-wrap .recruitWrap .list1 .textWrap{padding-top: 30px;padding-bottom: 30px;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap{padding-top: 20px; padding-bottom: 40px;}
+    .mainWrap .sec6-wrap .recruitWrap .list1 .textWrap li{height: 50px;}
+    .mainWrap .sec6-wrap .recruitWrap .list1 .textWrap li .tit{height: 50px;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap li{height: 45px;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap li .tit{height: 45px;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .textInfo{margin-top: 14px; line-height: 1.2em; height:2.2em;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .comm-btn{font-size: 17px; width: 240px;}
+    
+    .mainWrap .bannerWrap .textWrap{width: 94%;}
+    .mainWrap .bannerWrap .textWrap .title{font-size: 38px;}
+    .mainWrap .bannerWrap .textWrap .title span{font-size: 38px;}
+    .mainWrap .bannerWrap .textWrap .list{width: 100%;}
+    .mainWrap .bannerWrap .textWrap .list li{padding: 25px 0; width: calc(50% - 10px);}
+    .mainWrap .bannerWrap .textWrap .list li .tit{font-size: 17px;}
+    .mainWrap .bannerWrap .textWrap .list li .tit:after{margin: 10px auto 15px;}
+    .mainWrap .bannerWrap .textWrap .list li .text{font-size: 24px;}
+    
+    .mainWrap .sec7-wrap .callWrap{height: 65px;}
+    .mainWrap .sec7-wrap .callWrap .number{font-size: 24px;}
+    .mainWrap .sec8-wrap .btnWrap a{font-size: 17px;width: 240px;}
+    .mainWrap .sec9-wrap .bankWrap .title{font-size: 17px;}
+    .mainWrap .sec9-wrap .bankWrap .account{font-size: 24px;}
+    .mainWrap .sec9-wrap .bankWrap img{width: 100px;}
+    
+    
+    
+    /*자주묻는글 qna.html*/
+    .qnaWrap .search-wrap .searchBox{width: 80%;}
+    .qnaWrap .qnaBox li a .title{font-size: 16px;}
+    .qnaWrap .qnaBox li a .title span{font-size: 16px; margin-top: 1px;}
+    
+    
+    /*인사말씀 greeting.html*/
+    .greetingWrap .greetingBox .img{width: 30%;}
+    .greetingWrap .greetingBox .greetingTxt{width: calc(70% - 30px);}
+    .greetingWrap .greetingBox .greetingTxt .textWrap{display:inherit; margin-top: 20px;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text{width: 100%;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p{margin-bottom: 10px;}
+    
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .tit{font-size: 32px; margin-bottom: 10px;}
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .intro{font-size: 18px;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p.ceo span.name{font-size: 24px;}
+}
+
+
+
+@media screen and (max-width: 1200px) {
+    /* ruleset for 1025px - 1200px */
+    /*header*/
+    .header-wrap .header-inner .logo-wrap a{width: 120px; }
+    .header-wrap .header-inner .nav-wrap{width: calc(100% - 250px); }
+    .header-wrap .header-inner .nav-wrap .nav > li > a{font-size: 16px; width: 95px;}
+    .header-wrap .header-inner .nav-wrap .nav > li:nth-child(4) > a{width: 120px;}
+    .header-wrap .header-inner .user-wrap{width: 130px;}
+    .header-wrap .header-inner .nav-wrap .nav > li .depth2{left:-10px;}
+    .header-wrap .header-inner .nav-wrap .nav > li .depth2 li a{width: calc(100% + 20px); font-size: 14px;}
+    .header-wrap .header-inner .user-wrap > li .depth2{width: 130px;}
+    .header-wrap .header-inner .user-wrap > li .depth2 li a{font-size: 14px;}
+    .header-wrap .header-inner .user-wrap > li > a{font-size: 13px;}
+    .header-wrap .header-inner .user-wrap > li:first-child:after{margin: 0px 8px 0;;}
+    
+    
+    
+    /*공통사항*/
+    .auto{padding:40px 0 80px;}
+    
+    /*로그인 login*/
+    .login-wrap{margin-top:40px; padding:80px 60px;}
+    .login-wrap h4{font-size: 28px;}
+    .login-wrap .text-wrap input{font-size: 15px;}
+    .login-wrap .login-btn{font-size: 15px;}
+    /*아이디 찾기 findId*/
+    .phone-wrap select{font-size: 15px;}
+    
+    
+    
+    /*투자하기 invent*/
+    .subP-title .title{font-size: 30px;}
+    .invent-wrap .infoText-wrap p{font-size: 14px;}
+    .invent-wrap .infoText-wrap p span{font-size: 14px;}
+    .inventList-wrap{margin-top: 80px;}
+    .subTitle2 p.title{font-size: 24px;}
+    .inventList-wrap .subTitle2 .invent-btn{font-size: 15px;}
+    
+    
+    
+    /*투자확인요청 모달 invent-modal*/
+    .invent-modal .modal-text .text p.title{font-size: 15px;}
+    .modal-btn a{font-size: 15px;}
+    
+    
+    /*수익관리 profit*/
+    .profit-wrap .total-price .btn-wrap a{font-size: 15px;}
+    .profit-wrap .total-price{padding: 20px;}
+    .profit-wrap .total-price .price-wrap .title{font-size: 20px; font-weight: 500;}
+    .profit-wrap .imagine-price-wrap{margin-top: 20px;}
+    .profit-wrap .imagine-price-wrap li{padding: 20px;}
+    .profit-wrap .imagine-price-wrap li.today-price{margin-right: 20px;}
+    .profit-wrap .imagine-price-wrap li div .title{font-size: 14px;}
+    .profit-wrap .imagine-price-wrap li div .price{font-size: 16px;}
+    .profitList-wrap{padding-top: 80px;}
+    .profitList tbody td p.price{font-size: 15px;}
+    .profitList tbody td p.price span{margin-top: -2px;}
+    .profitList tbody td:last-child{font-size: 15px;}
+    
+    /*출금 신청하기 withdrawal*/
+    .withdrawal-wrap .wd-text{font-size: 14px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap{width: 35%;}
+
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .price .point{font-size: 17px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap{width: calc(65% - 20px);}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text p.title{width: 110px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text input{width: calc(100% - 110px);}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text2{width: calc(50% - 10px);}
+    
+    
+    /*회비관리 dues*/
+    .notiText-wrap span.exclam{width: 16px;height: 16px; font-size: 10px;}
+    .notiText-wrap p.text{font-size: 14px;}
+    .notiText-wrap p.text span{font-size: 14px;}
+    
+    
+    /*메인 index.html*/
+    .main-auto{padding: 100px 0 100px;}
+    .mainWrap .titleWrap1 .title{font-size: 42px;}
+    .mainWrap .titleWrap1 .text{font-size: 16px; padding-top: 60px;}
+    .mainWrap .titleWrap1 .text span{font-size: 16px;}
+    .mainWrap .titleWrap1 .text:after{height: 35px; }
+    
+    .mainWrap .sec1-wrap .chart{margin-top: 60px;}
+    .mainWrap .sec1-wrap .chart li{width: 230px;height: 230px; padding: 20px 30px 0;}
+    .mainWrap .sec1-wrap .chart li:after{width: 260px;height: 260px;}
+    .mainWrap .sec1-wrap .chart li .title{font-size: 22px; padding-bottom: 20px; margin-bottom: 15px; line-height: 1.2em; height:2.4em;}
+    .mainWrap .sec1-wrap .chart li .text{font-size: 16px; line-height: 1.2em; height:3.6em;}
+    .mainWrap .sec1-wrap .chart li.dot{margin: 0 30px;}
+    
+    .mainWrap .titleWrap2 .title{font-size: 34px;}
+    .mainWrap .titleWrap2 .title span{font-size: 34px;}
+    .mainWrap .titleWrap2 .text{font-size: 16px;}
+    .mainWrap .titleWrap2 .text span{font-size: 16px;}
+    
+    .mainWrap .sec2-wrap .chart .centerTitle{width: 410px;}
+    .mainWrap .sec2-wrap .chart .centerWrap .centerTitle:after{width: 470px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li{width: 165px;height: 165px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li:first-child{margin-right: 20px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li p.tit{font-size: 20px;}
+    .mainWrap .sec2-wrap .chart .centerTitle li p.txt{font-size: 16px;}
+    
+    .mainWrap .sec2-wrap .chart .list li{width: 260px;}
+    .mainWrap .sec2-wrap .chart .list li.left{left:-260px;}
+    .mainWrap .sec2-wrap .chart .list li.right{right:-260px;}
+    .mainWrap .sec2-wrap .chart .list li.bottom{top:157px;}
+    .mainWrap .sec2-wrap .chart .list li .tit{font-size: 17px; width: 220px;}
+    .mainWrap .sec2-wrap .chart .list li .txt{font-size: 16px; }
+    
+    .mainWrap .sec2-wrap .chart .list li.left:after{right:-28px;}
+    .mainWrap .sec2-wrap .chart .list li.right:after{left:-28px;}
+    
+    .mainWrap .sec3-wrap .listWrap li{width: 180px; font-size: 17px; height: 45px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):after{width: 60px;height: 64px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):after{width: 60px;height: 64px;}
+    
+    .mainWrap .sec3-wrap .list2Wrap{border-radius: 10px;}
+    .mainWrap .sec3-wrap .list2Wrap li{font-size: 16px; margin: 5px; width: calc(25% - 10px);}
+    
+    .mainWrap .sec4-wrap .textBox{padding: 40px 20px; border-radius: 10px;}
+    .mainWrap .sec4-wrap .textBox .title{font-size: 20px;}
+    .mainWrap .sec4-wrap .textBox ul.list{margin-top: 10px;}
+    .mainWrap .sec4-wrap .textBox ul.list li{font-size: 16px; border-radius: 10px; padding:0 20px; word-break: keep-all; line-height: 1.2;}
+    .mainWrap .sec4-wrap .text{font-size: 16px; word-break: keep-all; width: 80%; margin: 10px auto 0;}
+    
+    .mainWrap .sec5-wrap .listWrap {margin-top: 10px;}
+    .mainWrap .sec5-wrap .listWrap li{padding: 20px; height: 125px; margin-right: 10px; margin-top: 10px;}
+    .mainWrap .sec5-wrap .listWrap li .number{font-size: 14px; margin-bottom: 10px;}
+    .mainWrap .sec5-wrap .listWrap li .text{font-size: 16px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list{border-radius: 10px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .title{font-size: 25px; height: 60px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap{height: 290px; }
+    .mainWrap .sec6-wrap .recruitWrap .list1 .textWrap li{height: 45px;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap li{height: 40px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .tit{width: 135px; font-size: 16px;}
+    .mainWrap .sec6-wrap .recruitWrap .list1 .textWrap li .tit{height: 45px; }
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap li .tit{height: 40px; }
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .txt{font-size: 16px; padding: 3px 10px 0; width: calc(100% - 145px);}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textBox .info{font-size: 14px;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .textInfo{font-size: 14px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .comm-btn{font-size: 16px; width: 220px; height: 45px;}
+    .mainWrap .bannerWrap .textWrap{width: auto;}
+    .mainWrap .bannerWrap .textWrap .title{font-size: 34px;}
+    .mainWrap .bannerWrap .textWrap .title span{font-size: 34px;}
+    
+    .mainWrap .bannerWrap .textWrap .list{width: auto;}
+    .mainWrap .bannerWrap .textWrap .list li{padding: 20px 0; width:40vw; border-radius: 10px;}
+    .mainWrap .bannerWrap .textWrap .list li .tit{font-size: 15px;}
+    .mainWrap .bannerWrap .textWrap .list li .text{font-size: 20px;}
+    .mainWrap .bannerWrap .textWrap .info{font-size: 14px; bottom:-20px;}
+    
+    .mainWrap .bannerWrap img{width: 116vw; margin-left: -10vw;}
+    
+    .mainWrap .sec7-wrap .listWrap li .number{font-size: 17px; width: 50px;height: 50px;}
+    .mainWrap .sec7-wrap .listWrap li .text{font-size: 17px; height: 50px; width: calc(100% - 60px); line-height: 52px;}
+    .mainWrap .sec7-wrap .callWrap{height: 55px;}
+    .mainWrap .sec7-wrap .callWrap i{font-size: 11px;}
+    .mainWrap .sec7-wrap .callWrap .title{font-size: 15px; margin-left: 5px; padding-top: 3px;}
+    .mainWrap .sec7-wrap .callWrap .number{font-size: 20px;}
+    .mainWrap .sec7-wrap .listWrap li .info{font-size: 14px;}
+    
+    .mainWrap .sec8-wrap .listWrap{border-radius: 10px; padding: 30px;}
+    .mainWrap .sec8-wrap .listWrap .text{font-size: 17px;}
+    .mainWrap .sec8-wrap .listWrap .text:before{width: 8px;height: 8px; border-width: 3px}
+    .mainWrap .sec8-wrap .btnWrap a{font-size: 16px; width: 220px; height: 45px;}
+    
+    
+    
+    .mainWrap .sec9-wrap .bankWrap{margin-top: 42px; border-radius: 10px;}
+    .mainWrap .sec9-wrap .bankWrap .title{font-size: 16px; height: 44px; top:-22px;}
+    
+    
+    /*인사말씀 greeting.html*/
+    .greetingWrap .greetingBox .img{width: 26%;}
+    .greetingWrap .greetingBox .greetingTxt{width: calc(74% - 30px);}
+    .greetingWrap .greetingBox .greetingTxt p{line-height: 1.4;}
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .tit{font-size: 28px;}
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .intro{font-size: 17px; font-weight: 600;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap{margin-top: 15px;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p{font-size: 15px;line-height: 1.4;}
+    .greetingWrap .greetingBox .greetingTxt span{font-size: 15px;  line-height: 1.4;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p.ceo span.name{font-size: 20px; margin-left: 10px;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p.ceo{font-weight: 500; font-size: 15px;}
+}
+
+@media screen and (max-width: 1024px) {
+    /* ruleset for 768px - 1024px */
+    /*header*/
+    .pc-header-wrap{display:none;}
+    .m-header-wrap{display:block;}
+    .header-wrap .header-inner{height: 80px; justify-content: space-between;}
+    .m-header-wrap .info-wrap{display:flex; justify-content: flex-end; align-items: center; height: 100%;}
+    .m-header-wrap .info-wrap > a{display:flex; justify-content: center; align-items: center; height:100%; width: 35px; font-size: 0;}
+    .m-header-wrap .info-wrap > a:after{content:'\f007'; display:block; font-size: 24px; color: #000; font-weight: 400; font-family: "Font Awesome 6 Pro";}
+    
+    .m-header-wrap .info-wrap .nav-btn a{display:block; position:relative; padding:12px 0; width: 36px; margin-left: 20px;}
+    .m-header-wrap .info-wrap .nav-btn a span{display:block; width: 100%; height: 3px; font-size: 0; background: #000; border-radius: 3px;}
+    .m-header-wrap .info-wrap .nav-btn a span:before{content:''; display:block; width: 100%; height: 3px; background: #000;border-radius: 3px; position:absolute; top:0; left:0;}
+    .m-header-wrap .info-wrap .nav-btn a span:after{content:''; display:block; width: 100%; height: 3px; background: #000;border-radius: 3px; position:absolute; bottom:0; left:0;}
+
+   
+    .m-nav-wrap{width: 100%; height:100%; background: #fff; position:fixed; top:0; left:0; right:0; bottom:0; z-index: 99999999; display:none;}
+    .m-nav-wrap .nav-top-wrap{background: #f7f7f7; padding:0 3% 30px; }
+    
+    .m-nav-wrap .nav-logo-wrap{display:flex; justify-content: space-between;align-items: center; height:80px;}
+    .m-nav-wrap .nav-logo-wrap h1.logo-wrap a{width: 150px; font-size: 20px; font-weight: 700; color: #000; letter-spacing: -1px; display:flex; justify-content: flex-start; align-items: center;}
+    .m-nav-wrap .nav-logo-wrap .close-btn{font-size: 0;}
+    .m-nav-wrap .nav-logo-wrap .close-btn:after{content:'\f00d'; display:flex; justify-content: center; align-items: center; font-size: 40px; color: #000; font-weight: 900; font-family: "Font Awesome 6 Pro";}
+    
+    
+    .m-nav-wrap .info-btnWrap{display:flex; justify-content: space-between; align-items: center;}
+    .m-nav-wrap .info-btnWrap li{width: 100%;}
+    .m-nav-wrap .info-btnWrap li a.login-btn{height: 45px;}
+    
+    .m-nav-wrap .nav-wrap > li{ border-bottom:10px solid #f7f7f7;}
+    .m-nav-wrap .nav-wrap > li.actived{border-bottom: 0;}
+    .m-nav-wrap .nav-wrap > li.actived a{background: #d8a31e;}
+    .m-nav-wrap .nav-wrap > li.actived a span{color: #fff;}
+    .m-nav-wrap .nav-wrap > li.actived a i{transform: rotate(180deg); color: #fff;}
+    .m-nav-wrap .nav-wrap > li > a{display:flex; justify-content: space-between; align-items: center; height:60px; padding:0 3%;}
+    .m-nav-wrap .nav-wrap > li > a span{color: #000; font-size: 18px; font-weight: 700;}
+    
+    .m-nav-wrap .nav-wrap > li .depth2{display:none;}
+    .m-nav-wrap .nav-wrap > li .depth2 li a{padding:15px 3%; display:flex; justify-content: flex-start; align-items: center;background: #f7f7f7; border-top:1px solid #efefef; font-weight: 500; color: #333;}
+    
+    
+    
+    /*footer*/
+    .footer-wrap .footer-inner{height: 80px;}
+    
+    /*로그인 login*/
+    .login-wrap .text-wrap input{height: 45px;}
+    .login-wrap .login-btn{height: 45px;}
+    .login-wrap .sns-wrap .kakao-btn{height: 45px;}
+    .login-wrap .sns-wrap .kakao-btn:hover{background: #fff; color: #666; border-color:#e7e7e7;}
+    .login-wrap .sns-wrap .kakao-btn:hover i{color: #361e1e;}
+    
+    
+    /*아이디 찾기 findId*/
+    .phone-wrap select{height: 45px;}
+    .findId-btn-wrap .login-btn:hover{background:#fff; color: #666; border-color:#e7e7e7;}
+    
+    /*비밀번호 찾기 finddPassword*/
+    .infoText{font-size: 13px;}
+    
+    /*회원가입 join*/
+    .join-wrap .text-wrap .address-wrap1 .table-btn{height:45px;}
+    .join-wrap .text-wrap .date-wrap select{height: 45px;}
+    
+    
+    /*회원정보수정 mypage*/
+    .join-wrap .text-wrap select{ height: 45px;}
+    
+    
+    /*투자하기 invent*/
+    .subP-title .title{font-size: 28px;}
+/*
+    .subP-title .menuPath li a{font-size: 13px;}
+    .subP-title .menuPath li a i{font-size: 11px;}
+*/
+    .invent-wrap .infoText-wrap{padding: 20px;}
+    .subTitle2 p.title{font-size: 22px;}
+    .subTitle2 p.title:before{width: 8px;height: 8px;}
+    .subTitle2 .comm-btn{height: 45px;}
+    .search-wrap{padding: 20px;}
+    .period-wrap li a{font-size: 13px; width: 50px; height: 25px;}
+    
+    .page-table1 tr th p{font-size: 14px;}
+    .page-table1 tr th p:after{font-size: 14px;}
+    .page-table1 tr td{font-size: 14px;}
+    .page-table1 tr td p{font-size: 14px;}
+    .paging .page-num a{font-size: 13px;}
+    
+    .period-wrap li:hover a{border-color:#e7e7e7; color:#666}
+    .period-wrap li.actived a{border-color:#d8a31e; color: #b58408;}
+    
+    .paging .page-num a:hover{background: #fff; border:1px solid #e7e7e7; color:#888}
+    .paging .page-num a.actived{background: #d8a31e; color:#fff; border:1px solid #d8a31e;}
+    .paging .page-arrow:hover{background: #fff; border:1px solid #e7e7e7; color:#888}
+    .paging .page-arrow:hover:before{color: #aaa;}
+    
+    /*투자확인요청 모달 invent-modal*/
+    .modal-btn a{height: 45px;}
+    
+    
+    
+    /*수익관리 profit*/
+    .profit-wrap .total-price .price-wrap{width: calc(100% - 270px);}
+    .profit-wrap .total-price .btn-wrap a{width: 120px; height: 45px;}
+    .profit-wrap .total-price .price-wrap .title{font-size: 16px;}
+    .profit-wrap .total-price .price-wrap .price{font-size: 20px;}
+    .profitList-wrap .search-wrap select{width: 100px;}
+    .profitList-wrap .search-wrap input{width: 140px;}
+    
+    .profitList table colgroup col:nth-child(1){width: 8.5% !important;}
+    .profitList table colgroup col:nth-child(3){width: 30% !important;}
+    
+    .profitList tbody td p.price span{padding: 2px 6px;}
+    
+    
+    /*출금 신청하기 withdrawal*/
+    .withdrawal-wrap .withdrawal-textWrap{flex-wrap:wrap;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap{width: 100%; margin-bottom: 10px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .price{height: 35px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap{width: 100%;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text p.title{width: 120px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text input{width: calc(100% - 120px);}
+    
+    .withDrawalList table colgroup col:nth-child(1){width: 8.5% !important;}
+    .withDrawalList .white-btn{font-size: 14px;}
+    .withDrawalList .wd-text{font-size: 14px;}
+    .withDrawalList .price{font-size: 14px;}
+    
+    .withDrawalList .white-btn:hover{color:#666; background: #fff; border:1px solid #e7e7e7;}
+    
+    
+    /*회비관리 dues*/
+    .m-nav-wrap .nav-wrap > li.noti > a span{position:relative;}
+    .m-nav-wrap .nav-wrap > li.noti > a span:after{content:''; display:block; width: 5px;height: 5px; border-radius: 50%; background: #dd3413; position:absolute; top:0px; right:-10px;}
+    .notiText-wrap{padding: 20px;}
+    .inventList-wrap .page-table1 tr td p.state{font-size: 14px;}
+    
+    
+    /*적립금 관리 point*/
+    .point-wrap .point-infoWrap .level-wrap{padding: 30px 50px;}
+    .point-wrap .point-infoWrap .level-wrap h5.title{font-size: 22px;}
+    .point-wrap .point-infoWrap .level-wrap h5.title span{font-size: 22px;}
+    .benefit-btn{height: 45px;}
+    .point-wrap .point-infoWrap .pointInfo-list a.comm-btn{height: 45px;}
+    .point-wrap .point-infoWrap .pointInfo-list h5.title{font-size: 22px;}
+    .point-wrap .point-infoWrap .pointInfo-list p.text{height:2.6em;}
+    .pointList table tr td .point{font-size: 14px;}
+    
+    .benefit-btn:hover{color:#666; background: #fff; border-color:#e7e7e7;}
+    .point-wrap .point-infoWrap .pointInfo-list a.comm-btn:hover{color:#666; background: #fff; border-color:#e7e7e7;}
+    
+    /*게시판 board*/
+    .board-wrap .search-wrap{flex-wrap:wrap;}
+    .board-wrap .search-wrap .select-wrap{width: 100%; margin-bottom: 10px;}
+    .board-wrap .search-wrap .search{width: 100%;}
+    .board-wrap .search-wrap .search .searchBox{width: calc(100% - 130px);}
+    .board-wrap .search-wrap .search input{width: 100%;}
+    
+    .board-wrap table td p.notice{font-size: 14px; padding: 4px 8px;}
+    
+    .table-hover tbody tr:hover td{background: #fff;}
+    
+    
+    /*게시판 뷰페이지 board_view*/
+    .boardView-wrap .page-table1 tr td p.info{font-size: 15px;}
+    .boardView-wrap .page-table1 tr td.text-box p{font-size: 15px;}
+    
+    
+    
+    /*메인 index.html*/
+    .main-auto{padding: 80px 0 80px;}
+    .mainWrap .titleWrap1 .title{margin-bottom: 10px;}
+    .mainWrap .titleWrap1 .title:before{height: 12px;}
+    .mainWrap .titleWrap1 .text{padding-top: 50px; word-break: keep-all;}
+    .mainWrap .titleWrap2 .title{font-size: 32px;}
+    .mainWrap .sec1-wrap .chart{flex-direction: column; margin-top: 40px;}
+    
+    .mainWrap .sec1-wrap .chart li{width: 70vw; height: 100px; border-radius: 100px; padding: 0 30px;}
+    .mainWrap .sec1-wrap .chart li:after{width: calc(70vw + 20px); height: 120px; border-radius: 100px;}
+    .mainWrap .sec1-wrap .chart li .title{padding-bottom: 0; height: auto; margin-bottom: 5px;}
+    .mainWrap .sec1-wrap .chart li .title:after{display:none;}
+    .mainWrap .sec1-wrap .chart li .text{height: auto;}
+    .mainWrap .sec1-wrap .chart li .text br{display:inline-block; content:''; padding: 0 2px;}
+    .mainWrap .sec1-wrap .chart li .text br:after{content:','; display:inline-block; padding-right: 5px;}
+
+    .mainWrap .sec1-wrap .chart li.dot{margin: 20px 0;}
+    
+    .mainWrap .sec2-wrap .pc-wrap{display:none;}
+    .mainWrap .sec2-wrap .m-wrap{display:flex !important;}
+    .mainWrap .sec2-wrap .chart.m-wrap{margin: 30px 0 0;display:flex; justify-content: space-between; align-items: flex-start;}
+    .mainWrap .sec2-wrap .chart .listWrap{width: calc(50% - 5px); background: #fcf9ef; padding: 20px; border-radius: 10px; border:1px solid #f1dfb0;}
+    .mainWrap .sec2-wrap .chart .titleWrap{width: 100%; background: #f8f0da; border:1px solid #f1dfb0; padding: 20px; border-radius: 10px; text-align: center;}
+    .mainWrap .sec2-wrap .chart .titleWrap .tit{font-family: 'Gmarket-B'; font-size: 22px; color: #b58408; margin-bottom: 5px;}
+    .mainWrap .sec2-wrap .chart .chartList{display:flex; flex-direction: column; justify-content: flex-start; align-items: center;}
+    .mainWrap .sec2-wrap .chart .chartList li{width: 100%; background: #fff; border:1px solid #f1dfb0; border-radius: 10px; margin-top: 10px; padding: 20px; display:flex; justify-content: center; align-items: center; height: 106px; flex-direction: column;}
+    .mainWrap .sec2-wrap .chart .chartList li .tit{font-family: 'Gmarket-B'; color: #b58408; font-size: 18px; margin-bottom: 5px;}
+    .mainWrap .sec2-wrap .chart .chartList li .txt{line-height: 1.3; text-align: center; word-break: keep-all;}
+    
+    .mainWrap .sec2-wrap .chart .chartList li.arrow{position:relative;}
+    .mainWrap .sec2-wrap .chart .chartList li.arrow:before{content:''; display:block; position:absolute; width: 26px;height: 26px; border-radius: 50%; background: #fff; z-index: 1;}
+    .mainWrap .sec2-wrap .chart .chartList li.arrow:after{display:block; font-family: "Font Awesome 6 Pro"; font-size: 26px; font-weight: 900; color: #b58408; position:absolute; z-index: 2;}
+    
+    .mainWrap .sec2-wrap .chart .chartList li.left:after{content:'\f137'; top:50%; left:-38px; transform: translateY(-50%);}
+    .mainWrap .sec2-wrap .chart .chartList li.left:before{top:50%; left:-38px; transform: translateY(-50%);}
+    .mainWrap .sec2-wrap .chart .chartList li.top:after{content:'\f139'; top:-18px; left:50%; transform: translateX(-50%);}
+    .mainWrap .sec2-wrap .chart .chartList li.top:before{top:-18px; left:50%; transform: translateX(-50%);}
+    .mainWrap .sec2-wrap .chart .chartList li.bottom:after{content:'\f13a'; bottom:-18px; left:50%; transform: translateX(-50%);}
+    .mainWrap .sec2-wrap .chart .chartList li.bottom:before{bottom:-18px; left:50%; transform: translateX(-50%);}
+    
+    .mainWrap .sec3-wrap .listWrap li{width: 160px; margin: 5px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(2):before{width: 86vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):before{width: 93vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):before{width: 93vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):after{left:calc(93vw - 27px); width: 54px;height: 54px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):after{right:calc(93vw - 27px); width: 54px;height: 54px;}
+    
+    .mainWrap .sec3-wrap .list2Wrap{margin-top: 30px; padding: 20px;}
+    
+    
+    .mainWrap .sec5-wrap .listWrap li{width: calc(50% - 5px);}
+    .mainWrap .sec5-wrap .listWrap li:nth-child(3n){margin-right: 10px;}
+    .mainWrap .sec5-wrap .listWrap li:nth-child(2n){margin-right: 0px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap{flex-wrap: wrap; margin-top: 30px;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap{width: 100%;}
+    .mainWrap .sec6-wrap .recruitWrap .list .title{font-size: 22px; height: 50px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap{height: auto; padding: 20px !important;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li{height: 40px !important; margin-bottom: 10px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li:last-child{margin-bottom: 0;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .tit{height: 40px !important;}
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .btnWrap{margin-top: 20px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list2{margin-top: 60px;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap{padding-bottom: 40px !important;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textBox .info{right:20px;}
+    .mainWrap .bannerWrap img{width: 130vw; margin-left: -20vw;}
+    .mainWrap .bannerWrap .textWrap .title{font-size: 30px;}
+    .mainWrap .bannerWrap .textWrap .title span{font-size: 30px;}
+    .mainWrap .bannerWrap .textWrap .list{margin-top: 10px;}
+
+    .mainWrap .bannerWrap .textWrap .list li:first-child{margin-right: 10px;}
+    .mainWrap .bannerWrap .textWrap .list li .tit:after{display:none;}
+    .mainWrap .bannerWrap .textWrap .list li .text{font-size: 18px; margin-top: 10px;}
+    
+    
+    .mainWrap .sec7-wrap .listWrap li{width: 100%; margin-right: 0 !important; margin-bottom: 10px !important;}
+    .mainWrap .sec7-wrap .listWrap li:last-child{margin-bottom: 0 !important;}
+    
+    .mainWrap .sec7-wrap .listWrap li .number{width: 45px;height: 45px; font-size: 15px;}
+    .mainWrap .sec7-wrap .listWrap li .text{font-size: 16px; width: calc(100% - 55px); height: 45px; line-height: 47px; padding: 0 10px;}
+    .mainWrap .sec7-wrap .callWrap{height: 50px; margin-top: 20px;}
+    .mainWrap .sec7-wrap .callWrap .title{padding-top: 4px; margin-right: 10px;}
+    
+    .mainWrap .sec8-wrap .listWrap{padding: 20px; flex-wrap: wrap; margin-top: 10px;}
+    .mainWrap .sec8-wrap .listWrap .text{font-size: 16px; width: 100%;justify-content: center;}
+    .mainWrap .sec8-wrap .listWrap .text:first-child{margin-right: 0px; margin-bottom: 10px;}
+    .mainWrap .sec9-wrap .bankWrap{padding: 35px 0 20px;}
+    .mainWrap .sec9-wrap .bankWrap .account{font-size: 20px;}
+    
+    
+    /*자주묻는글 qna.html*/
+    .qnaWrap .search-wrap .searchBox{width:100%;}
+    .qnaWrap .qnaBox li a:hover{background: #fff;}
+    
+    /*인사말씀 greeting.html*/
+    .greetingWrap .greetingBox{flex-wrap:wrap;}
+    .greetingWrap .greetingBox .img{width: 100%; margin-bottom: 30px;}
+    .greetingWrap .greetingBox .greetingTxt{width: 100%;}
+    
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .tit{font-size: 32px; margin-bottom: 15px;}
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .intro{font-size: 18px;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p{font-size: 16px; line-height: 1.5;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text span{font-size: 16px; line-height: 1.5;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap{margin-top: 20px;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p{margin-bottom: 15px;}
+}
+    
+
+
+
+@media screen and (max-width: 767px) {
+    /* ruleset for 481px - 767px */
+    /*header*/
+    .header-wrap .header-inner{height: 60px;}
+    .header-wrap .header-inner .logo-wrap a{font-size: 18px; width: 130px;}
+    .m-header-wrap .info-wrap > a:after{font-size: 20px;}
+    .m-header-wrap .info-wrap .nav-btn a{margin-left: 10px; width: 32px; padding:10px 0;}
+    
+    .m-nav-wrap .nav-logo-wrap{height: 60px;}
+    .m-nav-wrap .nav-logo-wrap h1.logo-wrap a{font-size: 18px; width: 130px;}
+    .m-nav-wrap .nav-logo-wrap .close-btn:after{font-size: 35px;}
+    .m-nav-wrap .info-btnWrap li a.login-btn{height: 40px; font-size: 14px;}
+    
+    .m-nav-wrap .nav-wrap > li > a{height: 55px;}
+    .m-nav-wrap .nav-wrap > li > a span{font-size: 17px; font-weight: 600; }
+    .m-nav-wrap .nav-wrap > li .depth2 li a{font-size: 15px; padding:17px 3%;}
+    
+    /*footer*/
+    .footer-wrap .footer-inner{height: 80px; }
+    .footer-wrap .footer-inner p{font-size: 12px;}
+    
+    /*공통사항*/
+    .auto{padding:30px 0 60px}
+    
+    /*로그인 login*/
+    .login-wrap{width: 100%; margin-top: 30px; padding: 60px 40px;}
+    .login-wrap h4{font-size: 24px; margin-bottom: 30px;}
+    .login-wrap .text-wrap input{height: 40px; font-size: 14px;}
+    .login-wrap .login-btn{height: 40px;font-size: 14px;}
+    .login-wrap .find-wrap li a{font-size: 13px;}
+    
+    .login-wrap .sns-wrap p.snsTitle{font-size: 14px;}
+    .login-wrap .sns-wrap .kakao-btn{height: 40px; font-size: 14px;}
+    .login-wrap .sns-wrap .kakao-btn i{font-size: 14px; margin-top: 1px;}
+    
+    /*아이디 찾기 findId*/
+    .findId-btn-wrap{margin-top: 40px;}
+    .phone-wrap select{height: 40px; font-size: 14px;}
+    
+    /*비밀번호 찾기 finddPassword*/
+    .infoText{font-size: 12px;}
+    
+    
+    /*회원가입 join*/
+    .join-wrap .text-wrap p.title{font-size: 15px;}
+    .join-wrap .text-wrap .date-wrap select{font-size: 14px; height: 40px;}
+    .join-wrap .text-wrap .address-wrap1 .table-btn{height: 40px; font-size: 14px;}
+    
+    .join-agree-wrap{margin-top: 20px;padding-top: 20px;}
+    .join-agree-wrap .all-agree label{font-size: 15px;}
+    .join-agree-wrap .agree-text-wrap li label{font-size: 14px;}
+    .join-wrap .login-btn{margin-top: 40px;}
+    
+    /*회원가입 모달*/
+    .modal .modal-inner{width: 94%;}
+    .modal .modal-inner .modal-title{padding: 0 20px;}
+    .modal .modal-inner .modal-text{padding:20px}
+    
+    .join-agree-modal1 .modal-text, .join-agree-modal2 .modal-text{max-height: calc(70vh - 60px);}
+    .modal .modal-inner .modal-text .agree-text{margin-top: 20px;}
+    .modal .modal-inner .modal-text .agree-text p.title{font-size: 14px;}
+    .modal .modal-inner .modal-text .agree-text p.text{line-height: 1.4;}
+    
+    
+    /*회원정보수정 mypage*/
+    .join-wrap .text-wrap select{ height: 40px; font-size: 14px;}
+    
+    
+    /*투자하기 invent*/
+    .invent-wrap .infoText-wrap{margin-top: 20px;}
+    .subP-title .title{font-size: 24px;}
+    .inventList-wrap .subTitle2 .comm-btn{height: 40px; width: 120px; font-size: 14px;}
+    .subTitle2 p.title{font-size: 20px;}
+    .subTitle2 p.title:before{width: 6px;height: 6px;}
+    .subTitle2 p.title:before{margin-top: -4px;}
+    .search-wrap{flex-wrap:wrap; justify-content: flex-end;}
+    .inventList-wrap .search-wrap input{width: calc(50% - 8.8px); font-size: 14px;}
+    .search-wrap input{font-size: 14px;}
+    .inventList-wrap .search-wrap span{margin: 0 5px; font-size: 14px;}
+    .inventList-wrap .period-wrap{margin-top: 10px;}
+    .pc768-wrap{display:none;}
+    
+    .m768-wrap{display:block;}
+    
+    .inventList{margin-top: 20px;}
+    .inventList li{border:1px solid #e7e7e7; border-radius: 5px; padding:20px; margin-top: 10px;}
+  
+    .inventList li:first-child{margin-top: 0;}
+      .inventList li .text-wrap{display:flex; justify-content: space-between; align-items: center; width: 100%;}
+    .inventList li .text{width: 75%;}
+    .inventList li .text .date{font-size: 14px; color: #888; font-weight: 500;}
+    .inventList li .text .stateText{font-size: 14px; display:flex; justify-content: flex-end; align-items: center; width: 25%; font-weight: 600;}
+    
+    .inventList li .price{font-weight: 600; color: #000; font-family: 'roboto'; margin-top: 10px;}
+    .inventList li .disap-text{font-size: 14px; margin-top: 8px; line-height: 1.3; color: #888;}
+    
+    .paging .page-num a:nth-last-child(-n + 5){display:none;}
+    
+    
+    /*투자확인요청 모달 invent-modal*/
+    .invent-modal .modal-text .text p.title{font-size: 14px; font-weight: 600;}
+    .invent-modal .modal-text .text input, .invent-modal .modal-text .text select{font-size: 14px; height: 40px;}
+    .invent-modal .modal-text .userCheck label{font-size: 13px;}
+    .modal-btn{padding:10px 20px;}
+    .modal-btn a{font-size: 14px;height: 40px;}
+    
+    
+    
+    /*수익관리 profit*/
+    
+    .profit-wrap .total-price{flex-wrap:wrap; border-radius: 5px; margin-top: 20px;}
+    .profit-wrap .total-price .price-wrap{width: 100%; margin-bottom: 15px; padding-bottom: 15px; border-bottom:1px solid #e7e7e7;}
+    .profit-wrap .total-price .price-wrap .title{font-size: 15px;}
+    .profit-wrap .total-price .btn-wrap{width: 100%;}
+    .profit-wrap .total-price .btn-wrap a{width: 50%; height: 40px; font-size: 14px;}
+    .profit-wrap .imagine-price-wrap{flex-wrap:wrap; margin-top: 10px;}
+    .profit-wrap .imagine-price-wrap li{width: 100%; border-radius: 5px;}
+    .profit-wrap .imagine-price-wrap li.today-price{margin-right: 0; margin-bottom: 10px;}
+    
+    .profitList-wrap{padding-top: 60px;}
+    .profitList-wrap .search-wrap select{width: 80px; font-size: 14px; margin-bottom: 10px;}
+    .profitList-wrap .search-wrap input{width: calc(50% - 53.8px); margin-bottom: 10px;}
+    .profitList-wrap .search-wrap span{margin: 0 5px 10px; font-size: 14px;}
+    
+    .profitList{margin-top: 20px;}
+    .profitList li{margin-top: 10px; border:1px solid #e7e7e7; border-radius: 5px; padding:20px;}
+    .profitList li:first-child{margin-top: 0px;}
+    
+    .profitList li .date{font-size: 13px; color: #888;}
+    .profitList li .text{font-size: 14px; color: #666; margin-top: 5px; line-height: 1.3; margin-bottom: 15px;}
+    
+    .profitList li .text-wrap{display:flex; justify-content: space-between; align-items: center; width: 100%;}
+    
+    .profitList li .text-wrap .price{font-weight: 600;color: #000; font-size: 16px; font-family: 'roboto';  width: 50%; margin-right: 20px; display:flex; justify-content: flex-start; align-items: center;}
+    .profitList li .text-wrap .p-price{color: #276cad;}
+    .profitList li .text-wrap .m-price{color: #dd3413;}
+    .profitList li .text-wrap .price span{display:inline-block; padding:3px 6px; font-size: 12px; color: #276cad; border:1px solid #276cad; border-radius: 3px; margin-right: 5px;}
+    
+    .profitList li .text-wrap .m-price span{color: #dd3413; border:1px solid #dd3413;}
+    
+    .profitList li .text-wrap .all-price{color: #000; font-weight: 600; font-family: 'roboto'; width: 50%; display:flex; justify-content: flex-end; align-items: center;}
+    
+    
+    /*출금 신청하기 withdrawal*/
+    .withdrawal-wrap .wd-text{margin-top: 20px;}
+    .withdrawal-wrap .withdrawal-textWrap{margin-top: 20px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap{padding: 20px; border-radius: 5px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .price .title{font-size: 14px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .price .point{font-size: 16px;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .btn-wrap{margin-top: 0;}
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .comm-btn{height: 45px; font-size: 14px;}
+    
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap{padding: 20px; border-radius: 5px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text p.title{font-size: 14px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text input{height: 40px; font-size: 14px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text:first-child:after{font-size: 14px; margin-top: 1px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .text2{width: 100%;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .btn-wrap{margin-top: 10px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .btn-wrap a{height: 45px; font-size: 14px;}
+    
+    
+    .withDrawalList{margin-top: 20px;}
+    .withDrawalList li{padding: 20px; border:1px solid #e7e7e7; border-radius: 5px; margin-top: 10px; }
+    
+    .withDrawalList li:first-child{margin-top: 0;}
+    .withDrawalList li .wdText-wrap{display:flex; justify-content: space-between; align-items: center;}
+    .withDrawalList li .text-wrap{width: calc(100% - 100px);}
+    .withDrawalList li .date{font-size: 13px; color: #888;}
+    .withDrawalList li .white-btn{display:flex; justify-content: center; align-items: center;width: 100px; height: 65px; font-size: 15px; } 
+    
+    .withDrawalList .wd-text{color: #888; font-weight: 600; font-family: 'roboto'; font-size: 15px; margin-top: 20px;}
+
+    .withDrawalList .all-price{color: #000; font-weight: 600;font-family: 'roboto'; font-size: 18px; margin-top: 5px;}
+    
+    .withDrawalList .approval{display:flex; justify-content: center; align-items: center; width: 100px; color:#000; font-weight: 500; font-size: 15px;}
+    .withDrawalList .approval1{color: #276cad;}
+    .withDrawalList .approval2{color: #dd3413;}
+    
+    .withDrawalList .info-text{font-size: 14px; color: #888; margin-top: 15px; padding-top: 10px; border-top:1px solid #e7e7e7; line-height: 1.3;}
+    
+    
+    
+    /*회비관리 dues*/
+    .inventList li .text .date-wrap span{font-size: 13px; color: #aaa; font-weight: 500;}
+    .inventList li .text .date-wrap span.date2{color:#666;}
+    .inventList li .text .date-wrap span.date2:before{content:''; display:inline-block; margin: 0 8px; width: 3px;height: 3px; border-radius: 50%; background: #aaa; margin-top: -2px; vertical-align: middle;}
+    
+    .notiText-wrap span.exclam{width: 18px; height: 18px; font-size: 11px; margin-right: 10px;}
+    .notiText-wrap p.text{width: calc(100% - 30px);}
+    .notiText-wrap p.text span{font-weight: 500;}
+    
+    
+    /*적립금 관리 point*/
+    .point-wrap .point-infoWrap .level-wrap{padding: 30px; margin-bottom: 10px; border-radius: 5px;}
+    .point-wrap .point-infoWrap .level-wrap h5.title{font-size: 20px;}
+    .point-wrap .point-infoWrap .level-wrap h5.title span{font-size: 20px;}
+    .point-wrap .point-infoWrap .level-wrap p.text{font-size: 14px;}
+    .point-wrap .point-infoWrap .level-wrap .rest-point > p{font-size: 14px;}
+    .point-wrap .point-infoWrap .level-wrap .rest-point > p span{font-size: 14px;}
+    .point-wrap .point-infoWrap .level-wrap .level-chart .level span{font-size: 14px;}
+    .benefit-btn{width: 100%; font-size: 14px;}
+    .point-wrap .point-infoWrap .pointInfo-list{width: 100%; flex-direction: inherit; justify-content: space-between; align-items: center; flex-wrap:wrap; border-radius: 5px;}
+    
+    .point-wrap .point-infoWrap .pointInfo-list:last-child{margin-top: 10px;}
+    
+    .point-wrap .point-infoWrap .pointInfo-list h5.title{font-size: 15px;}
+    .point-wrap .point-infoWrap .pointInfo-list p.info{font-size: 24px; margin: 0;}
+    .point-wrap .point-infoWrap .pointInfo-list .text-wrap{justify-content: flex-start; width: 100%; margin-top: 20px;}
+    .point-wrap .point-infoWrap .pointInfo-list p.text{font-size: 14px; height:auto; width: 100%; text-align: left;  margin-bottom: 10px;}
+    .point-wrap .point-infoWrap .pointInfo-list a.comm-btn{font-size: 14px; width: 100%;}
+    
+    
+    
+    /*적립금 관리 모달 benefit-modal*/
+    .benefit-modal .level-title{font-size: 20px;}
+    .benefit-modal .level-title span{font-size: 20px;}
+    
+    
+    .benefit-modal .benefit-wrap{flex-wrap:wrap;}
+    .benefit-modal .benefit-wrap li{padding: 30px; width: 100%; }
+    .benefit-modal .benefit-wrap li:first-child{margin-right: 0; margin-bottom: 10px;}
+    .benefit-modal .benefit-wrap li .text{font-size: 15px;}
+    
+    .benefit-modal .benefit-wrap li .benefit-info{font-size: 20px;}
+    .benefit-modal .benefit-wrap li .benefit-info span{font-size: 20px;}
+    
+    
+    /*적립금 관리 모달 point-modal*/
+    .point-modal .modal-text .input-wrap .title{font-size: 15px; width: 140px;}
+    .point-modal .modal-text .input-wrap .text{width: calc(100% - 140px); font-size: 20px;}
+    .point-modal .modal-text .input-wrap input{width: calc(100% - 140px); height: 40px; font-size: 14px;}
+    .point-modal .modal-text .text-wrap p{font-size: 14px;}
+    .point-modal .modal-text .text-wrap p span{font-size: 14px;}
+    
+    
+    /*게시판 board*/
+    .board-wrap .search-wrap{margin-top: 20px;}
+    .board-wrap .search-wrap .select-wrap select{font-size: 14px; width: 100px;}
+    .board-wrap .search-wrap .search select{font-size: 14px; width: 100px;}
+    .board-wrap .search-wrap .search .searchBox{width: calc(100% - 110px);}
+    
+    .boardList li{margin-top: 10px; border:1px solid #e7e7e7; border-radius: 5px; padding:20px;}
+    .boardList li:first-child{margin-top: 20px;}
+    .boardList li .text-wrap{display:flex; justify-content: space-between; align-items: center;}
+    .boardList li .text-wrap p.date{color: #888; font-weight: 500;font-size: 14px; }
+    .boardList li .text-wrap p.notice{border:1px solid #e7e7e7; padding:4px 8px; border-radius: 5px; font-size: 14px; color: #666; }
+    .boardList li .text-wrap p.notice1{border:1px solid #d8a31e; color: #b58408; }
+    
+    .boardList li p.title{font-size: 16px; color: #000; font-weight: 500; line-height: 1.3; margin-top: 15px;}
+    
+    
+    /*게시판 뷰페이지 board_view*/
+    .boardView-wrap table thead th.boardView-title{font-size: 15px; padding: 10px 15px; height: 44px;}
+    .boardView-wrap table thead th.boardView-title span{font-size: 15px;}
+    .boardView-wrap .page-table1 tr td{height: 35px; padding: 5px 15px;}
+    
+    .boardView-wrap .page-table1 tr td p.info{font-size: 14px;}
+    .boardView-wrap .page-table1 tr td p.info span{font-size: 14px;}
+    .boardView-wrap .page-table1 tr td.file p a{font-size: 14px;}
+    .boardView-wrap .page-table1 tr td.text-box{padding: 20px 15px; }
+    
+    .boardView-wrap .page-table1 tr td.text-box p{font-size: 14px;}
+    
+    .page-btn a{height: 45px; font-size: 14px; width: 220px;}
+    
+    
+    /*메인 index.html*/
+    .main-auto{padding: 65px 0 65px;}
+    .mainWrap .titleWrap1 .title{font-size: 34px;}
+    .mainWrap .titleWrap1 .text:after{height: 2px; width: 30px;}
+    .mainWrap .titleWrap1 .text{padding-top: 20px; font-size: 15px;}
+    .mainWrap .titleWrap1 .text span{font-size: 15px;}
+    .mainWrap .titleWrap1 .text br{display:inline-block; content:' '; padding: 0 2px;}
+    .mainWrap .sec1-wrap .chart li{width: calc(100% - 20px); height: 80px;}
+    .mainWrap .sec1-wrap .chart li:after{width: calc(100% + 20px); height: 100px;}
+    .mainWrap .sec1-wrap .chart li .title{font-size: 18px; margin-bottom: 0;}
+    .mainWrap .sec1-wrap .chart li .text{font-size: 15px;}
+    
+    .mainWrap .sec1-wrap .chart li.dot{width: 6px;height: 6px; margin: 16px 0;}
+    
+    .mainWrap .titleWrap2 .title{font-size: 28px; word-break: keep-all; letter-spacing: -1px;}
+    .mainWrap .titleWrap2 .title span{font-size: 28px; word-break: keep-all; letter-spacing: -1px;}
+    .mainWrap .titleWrap2 .text{font-size: 15px;}
+    .mainWrap .titleWrap2 .text span{font-size: 15px;}
+    
+    .mainWrap .sec2-wrap .chart.m-wrap{margin-top: 20px;}
+    .mainWrap .sec2-wrap .chart .listWrap{padding: 10px;}
+    .mainWrap .sec2-wrap .chart .titleWrap{padding: 20px 10px;}
+    
+    .mainWrap .sec2-wrap .chart .titleWrap .tit{font-size: 18px;}
+    .mainWrap .sec2-wrap .chart .titleWrap .txt{font-size: 15px;}
+    .mainWrap .sec2-wrap .chart .chartList li{padding: 10px; text-align: center; word-break: keep-all; height: 120px;}
+    .mainWrap .sec2-wrap .chart .chartList li .tit{line-height: 1.2; font-size: 16px;}
+    .mainWrap .sec2-wrap .chart .chartList li .txt{font-size: 15px;}
+    .mainWrap .sec2-wrap .chart .chartList li.left:after{left:-29px;}
+    .mainWrap .sec2-wrap .chart .chartList li.left:before{left:-29px;}
+    
+    .mainWrap .sec3-wrap .listWrap.pc-wrap{display:none !important;}
+    .mainWrap .sec3-wrap .listWrap.m-wrap{display:flex !important;}
+    
+/*
+    .mainWrap .sec3-wrap .listWrap ul:after{display:none;}
+    .mainWrap .sec3-wrap .listWrap ul:before{display:none;}
+*/
+    .mainWrap .sec3-wrap .listWrap li{width:calc(30vw - 10px); font-size: 16px; font-family: 'pretendard'; font-weight: 800; height: 40px; }
+    
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):before{width: 86vw; right:inherit; left:50%; transform: translateX(-50%);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(4):before{width: 86vw; left:50%; transform: translateX(-50%);}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(5):before{width: 93vw; right:0}
+    
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):after{height: 49px; width: 49px; left:calc(93vw - 25px)}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(2):after{content:''; height: 49px; width: 49px; right:calc(93vw - 25px); position:absolute; border:1px solid #b58408; border-radius: 35px 0 0 35px; top:50%; border-right: 0; }
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):after{height: 49px; width: 49px; left:calc(93vw - 25px); right:inherit; top:50%; border-radius: 0 35px 35px 0; border-right: 1px solid #b58408; border-left: 0;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(4):after{content:''; height: 49px; width: 49px; right:calc(93vw - 25px); position:absolute; border:1px solid #b58408; border-radius: 35px 0 0 35px; top:50%; border-right: 0; }
+    
+    .mainWrap .sec3-wrap .list2Wrap{margin-top: 25px; justify-content: flex-start; padding: 15px;}
+    .mainWrap .sec3-wrap .list2Wrap li{margin: 5px 10px 5px 0; width: calc(33.33% - 6.667px); font-size: 15px;}
+    .mainWrap .sec3-wrap .list2Wrap li:nth-child(3n){margin-right: 0;}
+    
+    .mainWrap .sec4-wrap .textBox{padding: 30px 15px; margin-top: 10px;}
+    .mainWrap .sec4-wrap .textBox ul.list{flex-direction: column;}
+    .mainWrap .sec4-wrap .textBox ul.list li{width: 100%; margin-right: 0; margin-bottom: 10px; height:auto; padding:17px 15px 15px; font-size: 15px;}
+    .mainWrap .sec4-wrap .textBox ul.list li:last-child{margin-bottom: 0;}
+    .mainWrap .sec4-wrap .text{font-size: 15px; width: 100%;}
+    
+    .mainWrap .sec5-wrap .listWrap{margin-top: 0;}
+    .mainWrap .sec5-wrap .listWrap li{padding:20px 15px; width: 100%; margin-right: 0 !important; height:auto; border-radius: 5px; box-shadow: none;}
+    .mainWrap .sec5-wrap .listWrap li .text{font-size: 15px;}
+    .mainWrap .sec5-wrap .listWrap li .number{; font-size: 13px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .title{font-size: 20px; height: 45px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap{padding: 15px !important;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap{padding-bottom: 40px !important;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li{height: 36px !important;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .tit{height: 36px !important; width: 110px; font-family: 'Gmarket-M'; font-weight: 600; font-size: 15px; letter-spacing: 0;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .txt{width: calc(100% - 110px);  font-family: 'Gmarket-M';font-weight: 600; font-size: 15px; color: #000;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .textInfo{margin-top: 5px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .comm-btn{font-size: 15px; font-family: 'Gmarket-M'; width: 200px; }
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textBox .info{bottom:20px; right: 15px;}
+    
+    
+    .mainWrap .bannerWrap .textWrap{width: 94%;}
+    .mainWrap .bannerWrap .textWrap .list{flex-direction: column; width: 100%; margin-top: 0;}
+    .mainWrap .bannerWrap .textWrap .list li{width: 100%; margin-right: 0 !important; margin-top: 10px; padding: 25px 0;}
+    .mainWrap .bannerWrap .textWrap .list li .tit{font-size: 14px; }
+
+    .pc-bannerImg{display:none;}
+    .m-bannerImg{display:block;}
+    .mainWrap .bannerWrap img{width: 100vw; margin-left: 0; height: 60vw;}
+    .mainWrap .bannerWrap .textWrap .info{right:0;}
+    
+    
+    .mainWrap .sec7-wrap .listWrap{margin-top: 10px;}
+    .mainWrap .sec7-wrap .listWrap li .number{width: 40px;height: 40px; font-size: 14px;}
+    .mainWrap .sec7-wrap .listWrap li .text{font-family: 'Gmarket-M'; font-size: 15px; width: calc(100% - 45px); height: 40px; line-height: 40px; font-weight: 600;}
+    
+    .mainWrap .sec7-wrap .callWrap i{font-size: 10px; margin-top: -1px;}
+    .mainWrap .sec7-wrap .callWrap .title{font-size: 14px; font-family: 'Gmarket-M';}
+    .mainWrap .sec7-wrap .callWrap .number{font-size: 18px;}
+    
+    .mainWrap .sec8-wrap .listWrap .text{font-size: 15px; }
+    
+    .mainWrap .sec8-wrap .btnWrap a{font-family: 'Gmarket-M'; font-size: 15px; width: 200px;}
+    
+    .mainWrap .sec9-wrap .bankWrap .title{font-size: 15px; font-family: 'Gmarket-M'; padding: 0 20px; height: 40px; top:-20px;}
+    .mainWrap .sec9-wrap .bankWrap{margin-top: 30px; padding: 30px 0 20px;}
+    .mainWrap .sec9-wrap .bankWrap .account{font-size: 18px; margin-left: 10px;}
+    .mainWrap .sec9-wrap .bankWrap img{width: 90px;}
+    
+    /*자주묻는글 qna.html*/
+    .qnaWrap .search-wrap{margin-top: 20px;}
+    .qnaWrap .qnaBox{margin-top: 20px;}
+    .qnaWrap .qnaBox li a{padding: 15px;}
+    .qnaWrap .qnaBox li a .title{font-size: 15px; line-height: 1.4; width: calc(100% - 40px);}
+    .qnaWrap .qnaBox li a .title span{font-size: 15px;}
+    .qnaWrap .qnaBox li .answer p{font-size: 14px; line-height: 1.4;}
+    
+    
+    /*인사말씀 greeting.html*/
+    .greetingWrap .greetingBox{margin-top: 20px;}
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .tit{font-size: 22px; margin-bottom: 20px;}
+    .greetingWrap .greetingBox .greetingTxt .titleWrap .intro{font-size: 15px; font-weight: 600;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p{font-size: 15px; line-height: 1.4;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text span{font-size: 15px; line-height: 1.4;}
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p{margin-bottom: 10px;}
+    
+    .greetingWrap .greetingBox .greetingTxt .textWrap .text p.ceo span.name{font-size: 18px;}
+}
+
+@media screen and (max-width: 600px) {
+    /* ruleset for 481px - 600px */
+    .mainWrap .bannerWrap img{height: auto;}
+}
+
+
+
+
+@media screen and (max-width: 480px) {
+    /* ruleset for 375px - 480px */
+    
+    /*header*/
+    .header-wrap .header-inner .logo-wrap a{font-size: 17px;}
+    .m-header-wrap .info-wrap > a:after{font-size: 18px;}
+    .m-header-wrap .info-wrap .nav-btn a{width: 30px;}
+    .m-nav-wrap .nav-logo-wrap h1.logo-wrap a{font-size: 17px;}
+    .m-nav-wrap .nav-logo-wrap .close-btn:after{font-size: 32px;}
+    
+    /*footer*/
+    .footer-wrap .footer-inner p{font-size: 11px;}
+    
+    /*로그인*/
+    .login-wrap{padding:60px 20px;}
+    .login-wrap h4{font-size: 22px;}
+    
+    /*비밀번호 찾기 finddPassword*/
+    .infoText{font-size: 12px;}
+    
+    /*회원가입 join*/
+    .join-wrap .text-wrap p.title{font-size: 14px;}
+    .join-agree-wrap .all-agree label{font-size: 14px;}
+    .join-agree-wrap .agree-text-wrap li label{font-size: 13px;}
+    .join-agree-wrap .agree-text-wrap li a.agree-view{font-size: 12px;}
+    
+    /*회원가입 모달*/
+    .modal .modal-inner .modal-title{height: 50px;}
+    .modal .modal-inner .modal-title p.title{font-size: 16px;}
+    .modal .modal-inner .modal-title a.close-btn:after{font-size: 22px;}
+    .modal .modal-inner .modal-text .agree-text p.text{font-size: 13px;}
+    
+    
+    /*투자하기 invent*/
+    .subP-title .title{font-size: 22px;}
+    .subP-title .menuPath li a{font-size: 13px;}
+    .subP-title .menuPath li a i{font-size: 12px;}
+    .invent-wrap .infoText-wrap p{font-size: 13px;}
+    .invent-wrap .infoText-wrap p span{font-size: 13px;}
+    .invent-wrap .infoText-wrap{margin-top: 10px; padding: 15px;}
+    
+    .inventList-wrap{margin-top: 60px;}
+    .subTitle2 p.title{font-size: 18px;}
+    .subTitle2 .comm-btn{height: 35px;}
+    .search-wrap{padding: 15px;}
+    .inventList-wrap .period-wrap{width: 100%;}
+    .period-wrap li{width:calc(25% - 7.5px);}
+    .period-wrap li:first-child{margin-left: 0;}
+    .period-wrap li a{height: 30px; width: 100%;}
+    
+    .inventList li .price{font-size: 15px;}
+    .inventList .stateText{font-size: 15px;}
+    .inventList li .disap-text{font-size: 13px;}
+    
+    .paging{margin-top: 40px;}
+    .paging .page-num a{width: 32px;height: 32px; font-size: 12px;}
+    
+    .paging .page-arrow{width: 32px;height: 32px;}
+    .paging .page-arrow:before{font-size: 10px;}
+    
+    
+    
+    /*수익관리 profit*/
+    .profit-wrap.auto{padding-bottom: 30px;}
+    .profit-wrap .total-price{padding: 15px;}
+    .profit-wrap .total-price .price-wrap .title{font-size: 14px;}
+    .profit-wrap .total-price .price-wrap .price{font-size: 18px;}
+    .profit-wrap .imagine-price-wrap li{padding: 15px;}
+    .profit-wrap .imagine-price-wrap li div:first-child{margin-bottom: 8px; padding-bottom: 8px;}
+    .profit-wrap .imagine-price-wrap li div .title{font-size: 13px;}
+    .profit-wrap .imagine-price-wrap li div .price{font-size: 15px;}
+    
+    
+    .profitList-wrap .search-wrap select{width: 60px; background: #fff url(../images/select_icon.png) no-repeat 85% 55%; background-size: 9px;}
+    .profitList-wrap .search-wrap input{width: calc(50% - 44.4px); letter-spacing: -1px;}
+    .profitList-wrap .search-wrap input[type="date"]::-webkit-calendar-picker-indicator{width: 20px;}
+    .period-wrap{width: 100%;}
+    
+    
+    
+    /*출금 신청하기 withdrawal*/
+    .withdrawal-wrap .withdrawal-textWrap .price-wrap .comm-btn{height: 40px;}
+    .withdrawal-wrap .withdrawal-textWrap .account-wrap .btn-wrap a{height: 40px;}
+    .withdrawal-wrap .search-wrap select{width: 70px;}
+    .profitList-wrap .search-wrap input{width: calc(50% - 48.8px); letter-spacing: -1.2px;}
+    .withDrawalList .wd-text{font-size: 14px;}
+    .withDrawalList .all-price{font-size: 16px; margin-top: 0;}
+    
+    .withDrawalList li .text-wrap{width: calc(100% - 90px);}
+    .withDrawalList li .white-btn{font-size: 14px; width: 90px;}
+    .withDrawalList .approval{font-size: 14px; width: 90px;}
+    .withDrawalList .info-text{font-size: 13px; margin-top: 10px;}
+
+
+    /*회비관리 dues*/
+    .notiText-wrap{padding: 15px;}
+    .notiText-wrap p.text{font-size: 13px;}
+    .notiText-wrap p.text span{font-size: 13px;}
+    
+    /*적립금 관리 point*/
+    .point-wrap .point-infoWrap .level-wrap h5.title{font-size: 18px;}
+    .point-wrap .point-infoWrap .level-wrap h5.title span{font-size: 18px;}
+    .point-wrap .point-infoWrap .level-wrap p.text{font-size: 13px;}
+    .point-wrap .point-infoWrap .level-wrap .rest-point > p{font-size: 13px;}
+    .point-wrap .point-infoWrap .level-wrap .rest-point > p span{font-size: 13px;}
+    .point-wrap .point-infoWrap .level-wrap .level-chart .level span{font-size: 13px;}
+    .benefit-btn{height: 40px;}
+    .point-wrap .point-infoWrap .pointInfo-list p.info{font-size: 20px;}
+    .point-wrap .point-infoWrap .pointInfo-list a.comm-btn{height: 40px;}
+    
+    
+    /*적립금 관리 모달 benefit-modal*/
+    .benefit-modal .level-title{font-size: 17px;}
+    .benefit-modal .level-title span{font-size: 17px;}
+    
+    .benefit-modal .benefit-wrap li{padding: 25px;}
+    .benefit-modal .benefit-wrap li .text{font-size: 14px; margin-bottom: 6px;}
+    .benefit-modal .benefit-wrap li .benefit-info{font-size: 17px;}
+    .benefit-modal .benefit-wrap li .benefit-info span{font-size: 17px;}
+    
+    
+    /*적립금 관리 모달 point-modal*/
+    .point-modal .modal-text .input-wrap .title{font-size: 14px; width: 120px;}
+    .point-modal .modal-text .input-wrap .text{width: calc(100% - 120px); font-size: 17px;}
+    
+    .point-modal .modal-text .input-wrap input{width: calc(100% - 120px);}
+    .point-modal .modal-text .text-wrap p{font-size: 13px; line-height: 1.3; margin-top: 5px;}
+    .point-modal .modal-text .text-wrap p:first-child{margin-top: 0;}
+    .point-modal .modal-text .text-wrap p span{font-size: 13px;}
+    
+    
+    /*게시판 board*/
+    .board-wrap .search-wrap{margin-top: 10px;}
+    .board-wrap .search-wrap .select-wrap select{width: 80px;}
+    .board-wrap .search-wrap .search select{width: 80px;}
+    .board-wrap .search-wrap .search .searchBox{width: calc(100% - 90px);}
+    .boardList li{padding: 15px;}
+    .boardList li p.title{font-size: 15px; margin-top: 10px;}
+    
+    
+    /*게시판 뷰페이지 board_view*/
+    .boardView-wrap table thead th.boardView-title{font-size: 14px;}
+    .boardView-wrap table thead th.boardView-title span{font-size: 14px;}
+    .boardView-wrap .page-table1 tr td p.info{font-size: 13px;}
+    .boardView-wrap .page-table1 tr td p.info span{font-size: 13px;}
+    
+    .boardView-wrap .page-table1 tr td.file p a{font-size: 13px;}
+    
+    .page-btn a{height: 40px; width: 200px;}
+    
+    
+    /*메인 index.html*/
+    .main-auto{padding: 60px 0 60px;}
+    .mainWrap .titleWrap1 .title{font-size: 28px;}
+
+    
+    .mainWrap .sec1-wrap .chart li{height: 90px;}
+    .mainWrap .sec1-wrap .chart li:after{height: 110px;}
+    .mainWrap .sec1-wrap .chart li .title{font-size: 18px;}
+    .mainWrap .sec1-wrap .chart li .text{margin-top: 5px;}
+    
+    .mainWrap .titleWrap2 .title{font-size: 24px;}
+    .mainWrap .titleWrap2 .title span{font-size: 24px;}
+    .mainWrap .titleWrap2 .text{margin-top: 5px;}
+    
+    .mainWrap .sec2-wrap .chart .titleWrap{height: 101px; display:flex; justify-content: center; align-items: center; flex-direction: column;}
+    .mainWrap .sec2-wrap .chart .titleWrap .txt{word-break: keep-all; line-height: 1.2em; }
+    
+    .mainWrap .sec2-wrap .chart .chartList li{ height: 120px;}
+    .mainWrap .sec2-wrap .chart .chartList li:nth-child(2){ height: 160px;}
+    
+    .mainWrap .sec3-wrap .listWrap li{font-size: 15px; margin: 5px 3px;  padding: 2px 10px 0px; width:calc(35vw - 10px); height: 35px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3) li{width: auto;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):before{width: 90vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(2):before{width: 80vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):before{width: 80vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(4):before{width: 80vw;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(5):before{width: 90vw;}
+    
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(1):after{left:calc(90vw - 25px); z-index: -1; height: 44px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(2):after{right:calc(90vw - 25px); z-index: -1; height: 44px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(3):after{left:calc(90vw - 25px); z-index: -1; height: 44px;}
+    .mainWrap .sec3-wrap .listWrap ul:nth-child(4):after{right:calc(90vw - 25px); z-index: -1; height: 44px;}
+    
+    .mainWrap .sec3-wrap .list2Wrap{padding: 10px 15px; margin-top: 20px;}
+    .mainWrap .sec3-wrap .list2Wrap li{width: calc(50% - 5px);}
+    
+    .mainWrap .sec3-wrap .list2Wrap li:nth-child(3n){margin-right: 10px;}
+    .mainWrap .sec3-wrap .list2Wrap li:nth-child(2n){margin-right: 0px;}
+    
+    .mainWrap .sec4-wrap .textBox .title{line-height: 1.2; word-break: keep-all;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap{padding: 15px 10px !important;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .tit{width: 100px; font-size: 14px;}
+    .mainWrap .sec6-wrap .recruitWrap .list .textWrap li .txt{width: calc(100% - 100px); font-size: 14px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .listWrap .comm-btn{font-size: 14px; width: 100%; height: 40px;}
+    
+    .mainWrap .sec6-wrap .recruitWrap .list2{margin-top: 40px;}
+    .mainWrap .sec6-wrap .recruitWrap .list2 .textWrap{padding-bottom: 40px !important;}
+    
+    .mainWrap .bannerWrap .textWrap .title{font-size: 24px;}
+    .mainWrap .bannerWrap .textWrap .title span{font-size: 24px;}
+    .mainWrap .bannerWrap .textWrap .list li{padding: 15px 0;}
+    
+    
+    .mainWrap .sec8-wrap .listWrap{padding: 20px 10px;}
+    .mainWrap .sec7-wrap .listWrap li .text{font-size: 14px; }
+    
+    .mainWrap .sec8-wrap .listWrap .text{font-family: 'Gmarket-M'; font-weight: 600; font-size: 14px;}
+    
+    .mainWrap .sec8-wrap .btnWrap{margin-top: 20px;}
+    .mainWrap .sec8-wrap .btnWrap a {width: 100%; font-size: 14px;}
+    
+    
+    .mainWrap .sec9-wrap .main-auto{padding-bottom: 20px;}
+    .mainWrap .sec9-wrap .bankWrap .title{width: 240px; font-size: 14px; height: 35px; top:-17px}
+    
+    .mainWrap .sec9-wrap .bankWrap{margin-top: 25px; padding:  25px 0 15px;}
+    
+    
+    /*자주묻는글 qna.html*/
+    .qnaWrap .search-wrap{margin-top: 10px;}
+    .qnaWrap .qnaBox li a{padding: 15px 10px;}
+    .qnaWrap .qnaBox li a .title{ width: calc(100% - 35px);}
+    .qnaWrap .qnaBox li a .title span{ margin-top: 0;}
+    
+    .qnaWrap .qnaBox li a span.icon{width: 25px;height: 25px;}
+    .qnaWrap .qnaBox li a span.icon i{font-size: 11px;}
+    
+    /*인사말씀 greeting.html*/
+    .greetingWrap .greetingBox{margin-top: 10px;}
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

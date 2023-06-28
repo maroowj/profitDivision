@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">가입대기 리스트</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/members">회원관리</a></li>
+                <li><a href="/management/managers">가입대기 리스트</a></li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap wait-list joinList-list">
+            <div class="wait-list-2">
+                <p>가입대기 리스트</p>
+                <div class="search-wrap-admin">
+                    <div class="search">
+                        <select class="mr10" id="size">
+                            <option value=20 selected>20</option>
+                            <option value=40>40</option>
+                            <option value=60>60</option>
+                        </select>
+                    </div>
+                    <div class="searchBox">
+                        <input type="text" placeholder="아이디 또는 이름으로 검색" id="query">
+                        <span id="search-icon" class="search-icon"></span>
+                    </div>
+                </div>
+            </div>
+
+            <table class="page-table1 table-hover2 joinList-table">
+                <colgroup>
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                </colgroup>
+
+                <thead id="waitingMemberListThead">
+                <tr>
+                    <th><p class="sort" sort="userId">아이디</p></th>
+                    <th><p class="sort" sort="name">이름</p></th>
+                    <th><p class="sort" sort="birth">생년월일</p></th>
+                    <th><p class="sort" sort="mobile">연락처</p></th>
+                    <th><p class="sort" sort="email">이메일</p></th>
+                    <th><p class="sort" sort="address">주소</p></th>
+                    <th><p class="sort" sort="recommender">추천인</p></th>
+                    <th><p class="sort" sort="createdAt">가입일</p></th>
+                    <th><p class="sort" sort="accepted">승인여부</p></th>
+                </tr>
+                </thead>
+                <tbody id="waitingMemberListTbody">
+                <!--<tr>
+                    <td class="waitList-td1">test001@naver.com</td>
+                    <td>김지영</td>
+                    <td>93.03.25</td>
+                    <td>010-0000-0000</td>
+                    <td>test001@naver.com</td>
+                    <td>경기도 부천시 소사구</td>
+                    <td class="waitList-td7">test001@gmail.com</td>
+                    <td>2022-09-06</td>
+                    <td>
+                        <select name="" id="" class="mr10">
+                            <option value="">대기</option>
+                            <option value="">승인</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="waitList-td1">test001@naver.com</td>
+                    <td>김지영</td>
+                    <td>93.03.25</td>
+                    <td>010-0000-0000</td>
+                    <td>test001@naver.com</td>
+                    <td>경기도 부천시 소사구</td>
+                    <td class="waitList-td7">test001@gmail.com</td>
+                    <td>2022-09-06</td>
+                    <td>
+                        <select name="" id="" class="mr10">
+                            <option value="">대기</option>
+                            <option value="">승인</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="waitList-td1">test001@naver.com</td>
+                    <td>김지영</td>
+                    <td>93.03.25</td>
+                    <td>010-0000-0000</td>
+                    <td>test001@naver.com</td>
+                    <td>경기도 부천시 소사구</td>
+                    <td class="waitList-td7">test001@gmail.com</td>
+                    <td>2022-09-06</td>
+                    <td>
+                        <select name="" id="" class="mr10">
+                            <option value="">대기</option>
+                            <option value="">승인</option>
+                        </select>
+                    </td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- 모달창 -->
+        <div class="invent-modal modal waitList-modal">
+            <div class="modal-inner">
+                <div class="modal-title">
+                    <p class="title">회원 상세정보</p>
+                    <a href="#" class="close-btn">닫기</a>
+                </div>
+
+                <div class="modal-text">
+                    <div class="text">
+                        <p class="title">승인여부</p>
+                        <select id="modalAccepted">
+                            <option value=0>대기</option>
+                            <option value=1>승인</option>
+                            <option value=2>미승인</option>
+                        </select>
+                    </div>
+                    <div class="text userList-modal-text">
+                        <p class="title">아이디</p>
+                        <p id="memberId">test00@gmail.com</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">이름</p>
+                        <p id="memberName">송유진</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">생년월일</p>
+                        <p id="memberBirth">1993-03-25</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">연락처</p>
+                        <p id="memberMobile">010-1234-1111</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">이메일</p>
+                        <p id="memberEmail">test01@gmail.com</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">주소</p>
+                        <p id="memberAddress">인천 부평구 충선로 209번길 41</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">가입일</p>
+                        <p id="memberCreatedAt">22-08-04</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">추천인</p>
+                        <p id="memberRecommender" class="recommand">test01@gmail.com</p>
+                    </div>
+                </div>
+                <div class="modal-btn">
+                    <a href="#" class="white-btn close-btn mr10">닫기</a>
+                    <a href="#" id="btnUpdateMember" class="yellow-btn">확인</a>
+                </div>
+            </div>
+            <div class="modal-bg"></div>
+        </div>
+
+        <div class="invent-modal modal waitList-modal2">
+            <div class="modal-inner">
+                <div class="modal-title">
+                    <p class="title"><span id="modalTitle" class="yellow"></span>님의 추천인 상세정보</p>
+                    <a href="#" class="close-btn">닫기</a>
+                </div>
+
+                <div class="modal-text">
+                    <div class="text userList-modal-text">
+                        <p class="title">회원상태</p>
+                        <p id="recommenderGrade">정회원</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">레벨</p>
+                        <p><span class="yellow" id="recommenderLevel">Level5</span>
+                        </p>
+                    </div>
+                    <div class="text">
+                        <p class="title">회원번호</p>
+                        <p  id="recommenderMembershipNumber">00001</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">아이디</p>
+                        <p  id="recommenderId">test00@gmail.com</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">이름</p>
+                        <p  id="recommenderName">김지영</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">생년월일</p>
+                        <p id="recommenderBirth">1993-03-25</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">이메일</p>
+                        <p id="recommenderEmail">test00@gmail.com</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">주소</p>
+                        <p id="recommenderAddress" class="recommand">인천 부평구 충선로 209번길 41, 이레타운 3층</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">계좌정보</p>
+                        <p id="recommenderAccount">국민 0000000-000-000000</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">가입일</p>
+                        <p id="recommenderCreatedAt">22-08-44</p>
+                    </div>
+                    <div class="text">
+                        <p class="title">추천인</p>
+                        <p id="recommenderOfRecommender">test00@gmail.com</p>
+                    </div>
+                </div>
+                <div class="modal-btn">
+                    <a href="#" class="white-btn close-btn mr10">닫기</a>
+                    <!--                <a href="#" class="yellow-btn">등록</a>-->
+                </div>
+            </div>
+            <div class="modal-bg"></div>
+        </div>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!--            <a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>-->
+            <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+            <div class="page-num">
+                <a href="#" class="actived">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+            </div>
+            <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+            <!--<a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+    <script>
+        let page = 1;
+        let size = $("#size").val();
+        let query = "";
+        let sort = "createdAt,desc";
+        let modalUserDetailsSeq;
+        let modalMemberAccepted;
+
+        getWaitingList();
+
+        function getWaitingList() {
+            query = $("#query").val();
+            size = $("#size").val();
+
+            let objMember = {
+                "query": query,
+                "size": size,
+                "page": page - 1,
+                "sort": sort
+            }
+
+            $.ajax({
+                type: "get",
+                url: "/api/admin/members/waiting",
+                data: objMember,
+                async: false,
+                success: function (data) {
+                    // console.log(data);
+                    let list = data.content;
+                    let mTag = '';
+                    let arrAccepted = [];
+                    if (list != null && list.length != 0) {
+                        for (i = 0; i < list.length; i++) {
+                            arrAccepted.push(list[i].accepted);
+                            let address = '';
+                            if (list[i].address != null && list[i].address != '') {
+                                address = list[i].address.split(';')[1];
+                            }
+
+                            mTag += '<tr uSeq="'+list[i].userDetailsSeq+'">' +
+                                '<td class="waitList-td1">' + list[i].userId + '</td>' +
+                                '<td class="waitList-td1">' + list[i].name + '</td>' +
+                                '<td>' + list[i].birth + '</td>' +
+                                '<td>' + list[i].mobile + '</td>' +
+                                '<td>' + list[i].email + '</td>' +
+                                '<td>' + address + '</td>';
+                            if(list[i].recommender!=null) {
+                                mTag += '<td class="waitList-td7">'+list[i].recommender+'</td>';
+                            }else {
+                                mTag += '<td>-</td>';
+                            }
+                            mTag += '<td>'+list[i].createdAt+'</td>' +
+                                '<td><select class="mr10 selAccepted">' +
+                                '<option value=0>대기</option>' +
+                                '<option value=1>승인</option>' +
+                                '<option value=2>미승인</option>' +
+                                '</select>' +
+                                '</td>' +
+                                '</tr>';
+                        }
+                        fPagination(data, page);
+                    }
+                    $("#waitingMemberListTbody").html(mTag);
+
+                    $("#waitingMemberListTbody .selAccepted").each(function(index) {
+                        $(this).val(arrAccepted[index]).prop("selected", true);
+                    });
+
+                    // 대기회원 모달
+                    $('.waitList-td1').click(function(){
+                        $('.waitList-modal').css('display','block');
+                        modalUserDetailsSeq = $(this).parent().attr("uSeq");
+                        waitingMemberDetails(modalUserDetailsSeq);
+                    });
+                    // 추천인 모달
+                    $('.waitList-td7').click(function(){
+                        $('.waitList-modal2').css('display','block');
+                        modalUserDetailsSeq = $(this).parent().attr("uSeq");
+                        waitingMemberDetails(modalUserDetailsSeq);
+                    });
+
+                    // 승인여부 바로 변경 (select)
+                    $("#waitingMemberListTbody .selAccepted").on("change", function(){
+                        let userDetailsSeq = $(this).parent().parent().attr("uSeq");
+                        let accepted = parseInt($(this).val());
+                        updateAccepted(userDetailsSeq, accepted);
+                    });
+                }
+            });
+        }
+
+        // 모달 회원 승인여부 변경
+        $("#btnUpdateMember").on("click", function(){
+            let accepted =  parseInt($("#modalAccepted").val());
+            updateAcceptedModal(accepted);
+        });
+
+        function updateAcceptedModal(accepted){
+            $.ajax({
+                type:"put",
+                url:"/api/admin/members/waiting/"+modalUserDetailsSeq,
+                contentType: "application/json",
+                data:JSON.stringify({
+                    "accepted":accepted
+                }),
+                success:function(data) {
+                    toastModal("회원 승인여부가 변경되었습니다.");
+                    setTimeout(() => location.reload(), 1000);
+                },
+                error:function(request, status, error) {
+                    toastModal("승인여부를 변경하는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        function updateAccepted(userDetailsSeq, accepted){
+            $.ajax({
+                type:"put",
+                url:"/api/admin/members/waiting/"+userDetailsSeq,
+                contentType: "application/json",
+                data:JSON.stringify({
+                    "accepted":accepted
+                }),
+                success:function(data) {
+                    page=1;
+                    getWaitingList();
+                },
+                error:function(request, status, error) {
+                    toastModal("승인여부를 변경하는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 대기회원 상세 (추천인 포함)
+        function waitingMemberDetails(userDetailsSeq) {
+            $.ajax({
+                type: "get",
+                url: "/api/admin/members/waiting/" + userDetailsSeq,
+                data: {},
+                async: false,
+                success: function (data) {
+                    // console.log(data);
+                    let userDetails = data.userDetails;
+                    let recommenderDetails = data.recommenderDetails;
+
+                    $("#modalTitle").html(userDetails.name);
+
+                    $("#memberId").html(userDetails.userid);
+                    $("#memberName").html(userDetails.name);
+                    $("#memberBirth").html(userDetails.birth);
+                    $("#memberMobile").html(userDetails.mobile);
+                    $("#memberEmail").html(userDetails.email);
+                    let address = "-";
+                    if (userDetails.address != null && userDetails.address != "") {
+                        address = userDetails.address.split(";")[1];
+                    }
+                    $("#memberAddress").html(address);
+
+                    $("#memberCreatedAt").html(userDetails.createdAt);
+                    let recommender = "-";
+                    if (userDetails.recommenderId != null && userDetails.recommenderId != "") {
+                        recommender = userDetails.recommenderId;
+                    }
+                    $("#memberRecommender").html(recommender);
+
+                    // 추천인 탈퇴 여부 확인
+                    let recommenderGrade;
+                    if (recommenderDetails.withdrawal == false) {
+                        recommenderGrade = data.grade;
+                    } else {
+                        recommenderGrade = "탈퇴";
+                    }
+                    // 추천인
+
+                    let account = "-";
+                    if (recommenderDetails.bankName != null && recommenderDetails.bankName != "") {
+                        account = recommenderDetails.bankName + " " + recommenderDetails.accountNumber;
+                    }
+                    let recommenderAddress = "-";
+                    if (recommenderDetails.address != null && recommenderDetails.address != "") {
+                        recommenderAddress = recommenderDetails.address.split(";")[1];
+                    }
+
+                    $("#recommenderAccount").html(account);
+
+                    $("#recommenderGrade").html(recommenderGrade);
+                    $("#recommenderLevel").html(recommenderDetails.level);
+                    $("#recommenderMembershipNumber").html(recommenderDetails.membershipNumber);
+                    $("#recommenderId").html(recommenderDetails.userId);
+                    $("#recommenderName").html(recommenderDetails.name);
+                    $("#recommenderBirth").html(recommenderDetails.birth);
+                    $("#recommenderEmail").html(recommenderDetails.email);
+                    $("#recommenderAddress").html(recommenderAddress);
+                    $("#recommenderAccount").html(account);
+                    $("#recommenderCreatedAt").html(recommenderDetails.createdAt);
+                    let recommenderOfRecommender = "-";
+                    if (recommenderDetails.recommenderId != null && recommenderDetails.recommenderId != "") {
+                        recommenderOfRecommender = recommenderDetails.recommenderId;
+                    }
+                    $("#recommenderOfRecommender").html(recommenderOfRecommender);
+                },
+                error: function (request, status, error) {
+                    toastModal("회원 정보를 불러오는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 출력 개수 select 변경 시
+        $("#size").on("change", function () {
+            size = $(this).val();
+            page = 1
+            getWaitingList();
+        });
+
+        // 키워드 입력 후 Enter 눌렀을 경우
+        $("#query").on("keydown", function (e) {
+            if (e.keyCode == 13) {
+                $("#search-icon").click();
+            }
+        });
+
+        // 돋보기 아이콘 클릭 시 검색
+        $("#search-icon").on("click", function () {
+            page = 1
+            getWaitingList();
+        });
+
+        // 정렬
+        $("#waitingMemberListThead").on("click", ".sort", function(){
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            getWaitingList();
+        });
+    </script>
+
+</div>
+</html>

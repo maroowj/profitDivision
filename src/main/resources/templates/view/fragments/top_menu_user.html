@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<th:block th:fragment="topMenuFragment">
+    <header class="header-wrap pc-header-wrap">
+        <div class="header-inner">
+            <h1 class="logo-wrap">
+<!--                <a href="/" style="color:#D8A31E">공동체&nbsp;천인방</a>-->
+                <a href="/" style="color:#D8A31E;"><img src="/images/logo.png"></a>
+            </h1>
+            <div class="nav-wrap">
+                <ul class="nav">
+                    <li><a href="/greeting">인사말씀</a></li>
+                    <li>
+                        <a href="/profit">결산손익</a>
+                        <ul class="depth2">
+                            <li><a href="/profit">수익관리</a></li>
+                            <li><a href="/withdrawal">출금신청하기</a></li>
+                            <li><a href="/account">수익결산표</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/point">배당·적립</a></li>
+                    <li><a href="/dues">후원금·회비납부</a>
+                        <ul class="depth2">
+                            <li><a href="/invest">회비납부</a></li>
+                            <li><a href="/dues">회비관리</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="/notice">공지사항</a></li>
+                    <li><a href="/board">게시판</a></li>
+                    <li><a href="/faq">자주묻는글</a></li>
+                </ul>
+            </div>
+            <!--로그인시-->
+            <ul id="pc-login" class="user-wrap user-wrap1">
+                <li><a href="/user/logout">로그아웃</a></li>
+                <li>
+                    <a href="">마이페이지</a>
+                    <ul class="depth2">
+                        <li><a href="/mypage">회원정보수정</a></li>
+                        <li><a href="/change-password">비밀번호 변경</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <!--비로그인시-->
+            <ul id="pc-logout" class="user-wrap user-wrap1">
+                <li><a href="/login">로그인</a></li>
+                <li><a href="/join">회원가입</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <header class="header-wrap m-header-wrap">
+        <div class="header-inner">
+            <h1 class="logo-wrap">
+<!--                <a href="/" style="color:#D8A31E">공동체&nbsp;천인방</a>-->
+                <a href="/" style="color:#D8A31E;"><img src="/images/logo.png"></a>
+            </h1>
+            <div class="info-wrap">
+                <!--비 로그인시-->
+                <a id="nav-logout" href="/login ">로그인</a>
+
+                <!--로그인시-->
+                <a id="nav-login" href="/mypage" class="d-none">마이페이지</a>
+
+                <div class="nav-btn">
+                    <a href="#">
+                        <span>메뉴</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+    <!--모바일 메뉴-->
+    <div class="m-nav-wrap">
+        <div class="nav-top-wrap">
+            <div class="nav-logo-wrap">
+                <h1 class="logo-wrap"><a href="/index" style="color:#D8A31E">공동체&nbsp;천인방</a></h1>
+
+                <a href="#" class="close-btn">닫기</a>
+            </div>
+
+            <!--비 로그인 시-->
+            <ul id="mobile-logout" class="info-btnWrap">
+                <li><a href="/login" class="login-btn comm-btn gray-btn mr10">로그인</a></li>
+                <li><a href="/join" class="yellow-btn login-btn comm-btn">회원가입</a></li>
+            </ul>
+
+            <!--로그인 시-->
+            <ul id="mobile-login"  class="info-btnWrap d-none">
+                <li><a href="/user/logout" class="login-btn comm-btn gray-btn mr10">로그아웃</a></li>
+                <li><a href="/mypage" class="yellow-btn login-btn comm-btn">마이페이지</a></li>
+            </ul>
+        </div>
+
+        <ul class="nav-wrap">
+            <li>
+                <a href="/greeting">
+                    <span><a href=""인사말씀</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </li>
+            <li class="hasDep2">
+                <a href="#">
+                    <span>결산손익</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+                <ul class="depth2">
+                    <li><a href="/profit">수익관리</a></li>
+                    <li><a href="/withdrawal">출금신청하기</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/point">
+                    <span>배당·적립</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </li>
+            <li class="hasDep2">
+                <a href="#">
+                    <span>후원금·회비납부</span>
+                    <i class="fa-solid fa-angle-down"></i>
+                </a>
+                <ul class="depth2">
+                    <li><a href="/invest">회비납부</a></li>
+                    <li><a href="/dues">회비관리</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="/notice">
+                    <span>공지사항</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/board">
+                    <span>게시판</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </li>
+            <li>
+                <a href="/faq">
+                    <span>자주묻는질문</span>
+                    <i class="fa-solid fa-angle-right"></i>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- script START -->
+    <script>
+        let chkLogin = false;
+        loginChk();
+        function loginChk() {
+            $.ajax({
+                type:"get",
+                url:"/api/common/login",
+                async:false,
+                success:function(data) {
+                    if(data.login) {
+                        chkLogin=true;
+                        $("#pc-login").removeClass("d-none");
+                        $("#pc-logout").addClass("d-none");
+                        $("#nav-login").removeClass("d-none");
+                        $("#nav-logout").addClass("d-none");
+                        $("#mobile-login").removeClass("d-none");
+                        $("#mobile-logout").addClass("d-none");
+                    }else {
+                        chkLogin=false;
+                        $("#pc-login").addClass("d-none");
+                        $("#pc-logout").removeClass("d-none");
+                        $("#nav-login").addClass("d-none");
+                        $("#nav-logout").removeClass("d-none");
+                        $("#mobile-login").addClass("d-none");
+                        $("#mobile-logout").removeClass("d-none");
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+    </script>
+    <!-- script END -->
+</th:block>
+</html>

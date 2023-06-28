@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">게시판</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/board">게시판</a></li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap notice-wrap">
+            <div class="wait-list-2">
+                <p>게시판 리스트</p>
+                <div class="search-wrap-admin board-btn search-wrap-userList">
+                    <a href="/management/board-new" class=" notice-add">
+                        <button class="yellow-btn">게시글 추가</button>
+                    </a>
+
+                    <button id="delete-btn" class="white-btn" onclick="deleteBoard();">게시글 삭제</button>
+                </div>
+            </div>
+            <div class="popup-search">
+                <div class="search">
+                    <select id="size" class="mr10">
+                        <option value=20 selected>20</option>
+                        <option value=40>40</option>
+                        <option value=60>60</option>
+                    </select>
+                </div>
+                <div class="searchBox">
+                    <input type="text" placeholder="제목 또는 내용으로 검색" id="query">
+                    <span id="search-icon" class="search-icon"></span>
+                </div>
+            </div>
+
+            <table class="page-table1 table-hover">
+                <colgroup>
+                    <col style = "width:5%">
+                    <col style = "width:10%">
+                    <col style = "width:*%">
+                    <col style = "width:10%">
+                    <col style = "width:15%">
+                </colgroup>
+
+                <thead id="boardListThead">
+                <tr>
+                    <th><input type="checkbox" id="all-chk"></th>
+                    <th><p class="sort" sort="createdAt">번호</p></th>
+                    <th><p class="sort" sort="title">제목</p></th>
+                    <th><p class="sort" sort="name">작성자</p></th>
+                    <th><p class="sort" sort="createdAt">작성일</p></th>
+                </tr>
+                </thead>
+                <tbody id="boardListTbody">
+                <!--<tr onclick="">
+                    <td><input type="checkbox" class="chk"></td>
+                    <td><p>1</p></td>
+                    <td><p>공지사항제목공지사항제목공지사항</p></td>
+                    <td><p>관리자닉네임</p></td>
+                    <td><p>2022-08-04 00:00:00</p></td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!-- <a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+             <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+             <div class="page-num">
+                 <a href="#" class="actived">1</a>
+                 <a href="#">2</a>
+                 <a href="#">3</a>
+                 <a href="#">4</a>
+                 <a href="#">5</a>
+                 <a href="#">6</a>
+                 <a href="#">7</a>
+                 <a href="#">8</a>
+                 <a href="#">9</a>
+                 <a href="#">10</a>
+             </div>
+             <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+             <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+    <script>
+        let page=1;
+        let size=$("#size").val();
+        let sort="createdAt,desc";
+
+        getBoardList();
+
+        $("#boardListTbody").on("click", ".info", function() {
+            let seq = $(this).parent().attr("seq");
+            location.href="/management/board-details?seq="+seq;
+        });
+
+        // 공지사항 삭제
+        function deleteBoard() {
+            let checked = $("#boardListTbody .chk:checked").length;
+            if(checked==0) {
+                toastModal("삭제하려는 게시글을 선택해주세요.");
+                return;
+            }
+
+            if(!confirm("선택된 게시글을 삭제하시겠습니까?")) return;
+
+            let arrSeq = new Array();
+            $("#boardListTbody .chk:checked").each(function(){
+                let seq = $(this).parent().parent().attr("seq");
+                arrSeq.push(seq);
+            });
+
+            $.ajax({
+                type:"delete",
+                url:"/api/admin/board/delete",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "boardSeq":arrSeq
+                }),
+                success:function() {
+                    toastModal("게시글을 삭제했습니다.");
+                    setTimeout(() => location.reload(), 1000);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        };
+
+        // 체크박스
+        $("#all-chk").on("click", function(){
+            if($(this).prop("checked")) {
+                $("#boardListTbody .chk").prop("checked", true);
+            }else {
+                $("#boardListTbody .chk").prop("checked", false);
+            }
+        });
+
+        $("#boardListTbody").on("click", ".chk", function(){
+            let chk = $("#boardListTbody .chk").length;
+            let checked =  $("#boardListTbody .chk:checked").length;
+
+            if(chk==checked) {
+                $("#all-chk").prop("checked", true);
+            }else {
+                $("#all-chk").prop("checked", false);
+            }
+        });
+
+        // 페이지 클릭 시
+        $("#pagination").on("click", "a", function() {
+            page = $(this).attr("gopage") ;
+            getBoardList();
+        });
+
+        // 출력 개수 변경 시
+        $("#size").on("change", function() {
+            page=1;
+            getBoardList();
+        });
+
+        // 키워드 검색 시
+        $("#query").on("keydown", function(e) {
+            if(e.keyCode==13) {
+                $("#search-icon").click();
+            }
+        });
+
+        $("#search-icon").on("click", function(){
+            page=1;
+            getBoardList();
+        });
+
+        // 공지사항 목록
+        function getBoardList() {
+            let query = $("#query").val();
+            $.ajax({
+                type:"get",
+                url:"/api/admin/board",
+                data:{
+                    "query":query,
+                    "size":size,
+                    "page":page-1,
+                    "sort":sort
+                },
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list!=null && list.length!=0) {
+                        list.forEach(function(arg){
+                            tag += '<tr seq="'+arg.noticeSeq+'">' +
+                                '<td><input type="checkbox" class="chk"></td>' +
+                                '<td class="info"><p>'+arg.noticeNo+'</p></td>' +
+                                '<td class="info"><p>'+arg.title+'</p></td>' +
+                                '<td class="info"><p>'+arg.name+'</p></td>' +
+                                '<td class="info"><p>'+arg.createdAt+'</p></td>' +
+                                '</tr>';
+                        });
+                    }else {
+                        tag = '<tr><td colspan="5" style="text-align: center;">게시글이 존재하지 않습니다.</td></tr>';
+                    }
+                    fPagination2(data, page);
+                    $("#boardListTbody").html(tag);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+    </script>
+
+
+</div>
+
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">팝업추가</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/popup">팝업관리</a></li>
+                <li><a href="/management/popup-new">팝업추가</a></li>
+            </ul>
+        </div>
+
+        <div class="revenue-admin-wrap">
+            <div class="inventList page-tableBox pc768-wrap revenue-admin-inner1 popup-inner">
+                <div class="popup-title">
+                    <h3>팝업 미리보기</h3>
+                </div>
+                <div class="popup-priview-inner">
+                    <div class="popup-priview">
+                        <img id="previewImage">
+                    </div>
+                    <div class="popup-text-priview">텍스트 팝업</div>
+                    <div class="popup-priview-close">
+                        <label><input type="checkbox">오늘 하루 이 창을 열지 않음</label>
+                        <p>닫기</p>
+                    </div>
+                </div>
+                <div class="preview-btn-inner">
+                    <button class="gray-btn">
+                        홈페이지에서 미리보기
+                    </button>
+                </div>
+            </div>
+
+            <div class="inventList page-tableBox pc768-wrap wait-list-3 revenue-admin-inner2 border-none">
+                <div class="popup-title2">
+                    <h3>팝업 추가</h3>
+                    <div class="popup-button-wrap">
+                        <button class="white-btn" onclick="location.href='/management/popup'">목록</button>
+                        <button class="yellow-btn" onclick="createPopup();">등록</button>
+                    </div>
+                </div>
+
+                <table class="page-table1 table-hover page-tableBox page-table2 popup-table">
+                    <colgroup>
+                        <col style = "width:20%">
+                        <col style = "width:*%">
+                    </colgroup>
+                    <tr>
+                        <th>노출상태</th>
+                        <td>
+                            <label><input type="radio" name="exposure" value=1 checked>노출</label>
+                            <label><input type="radio" name="exposure" value=0>미노출</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>제목</th>
+                        <td><input type="text" class="w100" id="mainTitle"></td>
+                    </tr>
+                    <tr>
+                        <th>팝업창 크기</th>
+                        <td>
+                        <span>
+                            가로 <input type="text" placeholder="420" class="w20 ml10" id="width" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 픽셀
+                        </span>
+                            <i class="fa-sharp fa-solid fa-x"></i>
+                            <span>
+                            세로 <input type="text" placeholder="600" class="w20 ml10" id="height" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 픽셀
+                        </span>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">팝업창 위치</th>
+                        <td>
+                            <label>
+                                <input type="radio" name="position" value="leftTop">
+                                좌측 상단
+                            </label>
+                            <label>
+                                <input type="radio" name="position" value="rightTop">
+                                우측 상단
+                            </label>
+                            <label>
+                                <input type="radio" name="position" value="middle">
+                                가운데
+                            </label>
+                            <label>
+                                <input type="radio" name="position" value="self" checked>
+                                직접입력
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                        <span>
+                            상단에서 <input type="text" id="y"  class="w20 ml10 position" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 픽셀
+                            &nbsp;/&nbsp;
+                            좌측에서 <input type="text" id="x" class="w20 ml10 position" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 픽셀
+                        </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row" rowspan="4">팝업 종류</th>
+                        <td>
+                            <div class="popup-type">
+                                <label>
+                                    <input type="radio" name="popup-type" value="image" checked>
+                                    <span class="y-popup-img-btn">이미지</span>
+                                </label>
+                                <input type="text" id="imageName" class="width70 mr10" readonly>
+                                <button id="imageUpload" class="yellow-btn">이미지 업로드</button>
+                                <input type="file" id="image" class="d-none" accept="image/*">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBottom-none">
+                            <label class="y-popup-text-btn">
+                                <input type="radio" name="popup-type" value="text">텍스트
+                            </label>
+                            <input type="text" placeholder="팝업 제목을 입력해주세요." id="popupTitle">
+                            <textarea placeholder="팝업 내용을 입력해주세요." id="popupContents"></textarea>
+                        </td>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                    </tr>
+                    <tr>
+                        <th>닫기 설정</th>
+                        <td>
+                            <label>
+                                <input type="radio" name="closingOption" value=1>
+                                오늘 하루 이 창을 열지 않음
+                            </label>
+                            <label>
+                                <input type="radio" name="closingOption" value=0 checked>
+                                설정 안함
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">링크</th>
+                        <td>
+
+                            <label>
+                                <input type="radio" name="linkOption" value="no" checked>
+                                사용안함
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <label>
+                                <input type="radio" name="linkOption" value="yes">
+                                직접입력</label>
+                            <input type="text" id="link" class="w80 mt05" placeholder="URL을 입력해주세요.">
+                        </td>
+                    </tr>
+                    <tr>
+                        <th rowspan="2">노출기간</th>
+                        <td>
+
+                            <label>
+                                <input type="radio" name="dateOption" value="no-limit" checked>
+                                제한없음
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="borderBottom-none">
+                            <label style="display: flex; align-items:center;">
+                                <input type="radio" name="dateOption" value="limit">
+                                기간설정
+                            </label>
+                            <div class="mt10">
+                                <input type="date" id="startDate" class="dateOption">
+                                <select id="startHour" class="hour dateOption" style="width: 12%;"></select>
+                                <select id="startMinute" class="minute dateOption" style="width: 12%;"></select>
+                                <span> ~ </span>
+                                <input type="date" id="endDate" class="dateOption">
+                                <select id="endHour" class="hour dateOption" style="width: 12%;"></select>
+                                <select id="endMinute" class="minute dateOption" style="width: 12%;"></select>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="benefit-modal modal">
+        <div class="modal-inner">
+            <div class="modal-title">
+                <p class="title">등급별 혜택</p>
+                <a href="#" class="close-btn">닫기</a>
+            </div>
+            <div class="modal-text">
+                <p class="level-title">투자금액 <span class="yellow">1,000,000P당 1LEVEL</span> 등급 UP</p>
+
+                <ul class="benefit-wrap">
+                    <li>
+                        <p class="text">등급이 올라갈 때마다</p>
+                        <p class="benefit-info black">수익율이 <span class="yellow">증가</span></p>
+                    </li>
+                    <li>
+                        <p class="text">최초 등급 달성 시</p>
+                        <p class="benefit-info black"><span class="yellow">5,000A</span> 적립금 지급</p>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="modal-bg"></div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+    <script>
+        hourAndMinuteSetting();
+        $('.y-popup-img-btn').click(function(){
+            $('.popup-priview').css('display','block');
+            $('.popup-text-priview').css('display','none');
+        });
+        $('.y-popup-text-btn').click(function(){
+            $('.popup-text-priview').css('display','block');
+            $('.popup-priview').css('display','none');
+        });
+
+        $("#popupTitle").on("focus", function(){
+            $("input[name=popup-type][value=text]").prop("checked", true);
+        });
+
+        $("#popupContents").on("focus", function(){
+            $("input[name=popup-type][value=text]").prop("checked", true);
+        });
+
+        $("#link").on("focus", function(){
+            $("input[name=linkOption][value=yes]").prop("checked", true);
+        });
+
+        $(".dateOption").on("click", function(){
+            $("input[name=dateOption][value=limit]").prop("checked", true);
+        });
+
+        $("input[name=position]").on("click", function(){
+            let position = $(this).val();
+            if(position == "leftTop") {
+                $("#y").val("0");
+                $("#x").val("0");
+            }else if(position == "rightTop") {
+                $("#y").val("0");
+                $("#x").val("1200");
+            }if(position == "middle") {
+                $("#y").val("450");
+                $("#x").val("600");
+            }
+        });
+
+        $(".position").off("keyup").on("keyup", function() {
+            $("input[name=position][value=self]").prop("checked", true);
+        })
+
+        function createPopup() {
+            let formData = new FormData();
+            let exposure = $('input[name=exposure]:checked').val();
+            let mainTitle = $("#mainTitle").val();
+            if(mainTitle=="") {
+                toastModal("제목을 입력해주세요");
+                return;
+            }
+            let width = $("#width").val();
+            if(width=="") {
+                toastModal("가로 길이를 입력해주세요");
+                return;
+            }
+            let height = $("#height").val();
+            if(height=="") {
+                toastModal("세로 길이를 입력해주세요");
+                return;
+            }
+            let y = $("#y").val();
+            if(y=="") {
+                toastModal("세로 위치를 입력해주세요");
+                return;
+            }
+            let x = $("#x").val();
+            if(x=="") {
+                toastModal("가로 위치를 입력해주세요");
+                return;
+            }
+
+            formData.append("exposure", exposure);
+            formData.append("mainTitle", mainTitle);
+            formData.append("width", width);
+            formData.append("height", height);
+            formData.append("y", y);
+            formData.append("x", x);
+
+            let popupType = $('input[name=popup-type]:checked').val();
+            if(popupType==undefined || popupType==null) {
+                toastModal("팝업 종류를 선택해주세요");
+                return;
+            }else if(popupType=="image") {
+                let image = $("#image")[0].files[0];
+                if(image==undefined || image==null || image=="") {
+                    toastModal("이미지를 첨부해주세요");
+                    return;
+                }else {
+                    formData.append("popupImage", image);
+                }
+            }else if(popupType=="text") {
+                let popupTitle = $("#popupTitle").val();
+                let popupContents = $("#popupContents").val();
+                if(popupTitle=="") {
+                    toastModal("팝업 제목을 입력해주세요");
+                    return;
+                }
+                if(popupContents=="") {
+                    toastModal("팝업 내용을 입력해주세요");
+                    return;
+                }
+                formData.append("popupTitle", $("#popupTitle").val());
+                formData.append("popupContents", $("#popupContents").val());
+            }
+
+            let closingOption = $("input[name=closingOption]:checked").val();
+            formData.append("closingOption", closingOption);
+
+            let linkOption = $("input[name=linkOption]:checked").val();
+            if(linkOption=="yes") {
+                if($("#link").val()=="") {
+                    toastModal("링크 URL을 입력해주세요");
+                    return;
+                }
+                formData.append("link", $("#link").val());
+            }
+
+            let dateOption = $("input[name=dateOption]:checked").val();
+            if(dateOption=="limit") {
+                let startDate = $("#startDate").val()
+                if(startDate=="") {
+                    toastModal("노출 시작 날짜를 설정해주세요");
+                    return;
+                }
+                let startHour = $("#startHour").val();
+                if(startHour=="") {
+                    toastModal("노출 시작 시를 설정해주세요");
+                    return;
+                }
+                startHour = startHour.replace("시", "");
+                let startMinute = $("#startMinute").val();
+                if(startMinute=="") {
+                    toastModal("노출 시작 분을 설정해주세요");
+                    return;
+                }
+                startMinute = startMinute.replace("분", "");
+                let exposureStart = startDate+" "+startHour +":"+startMinute+":00";
+                formData.append("exposureStart", exposureStart);
+
+                let endDate = $("#endDate").val()
+                if(endDate=="") {
+                    toastModal("노출 종료 날짜를 설정해주세요");
+                    return;
+                }
+                let endHour = $("#endHour").val();
+                if(endHour=="") {
+                    toastModal("노출 시작 시를 설정해주세요");
+                    return;
+                }
+                endHour = endHour.replace("시", "");
+                let endMinute = $("#endMinute").val();
+                if(endMinute=="") {
+                    toastModal("노출 시작 분을 설정해주세요");
+                    return;
+                }
+                endMinute = endMinute.replace("분", "");
+                let exposureEnd = endDate+" "+endHour +":"+endMinute+":00";
+                formData.append("exposureEnd", exposureEnd);
+            }
+
+            for(let key of formData.keys()) {
+                console.log(key + ": " + formData.get(key));
+            }
+
+            $.ajax({
+                type:'post',
+                url:'/api/admin/popup',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success:function(data) {
+                    toastModal("팝업이 등록되었습니다.");
+                    setTimeout(() => location.href='/management/popup', 1000);
+                },
+                error:function(request, status, error) {
+                    toastModal("팝업 등록에 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        /** 이미지 업로드 START **/
+        $("#imageUpload").on("click", function(){
+            $("#image").click();
+        })
+
+        $("#image").on("change", function(){
+            let file =$("#image")[0].files[0];
+            let arrFiles = $(this)[0].files;
+            let url;
+            if(arrFiles.length<1) { // 첨부파일을 선택했다가 취소 할 경우
+                $("#imageName").val("");
+                $("#previewImage").attr("src", "");
+            }else {
+                url=URL.createObjectURL(file);
+                $("#imageName").val(file.name);
+                $("#previewImage").attr("src", url);
+            }
+        });
+        /** 이미지 업로드 END **/
+
+
+        function strDate(date) {
+            let year = date.getFullYear() + "";
+            let month = (date.getMonth() + 1) + "";
+            let day = date.getDate() + "";
+
+            if (month.length == 1) {
+                month = "0" + month;
+            }
+            if (day.length == 1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
+        }
+
+        function hourAndMinuteSetting() {
+            let hour = '';
+            for(i=0; i<24; i++) {
+                let num = ''+i;
+                if(num.length==1) {
+                    num = "0"+num;
+                }
+                hour += '<option value="'+ num +'">' + num + '시</option>';
+            }
+            let arrMinute = ["00", "15", "30", "45"];
+            let minute = '';
+            for(j=0; j<arrMinute.length; j++) {
+                minute += '<option value="'+arrMinute[j]+'">'+arrMinute[j]+'분</option>';
+            }
+
+            $(".hour").html(hour);
+            $(".minute").html(minute);
+        }
+    </script>
+
+
+</div>
+
+</html>

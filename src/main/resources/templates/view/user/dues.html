@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <div class="auto invent-wrap">
+        <div class="subP-title">
+            <p class="title">회비관리</p>
+            <ul class="menuPath">
+                <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="">회비관리</a></li>
+            </ul>
+        </div>
+
+        <div class="infoText-wrap">
+            <p class="text">
+                ※ <span id="duesDate" class="brown strong">매월 1일 ~ 5일은 회비 납부기간</span>입니다. <span class="brown strong">입금 후 미요청 시 미납으로 처리될 수 있으니 납부 확인 요청을 해주시기 바랍니다.</span> 회비 납부 내역은 납부 확인 요청 이후 약 2일 ~ 5일 후 반영됩니다. <br>
+                ※ 회비 납부 금액 : <span id="duesAmount" class="brown strong"></span><br>
+                ※ 예금주 : 관리자 <br>
+                ※ 납부계좌 : 신한은행 000-000-000000
+            </p>
+            <p class="text">※문의 : 000-000-0000</p>
+        </div>
+        <div id="notPaidDiv" class="notiText-wrap d-none">
+            <span class="exclam">!</span>
+            <p class="text"><span class="red">회비가 미납</span>되었습니다. 납부 여부를 다시 한번 확인 후 납부 확인 요청을 해주시기 바랍니다.</p>
+        </div>
+
+
+
+        <div class="inventList-wrap">
+            <div class="subTitle2">
+                <p class="title">회비 납부내역</p>
+                <div class="btn-wrap">
+                    <a class="yellow-btn invent-btn dues-btn comm-btn cupoint">납부 확인 요청</a>
+                </div>
+            </div>
+
+
+
+            <div id="search-wrap" class="search-wrap">
+                <input type="date" id="dateFrom" class="date">
+                <span>~</span>
+                <input type="date" id="dateTo" class="date">
+
+                <ul id="month-gap" class="period-wrap">
+                    <li><a class="cupoint" val=1>1개월</a></li>
+                    <li class="actived"><a class="cupoint" val="3">3개월</a></li>
+                    <li><a class="cupoint" val="6">6개월</a></li>
+                    <li><a class="cupoint" val="12">1년</a></li>
+                </ul>
+            </div>
+
+            <!--PC버전-->
+            <div class="inventList page-tableBox pc768-wrap">
+                <table class="page-table1">
+                    <colgroup>
+                        <col style = "width:10%">
+                        <col style = "width:*">
+                        <col style = "width:*">
+                        <col style = "width:*">
+                        <col style = "width:25%">
+                        <col style = "width:*">
+                        <col style = "width:*">
+
+                    </colgroup>
+
+                    <thead id="duesListThead">
+                    <tr>
+                        <th>번호</th>
+                        <th><p class="sort" sort="createdAt">회비년월</p></th>
+                        <th><p class="sort" sort="paidAt">납부일</p></th>
+                        <th><p class="sort" sort="amount">납부금액</p></th>
+                        <th>비고</th>
+                        <th><p class="sort" sort="confirmedAt">납부 확인일</p></th>
+                        <th><p class="sort" sort="paymentState">확인여부</p></th>
+                    </tr>
+                    </thead>
+                    <tbody id="duesListTbody">
+                    <!--<tr>
+                        <td>50</td>
+                        <td>2022년 12월</td>
+                        <td>2022-07-22</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td><p class="state">확인대기</p></td>
+                    </tr>
+                    <tr>
+                        <td>49</td>
+                        <td>2022년 11월</td>
+                        <td>2022-07-05</td>
+                        <td>100,000P</td>
+                        <td>회비 미입금</td>
+                        <td>2022-07-07</td>
+                        <td><p class="state state2">납부 미확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>48</td>
+                        <td>2022년 10월</td>
+                        <td>2022-06-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-06-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>-->
+                    <!--<tr>
+                        <td>47</td>
+                        <td>2022-05-02</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-05-04</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>46</td>
+                        <td>2022-04-02</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-04-06</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>45</td>
+                        <td>2022-03-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-03-07</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>44</td>
+                        <td>2022-02-06</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-02-09</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>43</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>42</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>41</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>40</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>37</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>36</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>2022-01-05</td>
+                        <td>100,000P</td>
+                        <td>-</td>
+                        <td>2022-01-05</td>
+                        <td><p class="state state1">납부확인</p></td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+
+            <!--M 768px ~ -->
+            <ul id="mobileDuesList" class="inventList m768-wrap">
+                <!--<li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="disap-text">2022년 12월</p>
+                            <p class="date-wrap"><span class="date1">2022-07-22</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="stateText">확인대기</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="disap-text">2022년 11월</p>
+                            <p class="date-wrap"><span class="date1">2022-07-05</span><span class="date2">2022-07-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="stateText disapproval">납부 미확인</p>
+
+                    </div>
+                    <p class="disap-text">회비 미입금 회비 미입금 회비 미입금 회비 미입금</p>
+
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="disap-text">2022년 10월</p>
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>-->
+                <!--<li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-05-05</span><span class="date2">2022-05-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date-wrap"><span class="date1">2022-06-05</span><span class="date2">2022-06-07</span></p>
+                            <p class="price">100,000P</p>
+                        </div>
+                        <p class="approval stateText">납부 확인</p>
+                    </div>
+                </li>-->
+
+            </ul>
+
+            <!--paging-->
+            <div id="pagination" class="paging">
+                <!--<a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+                <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+                <div class="page-num">
+                    <a href="#" class="actived">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                    <a href="#">8</a>
+                    <a href="#">9</a>
+                    <a href="#">10</a>
+                </div>
+                <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+                <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="dues-modal" class="invent-modal dues-modal modal">
+        <div class="modal-inner">
+            <div class="modal-title">
+                <p class="title">납부 확인 요청</p>
+                <a class="cupoint close-btn">닫기</a>
+            </div>
+
+            <div class="modal-text">
+                <div class="text">
+                    <p class="title">회비년월 <span class="yellow">*</span></p>
+                    <select id="notPaidYear" class="w37" style="margin-right: 5px;">
+                    </select>
+                    <select id="notPaidMonth" class="w37">
+                    </select>
+                </div>
+                <div class="text">
+                    <p class="title">납부일 <span class="yellow">*</span></p>
+                    <input type="date" id="paidAt">
+                </div>
+
+                <div class="text">
+                    <p class="title">납부 금액 <span class="yellow">*</span></p>
+                    <input type="text" id="amount" placeholder="100,000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+
+                <div class="userCheck">
+                    <label for="sameUser"><input type="checkbox" name="sameUser" id="sameUser" checked>회원정보와 동일</label>
+                </div>
+                <div class="text">
+                    <p class="title">예금주 <span class="yellow">*</span></p>
+                    <input type="text" id="name" disabled>
+                </div>
+
+                <div class="text">
+                    <p class="title">은행명 <span class="yellow">*</span></p>
+                    <select id="bankName">
+                        <option hidden selected>은행명</option>
+                        <option value="국민은행">국민은행</option>
+                        <option value="기업은행">기업은행</option>
+                        <option value="농협은행">농협은행</option>
+                        <option value="신한은행">신한은행</option>
+                        <option value="산업은행">산업은행</option>
+                        <option value="우리은행">우리은행</option>
+                        <option value="한국씨티은행">한국씨티은행</option>
+                        <option value="하나은행">하나은행</option>
+                        <option value="카카오뱅크">카카오뱅크</option>
+                    </select>
+                </div>
+                <div class="text">
+                    <p class="title">계좌번호 <span class="yellow">*</span></p>
+                    <input type="number" id="accountNumber" placeholder="숫자만 입력해주세요.">
+                </div>
+            </div>
+            <div class="modal-btn">
+                <a class="white-btn close-btn mr10 cupoint">닫기</a>
+                <a id="request-btn" class="yellow-btn cupoint">납부 확인 요청하기</a>
+            </div>
+
+        </div>
+        <div class="modal-bg"></div>
+    </div>
+
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <!-- script START -->
+    <script>
+        let page=1;
+        let size= 20;
+        let sort = "createdAt,desc";
+        let today = new Date();
+        let preDay = new Date(new Date().setMonth(new Date().getMonth()-3));
+        $("#dateFrom").val(strDate(preDay));
+        $("#dateTo").val(strDate(today));
+
+        notPaidList();
+        getDuesInfo();
+        if (matchMedia("screen and (max-width: 768px)").matches) {
+            getDuesListMobile();
+        } else {
+            getDuesList();
+        }
+
+        window.onresize = function(event){
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getDuesListMobile();
+            }else {
+                page = Math.round(page/2);
+                getDuesList();
+            }
+        };
+
+        function getDuesInfo(){
+            $.ajax({
+                type:"get",
+                url:"/api/user/dues/information",
+                success:function(data){
+                    let duesStartDate = data.duesDate;
+                    let duesEndDate = duesStartDate + 4;
+                    let duesAmount = fcomma(data.duesAmount) + "P";
+                    $("#duesDate").text("매월 "+duesStartDate+"일 ~ "+duesEndDate+"일은 회비 납부기간");
+                    $("#duesAmount").text(duesAmount);
+                }
+            });
+        }
+
+        /** 모달 내 기능 START **/
+
+        $('.dues-btn').click(function(){
+            $("#dues-modal input").val("");
+            $("#sameUser").prop("checked", true);
+            notPaidList();
+            $("#paidAt").val(strDate(today));
+            getUserDetails();
+            $('.dues-modal').css('display','block');
+        });
+
+        // 요청하기 버튼 클릭 시
+        $("#request-btn").on("click", function(){
+            let year = $("#notPaidYear").val();
+            let month = $("#notPaidMonth").val();
+            let paidAt = $("#paidAt").val();
+            let amount = uncomma($("#amount").val());
+            let bankName = $("#bankName").val();
+            let accountNumber = $("#accountNumber").val();
+
+            if(year==null || year==undefined || year=='' || year=='미납연도') {
+                toastModal("회비년월을 확인해주세요.");
+                $("#notPaidYear").focus();
+                return;
+            }
+            if(month==null || month==undefined || month=='' || month=='미납월') {
+                toastModal("회비년월을 확인해주세요.");
+                $("#notPaidMonth").focus();
+                return;
+            }
+            if(amount=="" || amount==null || amount==undefined || amount==0) {
+                toastModal("납부 금액을 확인해주세요.");
+                $("#amount").focus();
+                return;
+            }
+            if(accountNumber=="" || accountNumber==null || accountNumber==undefined || accountNumber==0) {
+                toastModal("계좌번호를 확인해주세요.");
+                $("#accountNumber").focus();
+                return;
+            }
+
+            if(!confirm("본인 명의의 계좌가 아닐 시 미납 처리될 수 있습니다.\n입력한 금액과 계좌정보가 맞습니까?")) return;
+
+            $.ajax({
+                type:"put",
+                url:"/api/user/dues",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "year":year,
+                    "month":month,
+                    "amount":amount,
+                    "bankName":bankName,
+                    "accountNumber":accountNumber,
+                    "paidAt":paidAt
+                }),
+                success:function() {
+                    toastModal("관리자에게 납부 확인을 요청했습니다.");
+                    setTimeout(() => location.reload(), 700);
+                },
+                error:function(request, status, error) {
+                    toastModal("납부 확인 요청에 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        });
+
+        $("#paidAt").on("change", function(){
+            let now = new Date();
+            now = strDate(now);
+            let paidAt = $(this).val();
+            if(now < paidAt) {
+                toastModal("납부일은 금일 이후로 선택할 수 없습니다.");
+                $("#paidAt").val(now);
+            }
+        });
+
+        $("#amount").on("keyup", function(){
+            let amount = $(this).val();
+            $(this).val(fcomma(amount));
+        });
+
+        $("#bankName").on("change", function(){
+            $("#sameUser").prop("checked", false);
+        });
+
+        $("#accountNumber").on("keyup", function(){
+            $("#sameUser").prop("checked", false);
+        });
+
+        $("#sameUser").on("change", function(){
+            if($(this).prop("checked")) {
+                getUserDetails();
+            }
+        });
+
+        // 사용자 정보
+        function getUserDetails() {
+            $.ajax({
+                type:'get',
+                url:'/api/user/details',
+                async:false,
+                success:function(data){
+                    $("#name").val(data.name);
+                    $("#bankName").val(data.bankName);
+                    $("#accountNumber").val(data.accountNumber);
+                },
+                error:function(request, status, error) {
+                    toastModal("회원 정보를 불러오는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 미납여부
+        function notPaidList(){
+            $.ajax({
+                type:"get",
+                url:"/api/user/dues/payment-state",
+                success:function(data) {
+                    let yearTag = '<option selected hidden>미납연도</option>';
+                    let monthTag = '<option selected hidden>미납월</option>';
+                    if(data!=null && data.length!=0) {
+                        $("#notPaidDiv").removeClass("d-none");
+                        for(i=0; i<data.length; i++) {
+                            monthTag += '<option value="'+data[i].notPaidMonth+'">'+data[i].notPaidMonth+'</option>';
+                            if(i==0) {
+                                yearTag += '<option value="'+data[i].notPaidYear+'">'+data[i].notPaidYear+'</option>';
+                            }else {
+                                if(data[i].notPaidYear != data[i-1].notPaidYear) {
+                                    yearTag += '<option value="'+data[i].notPaidYear+'">'+data[i].notPaidYear+'</option>';
+                                }
+                            }
+                        }
+                        $("#notPaidYear").prop("disabled", false);
+                        $("#notPaidMonth").prop("disabled", false);
+                    }else {
+                        $("#notPaidYear").prop("disabled", true);
+                        $("#notPaidMonth").prop("disabled", true);
+                    }
+                    $("#notPaidYear").html(yearTag);
+                    $("#notPaidMonth").html(monthTag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+        /** 모달 내 기능 END **/
+
+        // 회비 목록
+        function getDuesList() {
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/dues",
+                data: {
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                async:false,
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg){
+                            let paidTag = '';
+                            if(arg.paidAt!=null && arg.paidAt!='') {
+                                paidTag = '<td>'+arg.paidAt+'</td>';
+                            }else {
+                                paidTag = '<td>-</td>';
+                            }
+                            let amountTag = '';
+                            if(arg.amount!=0) {
+                                amountTag = '<td>'+fcomma(arg.amount)+'P</td>';
+                            }else {
+                                amountTag = '<td>-</td>';
+                            }
+
+                            let commentTag = '';
+                            if(arg.comment!=null && arg.comment!='') {
+                                commentTag = '<td>'+arg.comment+'</td>';
+                            }else {
+                                commentTag = '<td>-</td>';
+                            }
+                            let confirmedTag = '';
+                            if(arg.comfirmedAt!=null && arg.comfirmedAt!='') {
+                                confirmedTag = '<td>'+arg.comfirmedAt+'</td>';
+                            }else {
+                                confirmedTag = '<td>-</td>';
+                            }
+                            let stateTag = '';
+                            if(arg.paymentState==0) {
+                                stateTag = '<td><p class="state state2">납부 미확인</p></td>';
+                            }else if(arg.paymentState==1) {
+                                stateTag = '<td><p class="state">확인 대기</p></td>';
+                            }else if(arg.paymentState==2) {
+                                stateTag = '<td><p class="state state1">납부 확인</p></td>';
+                            }
+
+
+                            tag += '<tr>' +
+                                '<td>'+arg.rowNum+'</td>' +
+                                '<td>'+arg.year+'년 '+arg.month+'월</td>' +
+                                paidTag +
+                                amountTag +
+                                commentTag +
+                                confirmedTag +
+                                stateTag +
+                                '</tr>';
+                        });
+                    }else {
+                        tag = '<tr><td colspan="7">회비 내역이 존재하지 않습니다.</td></tr>';
+                    }
+                    fPagination2(data, page);
+                    $("#duesListTbody").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 회비 목록 모바일
+        function getDuesListMobile() {
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/dues",
+                data: {
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                async:false,
+                success:function(data) {
+                    // console.log(data);
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg){
+                            let paidTag = '';
+                            if(arg.paidAt!=null && arg.paidAt!='') {
+                                paidTag = '<span class="date1">'+arg.paidAt+'</span>';
+                            }else {
+                                paidTag = '<span class="date1">-</span>';
+                            }
+                            let amountTag = '';
+                            if(arg.amount!=0) {
+                                amountTag = '<p class="price">'+fcomma(arg.amount)+'</p>';
+                            }else {
+                                amountTag = '<p class="price">0P</p>';
+                            }
+
+                            let commentTag = '';
+                            if(arg.comment!=null && arg.comment!='') {
+                                commentTag = '<p class="disap-text">'+arg.comment+'</p>';
+                            }else {
+                                commentTag = '';
+                            }
+                            let confirmedTag = '';
+                            if(arg.comfirmedAt!=null && arg.comfirmedAt!='') {
+                                confirmedTag = '<span class="date2">'+arg.comfirmedAt+'</span>';
+                            }else {
+                                confirmedTag = '';
+                            }
+                            let stateTag = '';
+                            if(arg.paymentState==0) {
+                                stateTag = '<p class="stateText disapproval">납부 미확인</p>';
+                            }else if(arg.paymentState==1) {
+                                stateTag = '<p class="stateText">확인대기</p>';
+                            }else if(arg.paymentState==2) {
+                                stateTag = '<p class="approval stateText">납부 확인</p>';
+                            }
+
+                            tag += '<li>' +
+                                    '<div class="text-wrap">' +
+                                    '<div class="text">' +
+                                    '<p class="disap-text">'+arg.year+'년 '+arg.month+'월</p>' +
+                                    '<p class="date-wrap">'+paidTag+confirmedTag+'</p>' +
+                                    amountTag +
+                                    '</div>' +
+                                    stateTag +
+                                    '</div>' +
+                                    commentTag +
+                                    '</li>';
+                        });
+                    }else {
+                        tag = '<li><div style="text-align: center;">회비 내역이 존재하지 않습니다.</div></li>';
+                    }
+                    fPagination2(data, page);
+                    $("#mobileDuesList").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 날짜 단위 변경 시
+        $("#month-gap").on("click", "a", function(){
+            let dateTo = $("#dateTo").val();
+            let gap = Number($(this).attr("val"));
+            let dateFrom = new Date(dateTo);
+            dateFrom = new Date(dateFrom.setMonth(dateFrom.getMonth()-gap));
+            $("#dateFrom").val(strDate(dateFrom));
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getDuesListMobile();
+            } else {
+                getDuesList();
+            }
+        });
+
+        // 날짜 직접 선택 시
+        $("#search-wrap").on("change", ".date", function(){
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+            if(dateTo < dateFrom) {
+                toastModal("조회 시작 날짜가 종료 날짜를 넘길 수 없습니다.");
+                $("#dateFrom").val(dateTo);
+            }
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getDuesListMobile();
+            } else {
+                getDuesList();
+            }
+        });
+
+        // 정렬
+        $("#duesListThead").on("click", ".sort", function() {
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                sort="createdAt,desc";
+                getDuesListMobile()
+            } else {
+                getDuesList()
+            }
+        });
+
+        function strDate(date) {
+            let year = date.getFullYear() + "";
+            let month = (date.getMonth()+1) + "";
+            let day = date.getDate() + "";
+
+            if(month.length==1) {
+                month = "0" + month;
+            }
+            if(day.length==1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
+        }
+    </script>
+    <!-- script END -->
+</div>
+
+
+
+
+
+</html>

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+
+    <div class="auto qnaWrap">
+        <div class="subP-title">
+            <p class="title">자주묻는글</p>
+            <ul class="menuPath">
+                <li><a href="../index.html"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="#">자주묻는글</a></li>
+            </ul>
+        </div>
+
+        <div class="search-wrap">
+            <!--
+                           <select name="" id="" class="mr10">
+                               <option value="전체">전체</option>
+                               <option value="제목">제목</option>
+                               <option value="내용">내용</option>
+                               <option value="작성일">작성일</option>
+                           </select>
+
+            -->
+            <div class="searchBox">
+                <input type="text" placeholder="검색어를 입력해주세요." id="query">
+                <span id="search-icon" class="search-icon"></span>
+            </div>
+        </div>
+
+
+        <ul id="faqListUl" class="qnaBox">
+            <!--<li>
+                <a href="#"><p class="title"><span class="brown">Q.</span>
+                    천인방이 지향하는 일과 목표와 업무는 무엇인가요?</p> <span class="icon"><i class="fa-solid fa-angle-down"></i></span></a>
+                <div class="answer">
+                    <p>
+                        천인방이 지향하는 일과 목표와 업무는 무엇인가요? 답변입니다.<br>
+                        자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.
+                    </p>
+                </div>
+            </li>-->
+            <!--<li>
+                <a href="#"><p class="title"><span class="brown">Q.</span>
+                    천인방 회원 모집 시 출범 멤버와 일반 회원 명칭이 다른 이유는?</p> <span class="icon"><i class="fa-solid fa-angle-down"></i></span></a>
+                <div class="answer">
+                    <p>
+                        천인방 회원 모집 시 출범 멤버와 일반 회원 명칭이 다른 이유는? 답변입니다.<br>
+                        자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="#"><p class="title"><span class="brown">Q.</span>
+                    “한가족 공동체 천인방" 운영목적은 무엇인가요?</p> <span class="icon"><i class="fa-solid fa-angle-down"></i></span></a>
+                <div class="answer">
+                    <p>
+                        “한가족 공동체 천인방" 운영목적은 무엇인가요? 답변입니다.<br>
+                        자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="#"><p class="title"><span class="brown">Q.</span>
+                    회원가입시 가입비와 후원금으로 구분하는 이유가 무엇인가요?</p> <span class="icon"><i class="fa-solid fa-angle-down"></i></span></a>
+                <div class="answer">
+                    <p>
+                        회원가입시 가입비와 후원금으로 구분하는 이유가 무엇인가요? 답변입니다.<br>
+                        자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="#"><p class="title"><span class="brown">Q.</span>
+                    공유경제 공동체 천인방과 펀딩회원은 다른 개념인가요?</p> <span class="icon"><i class="fa-solid fa-angle-down"></i></span></a>
+                <div class="answer">
+                    <p>
+                        공유경제 공동체 천인방과 펀딩회원은 다른 개념인가요? 답변입니다.<br>
+                        자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.
+                    </p>
+                </div>
+            </li>
+            <li>
+                <a href="#"><p class="title"><span class="brown">Q.</span>
+                    천인방에서 통용되는 화폐 단위는 무엇인가요?</p> <span class="icon"><i class="fa-solid fa-angle-down"></i></span></a>
+                <div class="answer">
+                    <p>
+                        천인방에서 통용되는 화폐 단위는 무엇인가요? 답변입니다.<br>
+                        자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.자주묻는질문 답변입니다.
+                    </p>
+                </div>
+            </li>-->
+        </ul>
+
+        <div id="pagination" class="paging"></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/5f4b51f7f0.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <script>
+        let page=1;
+
+        getFaqList();
+
+        $("#query").on("keydown", function(e){
+            if(e.keyCode==13) {
+                $("#search-icon").click();
+            }
+        });
+
+        $("#search-icon").on("click", function(){
+            page=1;
+            getFaqList();
+        });
+
+        $('#faqListUl').on('click', 'a', function(){
+            if($(this).hasClass('actived')){
+                $(this).removeClass('actived');
+                $(this).siblings('.answer').slideUp();
+            }else{
+                $('.qnaBox li a').removeClass('actived');
+                $(this).addClass('actived');
+                $('.qnaWrap .qnaBox li .answer').slideUp();
+                $(this).siblings('.answer').slideDown();
+            }
+        });
+
+        function getFaqList() {
+            let query = $("#query").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/common/faq",
+                data:{
+                    "size": 10,
+                    "page":page-1,
+                    "query":query
+                },
+                success:function(data) {
+                    console.log(data);
+                    let list = data.content;
+                    let tag = '';
+                    if(data!=null && list.length!=0) {
+                        list.forEach(function(arg){
+                            let contents = arg.contents;
+                            contents=contents.replace("<", "&lt;");
+                            contents=contents.replace(">", "&gt;");
+                            contents=contents.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+                            $("#contents").html(contents);
+                            tag += '<li>' +
+                                    '<a class="cupoint">' +
+                                    '<p class="title">' +
+                                    '<span class="brown">Q.</span>'+
+                                    arg.title +
+                                    '</p>' +
+                                    ' <span class="icon"><i class="fa-solid fa-angle-down"></i></span>' +
+                                    '</a>' +
+                                    '<div class="answer">' +
+                                    '<p>' +
+                                    contents +
+                                    '</p>' +
+                                    '</div>' +
+                                    '</li>';
+                        });
+                    }else {
+                        tag = '<li style="text-align: center;"><p class="title" style="margin:auto; padding: 20px; min-height: 50px; font-size: 16px;">검색 결과가 존재하지 않습니다.</p></li>';
+                    }
+                    $("#faqListUl").html(tag);
+                    fMobilePagination(data, page);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+    </script>
+</div>
+</html>

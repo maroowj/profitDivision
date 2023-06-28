@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">자주찾는질문</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/faq">자주찾는질문</a></li>
+                <li><a href="">수정하기</a></li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap boardWrite">
+            <div class="wait-list-2">
+                <p>자주찾는질문 수정하기</p>
+                <div class="search-wrap-admin board-btn">
+                    <button class="yellow-btn" onclick="location.href='/management/faq'">목록</button>
+                    <button id="update-btn" class="white-btn" onclick="updateFaq();">수정</button>
+                </div>
+            </div>
+
+            <table class="page-table1 table-hover2 boardWrite-table">
+                <colgroup>
+                    <col style = "width:10%">
+                    <col style = "width:*%">
+                </colgroup>
+                <tr>
+                    <th>제목</th>
+                    <td>
+                        <input type="text" id="title" class="boardWrite-title mr10">
+                        <!--<label><input type="checkbox" id="fixed"> 공지사항</label>-->
+                    </td>
+                </tr>
+                <!--<tr>
+                    <th>작성자</th>
+                    <td class="text-align-left"><p>관리자</p></td>
+                </tr>-->
+                <tr class="d-none">
+                    <th>첨부파일</th>
+                    <td>
+                        <input type="text" id="fileName" class="boardWrite-imgUpload mr10" disabled>
+                        <button id="attach-btn" class="yellow-btn">첨부파일</button>
+                        <input type="file" id="file" hidden>
+                    </td>
+                </tr>
+                <tr>
+                    <th>내용</th>
+                    <td><textarea id="contents"></textarea></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+    <script>
+        /** 파리미터 받기 **/
+        const urlStr = window.location;
+        const url = new URL(urlStr);
+        const urlParams = url.searchParams;
+        const seq = urlParams.get('seq');
+        /** 파리미터 받기 **/
+        let file;
+        let originalFileName;
+
+        getFaqRead(seq);
+
+        // 공지사항 상세 불러오기
+        function getFaqRead(seq) {
+            $.ajax({
+                type:"get",
+                url:"/api/admin/faq/"+seq,
+                success:function(data) {
+                    console.log(data);
+                    $("#title").val(data.title);
+                    $("#contents").val(data.contents);
+                    if(data.fixed) {
+                        $("#fixed").prop("checked", true);
+                    }else {
+                        $("#fixed").prop("checked", false);
+                    }
+                    if(data.attachName!=null && data.attachName!="") {
+                        originalFileName = data.attachName;
+                    }
+                    $("#fileName").val(originalFileName);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        };
+
+        // 공지사항 수정
+        function updateFaq() {
+            let title = $("#title").val();
+            let contents = $("#contents").val();
+            let fixed = "false";
+            if($("#fixed").prop("checked")) {
+                fixed = "true";
+            }else {
+                fixed = "false";
+            }
+
+            if(title==null || title==undefined || title=="") {
+                toastModal("제목을 입력하세요");
+                return;
+            }
+            if(contents==null || contents==undefined || contents=="") {
+                toastModal("내용을 입력하세요");
+                return;
+            }
+
+            if(!confirm("게시글을 수정하시겠습니까?")) return;
+
+            let formData = new FormData();
+            formData.append("title", title);
+            formData.append("contents", contents);
+            formData.append("fixed", fixed);
+
+            if(file!=null && file!=undefined && file!="") {
+                formData.append("attach", file);
+            }
+
+            $.ajax({
+                type:"put",
+                url:"/api/admin/faq/"+seq,
+                data: formData,
+                processData: false,
+                contentType: false,
+                success:function() {
+                    toastModal("게시글이 수정되었습니다.");
+                    setTimeout(() => location.href="/management/faq", 1000);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 첨부파일
+        $("#attach-btn").on("click", function() {
+            $("#file").click();
+        });
+
+        $("#file").on("change", function() {
+            file = $("#file")[0].files[0];
+            let files = $("#file")[0].files;
+            if(files.length<1) {
+                $("#fileName").val(originalFileName);
+            }else {
+                $("#fileName").val(file.name);
+            }
+        });
+    </script>
+
+
+</div>
+
+
+</html>

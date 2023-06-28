@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">투자 관리</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/managers">투자관리</a></li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap wait-list ">
+            <div class="wait-list-2">
+                <p>회원 투자 리스트</p>
+                <div class="search-wrap-admin">
+                    <div class="search">
+                        <select name="" id="size" class="mr10">
+                            <option value=20>20</option>
+                            <option value=40>40</option>
+                            <option value=60>60</option>
+                        </select>
+                        <select name="" id="queryType" class="mr10">
+                            <option value="전체">전체</option>
+                            <option value="이름">이름</option>
+                            <option value="아이디">아이디</option>
+                            <option value="회원번호">회원번호</option>
+                        </select>
+                    </div>
+                    <div class="searchBox">
+                        <input type="text" placeholder="검색어를 입력하세요" id="query">
+                        <span id="search-icon" class="search-icon"></span>
+                    </div>
+                </div>
+            </div>
+
+            <table class="page-table1 table-hover2 profit2-table">
+                <colgroup>
+                    <col style = "width:10%">
+                    <col style = "width:10%">
+                    <col style = "width:10%">
+                    <col style = "width:10%">
+                    <col style = "width:10%">
+                    <col style = "width:15%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                    <col style = "width:*%">
+                </colgroup>
+
+                <thead id="investListThead">
+                <tr>
+                    <th><p class="sort" sort="membershipNumber">회원번호</p></th>
+                    <th><p class="sort" sort="userId">아이디</p></th>
+                    <th><p class="sort" sort="name">이름</p></th>
+                    <th><p class="sort" sort="mobile">연락처</p></th>
+                    <th><p class="sort" sort="bankName">은행명</p></th>
+                    <th><p class="sort" sort="accountNumber">계좌번호</p></th>
+                    <th><p class="sort" sort="amount">투자금</p></th>
+                    <th><p class="sort" sort="depositedAt">입금일</p></th>
+                    <th><p class="sort" sort="status">승인여부</p></th>
+                </tr>
+                </thead>
+                <tbody id="investListTbody">
+                <tr class="investList">
+                    <td><p>00001</p></td>
+                    <td><p>00001</p></td>
+                    <td><p>00001</p></td>
+                    <td><p>00001</p></td>
+                    <td><p>00001</p></td>
+                    <td><p>00001</p></td>
+                    <td><input type="text" placeholder="1,000,000,000P" class="profit2-pay"></td>
+                    <td><input type="text" placeholder="2022-08-05" class="profit2-day"></td>
+                    <td>
+                        <select class="mr10">
+                            <option>대기</option>
+                            <option>승인</option>
+                            <option>미승인</option>
+                        </select>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="invest-modal" class="invent-modal modal invest-modal">
+            <div class="modal-inner">
+                <div class="modal-title">
+                    <p class="title"><em>김지영</em>님 투자내역 </p>
+                    <a href="#" class="close-btn">닫기</a>
+                </div>
+                <table class="page-table1 table-hover2 profit2-table">
+                    <colgroup>
+                        <col style = "width:*%">
+                        <col style = "width:*%">
+                        <col style = "width:*%">
+                        <col style = "width:*%">
+                    </colgroup>
+
+                    <thead id="modalDetailsThead">
+                    <tr>
+                        <th><p class="sort" sort="depositedAt">날짜</p></th>
+                        <th><p class="sort" sort="total">총금액</p></th>
+                        <th><p class="sort" sort="amount">투자금</p></th>
+                        <th><p class="sort" sort="status">승인여부</p></th>
+                    </tr>
+                    </thead>
+                    <tbody id="modalDetailsTbody">
+                    <!-- <tr>
+                         <td><input type="text" class="invest-text"></td>
+                         <td><p>126,205,156p</p></td>
+                         <td><input type="text" class=" invest-text"></td>
+                         <td><select name="" id="" class="mr10">
+                             <option value="대기">대기</option>
+                             <option value="승인">승인</option>
+                             </select>
+                         </td>
+                     </tr>
+                     <tr>
+                         <td><input type="text" class="invest-text"></td>
+                         <td><p>126,205,156p</p></td>
+                         <td><input type="text" class=" invest-text"></td>
+                         <td><select name="" class="modalSelStatus" class="mr10">
+                             <option value=0>대기</option>
+                             <option value=1>승인</option>
+                             <option value=2>미승인</option>
+                             </select>
+                         </td>
+                     </tr>-->
+                    </tbody>
+                </table>
+                <div class="modal-btn">
+                    <a href="#" class="white-btn close-btn mr10">닫기</a>
+                    <a href="#" id="btnUpdateInvestStatus" class="yellow-btn">확인</a>
+                </div>
+            </div>
+            <div class="modal-bg"></div>
+        </div>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!--            <a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>-->
+           <!-- <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+            <div class="page-num">
+                <a href="#" class="actived">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+            </div>
+            <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>-->
+            <!--<a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+    <script>
+        let modalUserDetailsSeq;
+        let query = '';
+        let page = 1;
+        let sort = 'createdAt,desc';
+        let size = $("#size").val();
+
+        let modalSort = 'createdAt,desc';
+        let updateResult;
+
+
+        getInvestmentList();
+        $('.investList').click(function(){
+            $('.invest-modal').css('display','block');
+        });
+
+        function getInvestmentList() {
+            queryType = $("#queryType").val();
+            query = $("#query").val();
+            size = $("#size").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/admin/investments",
+                data: {
+                    "query":query,
+                    "queryType":queryType,
+                    "size":size,
+                    "sort":sort,
+                    "page":page-1
+                },
+                async: false,
+                success: function (data) {
+                    console.log(data);
+                    let investList = data.content;
+                    let iTag = '';
+
+                    if(investList!=null && investList.length!=0) {
+                        for(i=0; i<investList.length; i++) {
+                            let status = '';
+                            if(investList[i].status==0) {
+                                status = '대기';
+                            }else if(investList[i].status==1) {
+                                status = '승인';
+                            }else if(investList[i].status==2) {
+                                status = '미승인';
+                            }
+                            iTag += '<tr uSeq="'+investList[i].userDetailsSeq+'">' +
+                                '<td><p>'+investList[i].membershipNumber+'</p></td>' +
+                                '<td><p>'+investList[i].userId+'</p></td>' +
+                                '<td><p>'+investList[i].name+'</p></td>' +
+                                '<td><p>'+investList[i].mobile+'</p></td>' +
+                                '<td><p>'+investList[i].bankName+'</p></td>' +
+                                '<td><p>'+investList[i].accountNumber+'</p></td>' +
+                                '<td><div class="select-arrow-no">'+fcomma(investList[i].amount)+'</div></td>' +
+                                '<td><div class="select-arrow-no">'+investList[i].depositedAt+'</div></td>' +
+                                '<td><div class="select-arrow investList">'+status+'</div></td>' +
+                                '</tr>';
+                        }
+                        $("#investListTbody").html(iTag);
+                        fPagination(data, page);
+                    }else {
+                        $("#investListTbody").html("<tr><td colspan='9'>투자 내역이 존재하지 않습니다.</td></tr>");
+                    }
+
+
+                    $('.investList').click(function(){
+                        modalUserDetailsSeq = $(this).parent().parent().attr("uSeq");
+                        getInvestmentDetails();
+                        $('.invest-modal').css('display','block');
+                    });
+                },
+                error: function (request, status, error) {
+                    toastModal("회비 내역이 존재하지 않습니다.");
+                    $("#investListTbody").html("<tr><td colspan='9'>투자 내역이 존재하지 않습니다.</td></tr>");
+                }
+            });
+        }
+
+        // 페이징 클릭 시 실행
+        $("#pagination").on("click", "a", function () {
+            page = parseInt($(this).attr("gopage"));
+            getInvestmentList();
+        });
+
+        // 출력 개수 select 변경 시
+        $("#size").on("change", function () {
+            size = $(this).val();
+            page = 1
+            getInvestmentList();
+        });
+
+        // 검색종류 select 변경 시
+        $("#queryType").on("change", function () {
+            queryType = $(this).val();
+            page = 1
+            getInvestmentList();
+        });
+
+        // 키워드 입력 후 Enter 눌렀을 경우
+        $("#query").on("keydown", function (e) {
+            if (e.keyCode == 13) {
+                $("#search-icon").click();
+            }
+        });
+
+        // 돋보기 아이콘 클릭 시 검색
+        $("#search-icon").on("click", function () {
+            page = 1
+            getInvestmentList();
+        });
+
+        // 정렬
+        $("#investListThead").on("click", ".sort", function(){
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            getInvestmentList();
+        });
+
+        function getInvestmentDetails(){
+            $.ajax({
+                type:"get",
+                url:"/api/admin/investments/"+modalUserDetailsSeq,
+                data: {
+                    "sort":modalSort,
+                },
+                async: false,
+                success: function (data) {
+                    console.log(data);
+                    let investList = data.content;
+                    let iTag='';
+
+                    let arrStatus = [];
+                    if(investList!=null && investList.length!=0) {
+                        for(i=0; i<investList.length; i++) {
+                            arrStatus.push(investList[i].status);
+                            iTag += '<tr iSeq="'+investList[i].investmentSeq+'">' +
+                                '<td><div class="select-arrow-no">'+investList[i].depositedAt+'</div></td>' +
+                                '<td>'+fcomma(investList[i].total)+'</td>' +
+                                '<td><div class="select-arrow-no amount">'+fcomma(investList[i].amount)+'</div></td>' +
+                                '<td><select class="modalSelStatus" class="mr10">' +
+                                '<option value=0>대기</option>' +
+                                '<option value=1>승인</option>' +
+                                '<option value=2>미승인</option>' +
+                                '</select>' +
+                                '</td>' +
+                                '</tr>';
+                        }
+
+                        $("#modalDetailsTbody").html(iTag);
+
+                        $(".modalSelStatus").each(function(index){
+                            let status = arrStatus[index];
+                            $(this).val(status).prop("selected", true);
+                            if(status!=0) {
+                                console.log(status);
+                                $(this).attr("disabled", true);
+                                $(this).css("cursor", "inherit");
+                            }
+                        });
+                    }else {
+                        $("#modalDetailsTbody").html("<tr><td colspan='4'>투자 내역이 존재하지 않습니다.</td></tr>");
+                    }
+
+                    $(".modalSelStatus").on("change", function() {
+                        let status = $(this).val();
+                        if(status!=0) {
+                            $(this).addClass("change");
+                        }else {
+                            $(this).removeClass("change");
+                        }
+                    });
+                },
+                error: function (request, status, error) {
+                    toastModal("회원의 회비내역을 불러올 수 없습니다.");
+                }
+            });
+        };
+
+        $("#btnUpdateInvestStatus").on("click", function(){
+            let changeNum = $("#modalDetailsTbody .change").length;
+
+            if(changeNum==0) {
+                toastModal("변경 된 승인여부가 없습니다.");
+                return;
+            }
+
+            if(!confirm("승인 또는 미승인으로 변경 시 다시 수정할 수 없습니다.\n변경된 사항을 저장하시겠습니까?")) {
+                return;
+            }
+
+            updateResult = 0;
+            $("#modalDetailsTbody .change").each(function(){
+                let status = $(this).val();
+                let investmentSeq = $(this).parent().parent().attr("iSeq");
+                let amount = parseInt(uncomma($(this).parent().parent().find(".amount").html()));
+                let objInvest = {
+                    "amount":amount,
+                    "status":status
+                }
+                updateInvestmentStatus(investmentSeq, objInvest);
+                if(updateResult==2) {
+                    toastModal("승인여부 변경에 문제가 발생했습니다.");
+                    return false;
+                }
+            });
+
+            if(updateResult==1) {
+                toastModal("투자내역이 수정되었습니다.");
+                $(".close-btn").click();
+                getInvestmentList();
+            }
+        });
+
+        function updateInvestmentStatus(investmentSeq, objInvest) {
+            $.ajax({
+                type:"put",
+                url:"/api/admin/investments/"+investmentSeq,
+                contentType:"application/json",
+                data:JSON.stringify(objInvest),
+                async:false,
+                success:function(data) {
+                    updateResult = 1;
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                    updateResult = 2;
+                }
+            });
+        }
+
+        // 모달 정렬
+        $("#modalDetailsThead").on("click", ".sort", function(){
+            modalSort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                modalSort=modalSort+',desc'
+            }else{
+                $(this).addClass('actived');
+                modalSort=modalSort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            getInvestmentDetails();
+        });
+    </script>
+
+
+</div>
+
+</html>

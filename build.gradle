@@ -1,0 +1,159 @@
+buildscript {
+	ext {
+		queryDslVersion = "4.4.0"
+		swaggerVersion = "3.0.0"
+	}
+}
+
+plugins {
+	id 'org.springframework.boot' version '2.5.8'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	id 'java'
+	id 'war'
+	id 'org.asciidoctor.convert' version '1.5.8'
+	id "com.ewerk.gradle.plugins.querydsl" version "1.0.10"
+	id 'com.epages.restdocs-api-spec' version '0.15.1'
+	id "org.hidetake.swagger.generator" version "2.18.2"
+}
+
+group = 'com.muzisoft.division'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+ext {
+	set('snippetsDir', file("build/generated-snippets"))
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-mail'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
+	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'org.springframework.cloud:spring-cloud-starter-aws:2.0.1.RELEASE'
+	implementation "com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.1"
+	implementation 'com.google.code.gson:gson'
+	implementation 'io.jsonwebtoken:jjwt:0.9.1'
+	implementation 'net.rakugakibox.util:yaml-resource-bundle:1.1'
+	implementation "com.querydsl:querydsl-jpa:${queryDslVersion}"
+	implementation "com.querydsl:querydsl-apt:${queryDslVersion}"
+	implementation group: 'com.fasterxml.jackson.datatype', name: 'jackson-datatype-hibernate5', version: '2.11.3'
+	implementation 'mysql:mysql-connector-java'
+	implementation "org.mariadb.jdbc:mariadb-java-client"
+	implementation "io.springfox:springfox-boot-starter:${swaggerVersion}"
+	implementation "io.springfox:springfox-swagger-ui:${swaggerVersion}"
+	implementation "org.apache.commons:commons-io:1.3.2"
+	implementation "org.apache.commons:commons-lang3:3.12.0"
+	swaggerUI "org.webjars:swagger-ui:3.52.3"
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+	implementation 'com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.5.8'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.security:spring-security-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+	testImplementation 'com.epages:restdocs-api-spec-mockmvc:0.15.1'
+	testCompileOnly 'org.projectlombok:lombok'
+	testAnnotationProcessor 'org.projectlombok:lombok'
+	implementation 'com.vladmihalcea:hibernate-types-52:2.9.13'
+
+	// shedlock (스케쥴러 중복실행 방지)
+	implementation 'net.javacrumbs.shedlock:shedlock-spring:4.34.0'
+	implementation 'net.javacrumbs.shedlock:shedlock-provider-jdbc-template:4.34.0'
+
+}
+
+//querydsl 추가 시작
+def querydslDir = "$buildDir/generated/querydsl"
+
+querydsl {
+	jpa = true
+	querydslSourcesDir = querydslDir
+}
+
+sourceSets {
+	main.java.srcDir querydslDir
+}
+
+compileQuerydsl{
+	options.annotationProcessorPath = configurations.querydsl
+}
+
+configurations {
+	querydsl.extendsFrom compileClasspath
+}
+
+//querydsl 추가 끝
+
+if (!project.hasProperty('profile') || !profile) {
+
+	openapi3 {
+		server = 'http://localhost:8080'
+		title = 'Unknown API'
+		description = 'Unknown API Description'
+		version = '0.1.0'
+		format = 'yaml'
+	}
+
+	asciidoctor {
+		inputs.dir snippetsDir
+		outputs.dir snippetsDir
+	}
+} else {
+
+	openapi3 {
+		server = 'http://localhost:8080'
+		title = 'Unknown API'
+		description = 'Unknown API Description'
+		version = '0.1.0'
+		format = 'yaml'
+	}
+
+	test {
+		outputs.dir snippetsDir
+		useJUnitPlatform()
+	}
+
+	asciidoctor {
+		inputs.dir snippetsDir
+		dependsOn test
+	}
+}
+
+task createOpenApi {
+	dependsOn 'openapi3'
+	dependsOn 'asciidoctor'
+	doLast {
+		copy {
+			from 'build/api-spec'
+			include '*.yaml'
+			into 'src/main/resources/static/docs'
+		}
+	}
+}
+
+bootJar {
+	dependsOn 'openapi3'
+	from ("build/api-spec") {
+		include "*.yaml"
+		into "static/docs"
+	}
+}
+
+build {
+	dependsOn createOpenApi
+}

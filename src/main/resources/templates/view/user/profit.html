@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <div class="gray-bg">
+        <div class="auto profit-wrap">
+            <div class="subP-title">
+                <p class="title">수익관리</p>
+                <ul class="menuPath">
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="">수익관리</a></li>
+                </ul>
+            </div>
+
+            <div class="total-price">
+                <div class="price-wrap">
+                    <p class="title">나의 총금액</p>
+                    <p id="total" class="price"></p>
+                </div>
+                <div class="btn-wrap">
+                    <a href="/withdrawal" class="gray-btn comm-btn mr10">출금 신청</a>
+                    <a href="/invest" class="yellow-btn comm-btn">추가 투자하기</a>
+                </div>
+            </div>
+            <ul class="imagine-price-wrap">
+                <li class="today-price">
+                    <div class="user-price">
+                        <p class="title">나의 오늘 가상 수익</p>
+                        <p id="myDailyAmount" class="price"></p>
+                    </div>
+                    <div class="all-price">
+                        <p class="title">오늘 가상 수익</p>
+                        <p id="dailyAmount" class="price yellow"></p>
+                    </div>
+                </li>
+                <li class="month-price">
+                    <div class="user-price">
+                        <p class="title">나의 이번달 가상 수익</p>
+                        <p id="myMonthlyAmount" class="price"></p>
+                    </div>
+                    <div class="all-price">
+                        <p class="title">이번달 가상 수익</p>
+                        <p id="monthlyAmount" class="price yellow"></p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="auto profitList-wrap">
+        <div class="subTitle2">
+            <p class="title">수익 리스트</p>
+        </div>
+
+        <div id="search-wrap" class="search-wrap">
+            <select id="type">
+                <option value="전체" selected>전체</option>
+                <option value="수익">수익</option>
+                <option value="출금">출금</option>
+            </select>
+            <input type="date" id="dateFrom" class="date">
+            <span>~</span>
+            <input type="date" id="dateTo" class="date">
+
+            <ul id="month-gap" class="period-wrap">
+                <li><a class="cupoint" val=1>1개월</a></li>
+                <li class="actived"><a class="cupoint" val="3">3개월</a></li>
+                <li><a class="cupoint" val="6">6개월</a></li>
+                <li><a class="cupoint" val="12">1년</a></li>
+            </ul>
+        </div>
+
+
+        <!--PC버전-->
+        <div class="profitList page-tableBox pc768-wrap">
+            <table class="page-table1">
+                <colgroup>
+                    <col style = "width:10%">
+                    <col style = "width:*">
+                    <col style = "width:36%">
+                    <col style = "width:*">
+                    <col style = "width:*">
+
+                </colgroup>
+
+                <thead id="profitListThead">
+                <tr>
+                    <th>번호</th>
+                    <th><p class="sort" sort="createdAt">날짜</p></th>
+                    <th>내용</th>
+                    <th><p class="sort" sort="amount">입출금</p></th>
+                    <th><p class="sort" sort="total">총액</p></th>
+                </tr>
+                </thead>
+                <tbody id="profitListTbody">
+               <!-- <tr>
+                    <td>50</td>
+                    <td>2022-08-10 18:10:23</td>
+                    <td>2022년 08월 08일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>-->
+                <!--<tr>
+                    <td>49</td>
+                    <td>2022-08-09 18:10:23</td>
+                    <td>2022년 07월 이자</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>48</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>-->
+                <!--<tr>
+                    <td>47</td>
+                    <td>2022-08-06 18:10:23</td>
+                    <td>2022년 08월 04일 출금 신청 승인</td>
+                    <td><p class="m-price price"><span class="text">출금</span> 1,000,000P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>-->
+                <!--<tr>
+                    <td>46</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>45</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>44</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>43</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>42</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>41</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>40</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>39</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>38</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>37</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>36</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>35</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>34</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>33</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>32</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>
+                <tr>
+                    <td>31</td>
+                    <td>2022-08-08 18:10:23</td>
+                    <td>2022년 08월 07일 수익배분</td>
+                    <td><p class="p-price price"><span class="text">수익</span> 12,784P</p></td>
+                    <td>1,156,789,483P</td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+
+        <!--M 768px ~ -->
+        <ul id="mobileProfitList" class="profitList m768-wrap">
+            <!--<li>
+                <p class="date">2022-08-08 18:10:23</p>
+                <p class="text">2022년 08월 08일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>-->
+            <!--<li>
+                <p class="date">2022-08-07 18:10:23</p>
+                <p class="text">2022년 08월 07일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>
+            <li>
+                <p class="date">2022-08-06 18:10:23</p>
+                <p class="text">2022년 08월 06일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>-->
+           <!-- <li>
+                <p class="date">2022-08-05 18:10:23</p>
+                <p class="text">2022년 08월 05일 출금 신청 승인</p>
+                <div class="text-wrap">
+                    <p class="m-price price"><span>출금</span>1,000,000P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>-->
+            <!--<li>
+                <p class="date">2022-08-08 18:10:23</p>
+                <p class="text">2022년 08월 08일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>
+            <li>
+                <p class="date">2022-08-07 18:10:23</p>
+                <p class="text">2022년 08월 07일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>
+            <li>
+                <p class="date">2022-08-06 18:10:23</p>
+                <p class="text">2022년 08월 06일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>
+            <li>
+                <p class="date">2022-08-08 18:10:23</p>
+                <p class="text">2022년 08월 08일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>
+            <li>
+                <p class="date">2022-08-07 18:10:23</p>
+                <p class="text">2022년 08월 07일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>
+            <li>
+                <p class="date">2022-08-06 18:10:23</p>
+                <p class="text">2022년 08월 06일 수익배분</p>
+                <div class="text-wrap">
+                    <p class="p-price price"><span>수익</span>12,784P</p>
+                    <p class="all-price">1,156,789,483P</p>
+                </div>
+            </li>-->
+        </ul>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+          <!--  <a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+            <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+            <div class="page-num">
+                <a href="#" class="actived">1</a>
+                <a href="#">2</a>
+                <a href="#">3</a>
+                <a href="#">4</a>
+                <a href="#">5</a>
+                <a href="#">6</a>
+                <a href="#">7</a>
+                <a href="#">8</a>
+                <a href="#">9</a>
+                <a href="#">10</a>
+            </div>
+            <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+            <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <script>
+        let page=1;
+        let size= 20;
+        let sort = "createdAt,desc";
+        let today = new Date();
+        let preDay = new Date(new Date().setMonth(new Date().getMonth()-3));
+        $("#dateFrom").val(strDate(preDay));
+        $("#dateTo").val(strDate(today));
+
+        getProfitOverview();
+        if (matchMedia("screen and (max-width: 768px)").matches) {
+            getProfitListMobile();
+        } else {
+            getProfitList();
+        }
+
+        function getProfitOverview() {
+            $.ajax({
+                type:'get',
+                url:'/api/user/profits/overview',
+                success:function(data) {
+                    for(let key in data) {
+                        let val = data[key];
+                        val = fcomma(val) + "P";
+                        $("#"+key).text(val);
+                    }
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        function getProfitList() {
+            let type = $("#type").val();
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/profits",
+                data: {
+                    "type":type,
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                async:false,
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg){
+                            let priceTag = '';
+                            if(arg.type=='DEPOSIT') {
+                                priceTag = '<td><p class="p-price price"><span class="text">수익</span> '+fcomma(arg.amount)+'P</p></td>';
+                            }else {
+                                priceTag = '<td><p class="m-price price"><span class="text">출금</span> '+fcomma(arg.amount)+'P</p></td>';
+                            }
+
+                            tag += '<tr>' +
+                                    '<td>'+arg.rowNum+'</td>' +
+                                    '<td>'+arg.createdAt+'</td>' +
+                                    '<td>'+arg.content+'</td>' +
+                                    priceTag +
+                                    '<td>'+fcomma(arg.total)+'P</td>' +
+                                    '</tr>';
+                        });
+                    }else {
+                        tag = '<tr><td colspan="5">수익 입출금 내역이 존재하지 않습니다.</td></tr>';
+                    }
+                    fPagination2(data, page);
+                    $("#profitListTbody").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        function getProfitListMobile() {
+            let type = $("#type").val();
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/profits",
+                data: {
+                    "type":type,
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":10
+                },
+                async:false,
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg){
+                            let priceTag = '';
+                            if(arg.type=='DEPOSIT') {
+                                priceTag = '<p class="p-price price"><span>수익</span> '+fcomma(arg.amount)+'P</p>';
+                            }else {
+                                priceTag = '<p class="m-price price"><span>출금</span> '+fcomma(arg.amount)+'P</p>';
+                            }
+
+                            tag += '<li>' +
+                                '<p class="date">'+arg.createdAt+'</p>' +
+                                '<p class="text">'+arg.content+'</p>' +
+                                '<div class="text-wrap">'+
+                                priceTag +
+                                '<p class="all-price">'+fcomma(arg.total)+'P</p>' +
+                                '</div>' +
+                                '</li>';
+                        });
+                    }else {
+                        tag = '<li class="text" style="text-align: center;">수익 입출금 내역이 존재하지 않습니다.</li>';
+                    }
+                    fMobilePagination(data, page);
+                    $("#mobileProfitList").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 전체, 수익, 출금 필터링
+        $("#type").on("change", function(){
+            page=1;
+            sort="createdAt,desc";
+            $(".sort").removeClass("actived");
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getProfitListMobile();
+            } else {
+                getProfitList();
+            }
+        });
+
+        // 날짜 단위 변경 시
+        $("#month-gap").on("click", "a", function(){
+            let dateTo = $("#dateTo").val();
+            let gap = Number($(this).attr("val"));
+            let dateFrom = new Date(dateTo);
+            dateFrom = new Date(dateFrom.setMonth(dateFrom.getMonth()-gap));
+            $("#dateFrom").val(strDate(dateFrom));
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getProfitListMobile();
+            } else {
+                getProfitList();
+            }
+        });
+
+        // 날짜 직접 선택 시
+        $("#search-wrap").on("change", ".date", function(){
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+            if(dateTo < dateFrom) {
+                toastModal("조회 시작 날짜가 종료 날짜를 넘길 수 없습니다.");
+                $("#dateFrom").val(dateTo);
+            }
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getProfitListMobile();
+            } else {
+                getProfitList();
+            }
+        });
+
+        function strDate(date) {
+            let year = date.getFullYear() + "";
+            let month = (date.getMonth()+1) + "";
+            let day = date.getDate() + "";
+
+            if(month.length==1) {
+                month = "0" + month;
+            }
+            if(day.length==1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
+        }
+
+        // 페이지 클릭 시
+        $("#pagination").on("click", "a", function(){
+            page = $(this).attr("gopage");
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getProfitListMobile();
+            } else {
+                getProfitList();
+            }
+        });
+
+        window.onresize = function(event){
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getProfitListMobile();
+            }else {
+                page = Math.round(page/2);
+                getProfitList();
+            }
+        };
+
+        // 정렬
+        $("#profitListThead").on("click", ".sort", function() {
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                sort="createdAt,desc";
+                getProfitListMobile();
+            } else {
+                getProfitList();
+            }
+        });
+
+    </script>
+
+</div>
+
+</html>

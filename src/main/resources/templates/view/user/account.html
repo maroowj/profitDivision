@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <div class="auto profitList-wrap" style="padding-top:40px;">
+    <div class="subTitle2">
+        <p class="title">천인방 수익결산표</p>
+    </div>
+
+    <div class="paging">
+        <a class="cupoint arrow page-arrow2 page-arrow arrow-prev">이전 게시물 목록</a>
+        <input type="text" style="margin-right:5px; text-align: center;" id="year">
+        <a class=" cupoint arrow page-arrow3 page-arrow arrow-next pc-mr05">다음 게시물 목록</a>
+    </div>
+
+
+
+    <!--PC버전-->
+    <div class="profitList page-tableBox " style="overflow-x: scroll;">
+        <table class="page-table1" style="min-width: 800px;">
+            <thead>
+            <tr>
+                <th rowspan=2 style="width: 200px !important;">과목</th>
+                <th>제1기 1분기</th>
+                <th>제1기 2분기</th>
+                <th>제1기 3분기</th>
+                <th>제1기 4분기</th>
+            </tr>
+            <tr>
+                <th class="year1">년 3월말</th>
+                <th class="year2">년 6월말</th>
+                <th class="year3">년 9월말</th>
+                <th class="year4">년 12월말</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th style="text-align: left; padding-left:10px; font-size: 16px; font-weight: 600;">▶ 투자계좌</th>
+                <td colspan=4 id="1-1-1" class="contents"></td>
+            </tr>
+            <tr>
+                <th>기초.투자투입금액</th>
+                <td id="1-2-1" class="contents"></td>
+                <td id="1-2-2" class="contents"></td>
+                <td id="1-2-3" class="contents"></td>
+                <td id="1-2-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>기말.투자평가금액</th>
+                <td id="1-3-1" class="contents"></td>
+                <td id="1-3-2" class="contents"></td>
+                <td id="1-3-3" class="contents"></td>
+                <td id="1-3-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>기말.투자평가손익</th>
+                <td id="1-4-1" class="contents"></td>
+                <td id="1-4-2" class="contents"></td>
+                <td id="1-4-3" class="contents"></td>
+                <td id="1-4-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>기말.투자수익률(%)</th>
+                <td id="1-5-1" class="contents"></td>
+                <td id="1-5-2" class="contents"></td>
+                <td id="1-5-3" class="contents"></td>
+                <td id="1-5-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="font-weight: bold;">예수금 총액</th>
+                <td id="1-6-1" class="contents"></td>
+                <td id="1-6-2" class="contents"></td>
+                <td id="1-6-3" class="contents"></td>
+                <td id="1-6-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="font-weight: bold;">배당금 총액</th>
+                <td id="1-7-1" class="contents"></td>
+                <td id="1-7-2" class="contents"></td>
+                <td id="1-7-3" class="contents"></td>
+                <td id="1-7-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="font-weight: bold;">운용비 총액</th>
+                <td id="1-8-1" class="contents"></td>
+                <td id="1-8-2" class="contents"></td>
+                <td id="1-8-3" class="contents"></td>
+                <td id="1-8-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="color:red; font-weight: bold;">이월금액(이익잉여금포함)</th>
+                <td id="1-9-1" class="contents"></td>
+                <td id="1-9-2" class="contents"></td>
+                <td id="1-9-3" class="contents"></td>
+                <td id="1-9-4" class="contents"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="profitList page-tableBox " style="overflow-x: scroll;">
+        <table class="page-table1" style="min-width: 800px;">
+            <thead>
+            <tr>
+                <th rowspan=2 style="width: 200px !important;">과목</th>
+                <th>제1기 1분기</th>
+                <th>제1기 2분기</th>
+                <th>제1기 3분기</th>
+                <th>제1기 4분기</th>
+            </tr>
+            <tr>
+                <th class="year1">년 3월말</th>
+                <th class="year2">년 6월말</th>
+                <th class="year3">년 9월말</th>
+                <th class="year4">년 12월말</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th style="text-align: left; padding-left:10px; font-size: 16px; font-weight: 600;">▶ 부채</th>
+                <td colspan=4 id="2-1-1" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅰ. 유동부채</th>
+                <td id="2-2-1" class="contents"></td>
+                <td id="2-2-2" class="contents"></td>
+                <td id="2-2-3" class="contents"></td>
+                <td id="2-2-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="color:red;">Ⅱ. 고정부채</th>
+                <td id="2-3-1" class="contents"></td>
+                <td id="2-3-2" class="contents"></td>
+                <td id="2-3-3" class="contents"></td>
+                <td id="2-3-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅲ. 선수금</th>
+                <td id="2-4-1" class="contents"></td>
+                <td id="2-4-2" class="contents"></td>
+                <td id="2-4-3" class="contents"></td>
+                <td id="2-4-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅳ. 차입금 및 사채</th>
+                <td id="2-5-1" class="contents"></td>
+                <td id="2-5-2" class="contents"></td>
+                <td id="2-5-3" class="contents"></td>
+                <td id="2-5-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅴ. 기타지급채무</th>
+                <td id="2-6-1" class="contents"></td>
+                <td id="2-6-2" class="contents"></td>
+                <td id="2-6-3" class="contents"></td>
+                <td id="2-6-4" class="contents"></td>
+            </tr>
+            <tr class="bg-gray">
+                <th style="font-weight: bold;">부 채 총 계(부채비율)</th>
+                <td id="2-7-1" class="contents"></td>
+                <td id="2-7-2" class="contents"></td>
+                <td id="2-7-3" class="contents"></td>
+                <td id="2-7-4" class="contents"></td>
+            </tr>
+
+
+            <tr>
+                <th style="text-align: left; padding-left:10px; font-size: 16px; font-weight: 600;">▶ 자본</th>
+                <td colspan=4 id="2-8-1" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅰ. 자본금</th>
+                <td id="2-9-1" class="contents"></td>
+                <td id="2-9-2" class="contents"></td>
+                <td id="2-9-3" class="contents"></td>
+                <td id="2-9-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="color:red;">Ⅱ. 불입자본(후원금,회비)</th>
+                <td id="2-10-1" class="contents"></td>
+                <td id="2-10-2" class="contents"></td>
+                <td id="2-10-3" class="contents"></td>
+                <td id="2-10-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅲ. 기타자본구성요소</th>
+                <td id="2-11-1" class="contents"></td>
+                <td id="2-11-2" class="contents"></td>
+                <td id="2-11-3" class="contents"></td>
+                <td id="2-11-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅳ. 이익잉여금(결손)</th>
+                <td id="2-12-1" class="contents"></td>
+                <td id="2-12-2" class="contents"></td>
+                <td id="2-12-3" class="contents"></td>
+                <td id="2-12-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="color:red;">Ⅴ. 특별구성자본</th>
+                <td id="2-13-1" class="contents"></td>
+                <td id="2-13-2" class="contents"></td>
+                <td id="2-13-3" class="contents"></td>
+                <td id="2-13-4" class="contents"></td>
+            </tr>
+            <tr class="bg-gray">
+                <th style="font-weight: bold;">자 본 총 계(자본비율)</th>
+                <td id="2-14-1" class="contents"></td>
+                <td id="2-14-2" class="contents"></td>
+                <td id="2-14-3" class="contents"></td>
+                <td id="2-14-4" class="contents"></td>
+            </tr>
+            <tr class="bg-gray">
+                <th style="font-weight: bold;">부 채 및 자 본 총 계</th>
+                <td id="2-15-1" class="contents"></td>
+                <td id="2-15-2" class="contents"></td>
+                <td id="2-15-3" class="contents"></td>
+                <td id="2-15-4" class="contents"></td>
+            </tr>
+
+
+            <tr>
+                <th style="text-align: left; padding-left:10px; font-size: 16px; font-weight: 600;">▶ 자산</th>
+                <td colspan=4 id="2-16-1" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅰ. 유동자산</th>
+                <td id="2-17-1" class="contents"></td>
+                <td id="2-17-2" class="contents"></td>
+                <td id="2-17-3" class="contents"></td>
+                <td id="2-17-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>&nbsp;&nbsp;&nbsp;예수금총액</th>
+                <td id="2-18-1" class="contents"></td>
+                <td id="2-18-2" class="contents"></td>
+                <td id="2-18-3" class="contents"></td>
+                <td id="2-18-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>&nbsp;&nbsp;&nbsp;이익잉여금(결손금)</th>
+                <td id="2-19-1" class="contents"></td>
+                <td id="2-19-2" class="contents"></td>
+                <td id="2-19-3" class="contents"></td>
+                <td id="2-19-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>&nbsp;&nbsp;&nbsp;현금및현금성자산</th>
+                <td id="2-20-1" class="contents"></td>
+                <td id="2-20-2" class="contents"></td>
+                <td id="2-20-3" class="contents"></td>
+                <td id="2-20-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th style="color:red;">Ⅱ. 고정자산</th>
+                <td id="2-21-1" class="contents"></td>
+                <td id="2-21-2" class="contents"></td>
+                <td id="2-21-3" class="contents"></td>
+                <td id="2-21-4" class="contents"></td>
+            </tr>
+            <tr>
+                <th>Ⅲ. 기타 유동자산</th>
+                <td id="2-22-1" class="contents"></td>
+                <td id="2-22-2" class="contents"></td>
+                <td id="2-22-3" class="contents"></td>
+                <td id="2-22-4" class="contents"></td>
+            </tr>
+            <tr class="bg-gray">
+                <th style="font-weight: bold;">자산총계</th>
+                <td id="2-23-1" class="contents"></td>
+                <td id="2-23-2" class="contents"></td>
+                <td id="2-23-3" class="contents"></td>
+                <td id="2-23-4" class="contents"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <script>
+        let year = new Date().getFullYear();
+        setYear(year);
+        getAccountBook();
+
+        $(".arrow").on("click", function(){
+            if($(this).hasClass("arrow-prev")) {
+                year = year-1;
+                setYear(year);
+                getAccountBook();
+            }else {
+                year = year+1;
+                setYear(year);
+                getAccountBook();
+            }
+        });
+
+        function getAccountBook() {
+            let year = $("#year").val();
+            $.ajax({
+                type:"get",
+                url:"/api/common/accounts/"+year,
+                async:false,
+                success:function(data) {
+                    let contents = data.contents;
+                    if(contents!=null) {
+                        for(let key in contents) {
+                            $("#"+key).text(contents[key]);
+                        }
+                    }else {
+                        $(".contents").text("");
+                    }
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+
+        function setYear(year) {
+            $("#year").val(year);
+            $(".year1").text(year+"년 3월말");
+            $(".year2").text(year+"년 6월말");
+            $(".year3").text(year+"년 9월말");
+            $(".year4").text(year+"년 12월말");
+        }
+    </script>
+</div>
+</html>

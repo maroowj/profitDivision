@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+
+    <div class="auto board-wrap">
+        <div class="subP-title">
+            <p class="title">게시판</p>
+            <ul class="menuPath">
+                <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="/board">게시판</a></li>
+            </ul>
+        </div>
+
+        <!--PC버전-->
+        <div class="boardView-wrap page-tableBox">
+            <table class="page-table1">
+                <colgroup>
+                    <col style = "width:50%">
+                    <col style = "width:50%">
+                </colgroup>
+
+                <thead>
+                <tr>
+                    <th id="title" class="boardView-title" colspan="2"><span></span></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td class="file">
+                        <p id="attach" class="info">
+                            <!--<span class="title">첨부파일</span> <a href="" id="link" download>자료.hwp</a>-->
+                        </p>
+                    </td>
+                    <td class="date">
+                        <p id="createdAt" class="info"><span class="title">작성일</span></p>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="2" class="text-box">
+                        <p id="contents">
+                            <!--포인트 수익배분 일반 게시판내용입니다.<br>
+                            포인트 수익배분 일반 게시판내용입니다. 포인트 수익배분 일반 게시판내용입니다. 포인트 수익배분 일반 게시판내용입니다.<br>
+                            포인트 수익배분 일반 게시판내용입니다.<br>
+                            포인트 수익배분 일반 게시판내용입니다.포인트 수익배분 일반 게시판내용입니다.-->
+                        </p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+
+        <!--M 768px ~ -->
+        <!-- <ul class="boardList m768-wrap">
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+             <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판 포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+             <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+            <li>
+               <a href="./board_view.html">
+                    <div class="text-wrap">
+                        <p class="date">2022-08-10</p>
+                        <p class="notice notice1">공지</p>
+                    </div>
+                    <p class="title">포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판포인트 수익배분 공지사항 게시판</p>
+                </a>
+            </li>
+        </ul>-->
+
+        <div class="page-btn">
+            <a href="/board" class="list-btn comm-btn yellow-btn">목록</a>
+        </div>
+
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <script>
+        const urlStr = window.location;
+        const url = new URL(urlStr);
+        const urlParams = url.searchParams;
+        const seq = urlParams.get('no');
+
+        getBoardRead(seq);
+
+        function getBoardRead(seq) {
+            $.ajax({
+                type:"get",
+                url:"/api/common/board/"+seq,
+                success:function(data) {
+                    let title = '<span>['+data.type+']</span>'+data.title;
+                    $("#title").html(title);
+                    let createdAt = '<span class="title">작성일</span> '+ data.createdAt.substring(0, 10);
+                    $("#createdAt").html(createdAt);
+                    let contents = data.contents;
+                    contents=contents.replace("<", "&lt;");
+                    contents=contents.replace(">", "&gt;");
+                    contents=contents.replace(/(?:\r\n|\r|\n)/g,'<br/>');
+                    $("#contents").html(contents);
+
+                    if(data.attachName!=null && data.attachName!='') {
+                        let url = data.attachUrl.split('files');
+                        url = '/files' + url[1];
+                        let attach = '<span class="title">첨부파일</span> <a href="'+url+'" id="link" download="'+data.attachName+'">'+data.attachName+'</a>';
+                        $("#attach").html(attach);
+                    }else {
+                        let attach = '<span class="title">첨부파일</span> -';
+                        $("#attach").html(attach);
+                    }
+
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+    </script>
+</div>
+
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+
+<th:block th:fragment="topMenuFragment">
+    <!--왼쪽 메뉴-->
+    <div class="admin-leftMenu-wrap">
+        <div class="adminInfo-wrap">
+            <div id="adminInfo" class="img-wrap">
+                <a class="img"><img src="../images/none_userIme.jpg" class="profileImage" alt="관리자"></a>
+
+                <div class="adminInfo">
+                    <p class="name"></p>
+                    <p class="level"></p>
+                </div>
+            </div>
+
+            <a class="adminUpdate-btn cupoint"><span></span></a>
+
+        </div>
+
+        <!--메뉴-->
+        <ul class="navList">
+            <li id="memberDep" class="hasDep2">
+                <a class="cupoint">
+                    <i class="fa-solid fa-user"></i><span>회원관리</span>
+                </a>
+                <ul class="depth2">
+                    <li class="depTitle">회원관리</li>
+                    <li class="secondDep"><a href="/management/managers">관리자 관리</a></li>
+                    <li class="secondDep"><a href="/management/members">회원 리스트</a></li>
+                    <li class="secondDep"><a href="/management/waiting">가입대기 리스트</a></li>
+                    <li class="secondDep"><a href="/management/dues">회비입금 확인</a></li>
+                </ul>
+            </li>
+
+            <li id="investmentDep" class="secondDep"><a href="/management/investment"><i
+                    class="fa-solid fa-chart-simple"></i><span>투자관리</span></a></li>
+
+            <li id="profitDep" class="hasDep2">
+                <a class="cupoint">
+                    <i class="fa fa-solid fa-coins"></i><span>수익관리</span>
+                </a>
+                <ul class="depth2">
+                    <li class="depTitle">수익관리</li>
+                    <li class="secondDep"><a href="/management/profits">수익 리스트</a></li>
+                    <li class="secondDep"><a href="/management/withdrawals">출금 리스트</a></li>
+                    <li class="secondDep"><a href="/management/accounts">수익 결산표</a></li>
+                </ul>
+            </li>
+
+            <li id="interestDep" class="secondDep"><a href="/management/interest"><i
+                    class="fa-solid fa-receipt"></i><span>부대비용 관리</span></a></li>
+
+            <li id="reserveDep" class="hasDep2">
+                <a class="cupoint">
+                    <i class="fa-solid fa-ticket-simple"></i><span>적립금 관리</span>
+                </a>
+                <ul class="depth2">
+                    <li class="depTitle">적립금 관리</li>
+                    <li class="secondDep"><a href="/management/reserves-manage">적립금 관리</a></li>
+                    <li class="secondDep"><a href="/management/reserves-list">적립금 리스트</a></li>
+                </ul>
+            </li>
+
+            <li id="popupDep" class="secondDep"><a href="/management/popup"><i
+                    class="fa-solid fa-clone"></i><span>팝업관리</span></a></li>
+
+            <li id="boardDep" class="hasDep2">
+                <a class="cupoint">
+                    <i class="fa-solid fa-ticket-simple"></i><span>게시판 관리</span>
+                </a>
+                <ul class="depth2">
+                    <li class="depTitle">게시판 관리</li>
+                    <li class="secondDep"><a href="/management/notices">공지사항</a></li>
+                    <li class="secondDep"><a href="/management/board">게시판</a></li>
+                    <li class="secondDep"><a href="/management/faq">자주찾는질문</a></li>
+                </ul>
+            </li>
+        </ul>
+
+        <!--로그아웃 버튼-->
+        <a href="/management/logout" class="admin-logoutBtn gray-btn comm-btn"><i
+                class="fa-solid fa-power-off"></i><span>로그아웃</span></a>
+
+        <!--메뉴 접기 버튼-->
+        <a class="menuSize-btn cupoint"><i class="fa-solid fa-angles-left"></i></a>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/5f4b51f7f0.js" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
+    <!-- script START -->
+    <script>
+        let uri = window.location.pathname;
+        getBasic();
+        if (uri.includes("/management/managers") || uri.includes("/management/members") || uri.includes("/management/waiting") || uri.includes("/management/dues")) { // 회원관리
+            $(".hasDep2").removeClass("on");
+            $(".secondDep").removeClass("on");
+            $("#memberDep").addClass("on");
+            $("#memberDep .secondDep").each(function () {
+                let href = $(this).children().attr("href");
+                if (uri.includes(href)) {
+                    $(this).addClass("on");
+                    return false;
+                }
+            });
+        } else if (uri.includes("/management/investment")) { // 투자관리
+            $(".hasDep2").removeClass("on");
+            $(".secondDep").removeClass("on");
+            $("#investmentDep").addClass("on");
+        } else if (uri.includes("/management/profits") || uri.includes("/management/withdrawals") || uri.includes("/management/accounts")) { // 수익관리
+            $(".secondDep").removeClass("on");
+            $("#profitDep").addClass("on");
+            $("#profitDep .secondDep").each(function () {
+                let href = $(this).children().attr("href");
+                if (uri.includes(href)) {
+                    $(this).addClass("on");
+                    return false;
+                }
+            });
+        } else if (uri.includes("/management/interest")) { // 부대비용관리
+            $(".hasDep2").removeClass("on");
+            $(".secondDep").removeClass("on");
+            $("#interestDep").addClass("on");
+        } else if (uri.includes("/management/reserves-manage") || uri.includes("/management/reserves-list")) { // 적립금관리
+            $(".secondDep").removeClass("on");
+            $("#reserveDep").addClass("on");
+            $("#reserveDep .secondDep").each(function () {
+                let href = $(this).children().attr("href");
+                if (uri.includes(href)) {
+                    $(this).addClass("on");
+                    return false;
+                }
+            });
+        } else if (uri.includes("/management/popup")) { // 팝업관리
+            $(".hasDep2").removeClass("on");
+            $(".secondDep").removeClass("on");
+            $("#popupDep").addClass("on");
+        } else if (uri.includes("/management/notices") || uri.includes("/management/board") || uri.includes("/management/faq")) { // 게시판관리
+            $(".secondDep").removeClass("on");
+            $("#boardDep").addClass("on");
+            $("#boardDep .secondDep").each(function () {
+                let href = $(this).children().attr("href");
+                if (uri.includes(href)) {
+                    $(this).addClass("on");
+                    return false;
+                }
+            });
+        }
+
+
+        function getBasic(){
+            $.ajax({
+                type:"get",
+                url:"/api/admin/basic",
+                success:function(data) {
+                    console.log(data);
+                    if(data.profileImage!=null && data.profileImage!="") {
+                        $("#adminInfo").find(".profileImage").attr("src", data.profileImage);
+                    }else {
+                        $("#adminInfo").find(".profileImage").attr("src", "/images/none_userIme.jpg");
+                    }
+                    $("#adminInfo").find(".name").text(data.name);
+                    $("#adminInfo").find(".level").text(data.grade);
+                },
+                error: function (request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+    </script>
+    <!-- script END -->
+</th:block>
+</html>

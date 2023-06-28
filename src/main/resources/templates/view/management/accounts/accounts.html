@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="chorus" content="true"/>
+    <meta name="viewport" content="width=1200,user-scalable=yes">
+    <meta name="viewport"
+          content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <title>포인트 수익배분</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/font.css">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="../css/layout.css">
+    <link rel="stylesheet" href="../css/content.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+
+<body>
+<!--왼쪽 메뉴-->
+<div class="admin-leftMenu-wrap">
+
+    <div class="adminInfo-wrap">
+        <div class="img-wrap">
+            <a class="img"><img src="../images/none_userIme.jpg" alt="관리자"></a>
+
+            <div class="adminInfo">
+                <p class="name">관리자</p>
+                <p class="level">대표 관리자</p>
+            </div>
+        </div>
+
+        <a href="#" class="adminUpdate-btn"><span></span></a>
+
+    </div>
+
+    <!--메뉴-->
+    <ul class="navList">
+        <li class="hasDep2">
+            <a href="#">
+                <i class="fa-solid fa-user"></i><span>회원관리</span>
+            </a>
+            <ul class="depth2">
+                <li class="depTitle">회원관리</li>
+                <li class="on"><a href="/management/managers">관리자 관리</a></li>
+                <li><a href="/management/members">회원 리스트</a></li>
+                <li><a href="/management/waiting">가입대기 리스트</a></li>
+                <li><a href="/management/dues">회비입금 확인</a></li>
+            </ul>
+        </li>
+
+        <li><a href="/management/investment"><i class="fa-solid fa-chart-simple"></i><span>투자관리</span></a></li>
+
+        <li class="hasDep2 on">
+            <a href="#">
+                <i class="fa fa-solid fa-coins"></i><span>수익관리</span>
+            </a>
+            <ul class="depth2">
+                <li class="depTitle">수익관리</li>
+                <li><a href="/management/profits">수익 리스트</a></li>
+                <li><a href="/management/withdrawals">출금 리스트</a></li>
+                <li class="on"><a href="/management/accounts">출금 리스트</a></li>
+            </ul>
+        </li>
+
+        <li><a href="/management/interest"><i class="fa-solid fa-receipt"></i><span>부대비용 관리</span></a></li>
+
+        <li class="hasDep2">
+            <a href="#">
+                <i class="fa-solid fa-ticket-simple"></i><span>적립금 관리</span>
+            </a>
+            <ul class="depth2">
+                <li class="depTitle">적립금 관리</li>
+                <li><a href="/management/reserves-manage">적립금 관리</a></li>
+                <li><a href="/management/reserves-list">적립금 리스트</a></li>
+            </ul>
+        </li>
+
+        <li><a href="/management/popup"><i class="fa-solid fa-clone"></i><span>팝업관리</span></a></li>
+
+        <li class="hasDep2">
+            <a href="#">
+                <i class="fa-solid fa-ticket-simple"></i><span>게시판 관리</span>
+            </a>
+            <ul class="depth2">
+                <li class="depTitle">게시판 관리</li>
+                <li><a href="/management/notices">공지사항</a></li>
+                <li><a href="/management/faq">자주찾는질문</a></li>
+                <li><a href="#">외부 게시판</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <!--로그아웃 버튼-->
+    <a href="/management/logout" class="admin-logoutBtn gray-btn comm-btn"><i class="fa-solid fa-power-off"></i><span>로그아웃</span></a>
+
+    <!--메뉴 접기 버튼-->
+    <a href="#" class="menuSize-btn"><i class="fa-solid fa-angles-left"></i></a>
+</div>
+
+
+<!--컨텐츠 내용-->
+<div class="admin accountWrap">
+    <div class="pageTitle-wrap">
+        <h3 class="title">수익 결산표</h3>
+        <ul class="contentMenu">
+            <li><a href="/management">HOME</a></li>
+            <li><a href="/management/profits">수익관리</a></li>
+            <li><a href="">수익 결산표</a></li>
+        </ul>
+    </div>
+
+
+    <div class="dateWrap">
+        <div class="dateBox">
+            <p class="title"><span class="brown year"></span><span class="brown">년</span> 수익분배 결산</p>
+            <div class="btnWrap">
+                <a class="cupoint arrow arrow-prev mr05">이전연도</a>
+                <a class="cupoint arrow arrow-next">다음연도</a>
+            </div>
+        </div>
+        <a class="cupoint save-btn comm-btn yellow-btn" onclick="saveAccountBook();">저장하기</a>
+
+    </div>
+
+    <div class="accountTable mt20">
+        <div class="table-titleWrap">
+            <div class="titleBox">
+                <p class="title">기초출범자본</p>
+                <input type="text" class="contents" id="basic" placeholder="내용을 입력해주세요.">
+            </div>
+            <div class="detail">
+                <p class="text">(단위 : 만원)</p>
+            </div>
+        </div>
+
+        <!--기초출범자본-->
+        <div class="tableWrap scroll-style">
+            <table class="page-table2" style="width:100%;">
+                <colgroup>
+                    <col style="width:28%">
+                    <col style="width:18%">
+                    <col style="width:18%">
+                    <col style="width:18%">
+                    <col style="width:18%">
+
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>과목</th>
+                    <th><span class="year"></span>년 1분기</th>
+                    <th><span class="year"></span>년 2분기</th>
+                    <th><span class="year"></span>년 3분기</th>
+                    <th><span class="year"></span>년 4분기</th>
+
+                </tr>
+                <tr>
+                    <th>투자계좌</th>
+                    <td colspan="12">
+                        <input type="text" placeholder="내용을 입력해주세요." class="contents" id="1-1-1">
+                    </td>
+                </tr>
+                <tr>
+                    <th>기초.투자투입금액</th>
+                    <td><input type="text" class="contents" id="1-2-1"></td>
+                    <td><input type="text" class="contents" id="1-2-2"></td>
+                    <td><input type="text" class="contents" id="1-2-3"></td>
+                    <td><input type="text" class="contents" id="1-2-4"></td>
+                </tr>
+                <tr>
+                    <th>기말.투자평가금액</th>
+                    <td><input type="text" class="contents" id="1-3-1"></td>
+                    <td><input type="text" class="contents" id="1-3-2"></td>
+                    <td><input type="text" class="contents" id="1-3-3"></td>
+                    <td><input type="text" class="contents" id="1-3-4"></td>
+                </tr>
+                <tr>
+                    <th>기말.투자평가손익</th>
+                    <td><input type="text" class="contents" id="1-4-1"></td>
+                    <td><input type="text" class="contents" id="1-4-2"></td>
+                    <td><input type="text" class="contents" id="1-4-3"></td>
+                    <td><input type="text" class="contents" id="1-4-4"></td>
+                </tr>
+                <tr>
+                    <th>기말.투자수익률(%)</th>
+                    <td><input type="text" class="contents" id="1-5-1"></td>
+                    <td><input type="text" class="contents" id="1-5-2"></td>
+                    <td><input type="text" class="contents" id="1-5-3"></td>
+                    <td><input type="text" class="contents" id="1-5-4"></td>
+                </tr>
+                <tr>
+                    <th class="bold brown">예수금 총액</th>
+                    <td><input type="text" id="1-6-1" class="contents"></td>
+                    <td><input type="text" id="1-6-2" class="contents"></td>
+                    <td><input type="text" id="1-6-3" class="contents"></td>
+                    <td><input type="text" id="1-6-4" class="contents"></td>
+
+                </tr>
+                <tr>
+                    <th class="bold brown">배당금 총액</th>
+                    <td><input type="text" id="1-7-1" class="contents"></td>
+                    <td><input type="text" id="1-7-2" class="contents"></td>
+                    <td><input type="text" id="1-7-3" class="contents"></td>
+                    <td><input type="text" id="1-7-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th class="bold brown">운용비 총액</th>
+                    <td><input type="text" id="1-8-1" class="contents"></td>
+                    <td><input type="text" id="1-8-2" class="contents"></td>
+                    <td><input type="text" id="1-8-3" class="contents"></td>
+                    <td><input type="text" id="1-8-4" class="contents"></td>
+                </tr>
+                <tr class="total">
+                    <th class="bold brown">이월금액 (이익잉여금포함)</th>
+                    <td><input type="text" id="1-9-1" class="contents"></td>
+                    <td><input type="text" id="1-9-2" class="contents"></td>
+                    <td><input type="text" id="1-9-3" class="contents"></td>
+                    <td><input type="text" id="1-9-4" class="contents"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+    <!--부채 및 자본, 자산-->
+    <div class="accountTable mt20">
+
+        <div class="tableWrap scroll-style">
+            <table class="page-table2" style="width:100%;">
+                <colgroup>
+                    <col style="width:28%">
+                    <col style="width:18%">
+                    <col style="width:18%">
+                    <col style="width:18%">
+                    <col style="width:18%">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <th>과목</th>
+                    <th><span class="year"></span>년 1분기</th>
+                    <th><span class="year"></span>년 2분기</th>
+                    <th><span class="year"></span>년 3분기</th>
+                    <th><span class="year"></span>년 4분기</th>
+                </tr>
+                <tr>
+                    <th>부채</th>
+                    <td colspan="12">
+                        <input type="text" placeholder="내용을 입력해주세요." id="2-1-1" class="contents">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ⅰ. 유동부채</th>
+                    <td><input type="text" id="2-2-1" class="contents"></td>
+                    <td><input type="text" id="2-2-2" class="contents"></td>
+                    <td><input type="text" id="2-2-3" class="contents"></td>
+                    <td><input type="text" id="2-2-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th class="bold brown">Ⅱ. 고정부채</th>
+                    <td><input type="text" id="2-3-1" class="contents"></td>
+                    <td><input type="text" id="2-3-2" class="contents"></td>
+                    <td><input type="text" id="2-3-3" class="contents"></td>
+                    <td><input type="text" id="2-3-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>Ⅲ. 선수금</th>
+                    <td><input type="text" id="2-4-1" class="contents"></td>
+                    <td><input type="text" id="2-4-2" class="contents"></td>
+                    <td><input type="text" id="2-4-3" class="contents"></td>
+                    <td><input type="text" id="2-4-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>Ⅳ. 차입금 및 사채</th>
+                    <td><input type="text" id="2-5-1" class="contents"></td>
+                    <td><input type="text" id="2-5-2" class="contents"></td>
+                    <td><input type="text" id="2-5-3" class="contents"></td>
+                    <td><input type="text" id="2-5-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>Ⅴ. 기타지급채무</th>
+                    <td><input type="text" id="2-6-1" class="contents"></td>
+                    <td><input type="text" id="2-6-2" class="contents"></td>
+                    <td><input type="text" id="2-6-3" class="contents"></td>
+                    <td><input type="text" id="2-6-4" class="contents"></td>
+                </tr>
+                <tr class="total">
+                    <th class="bold brown">부채총계(부채비율)</th>
+                    <td><input type="text" id="2-7-1" class="contents"></td>
+                    <td><input type="text" id="2-7-2" class="contents"></td>
+                    <td><input type="text" id="2-7-3" class="contents"></td>
+                    <td><input type="text" id="2-7-4" class="contents"></td>
+                </tr>
+                <tr style="border-top:5px solid #e7e7e7">
+                    <th>자본</th>
+                    <td colspan="12">
+                        <input type="text" placeholder="내용을 입력해주세요." id="2-8-1" class="contents">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ⅰ. 자본금</th>
+                    <td><input type="text" id="2-9-1" class="contents"></td>
+                    <td><input type="text" id="2-9-2" class="contents"></td>
+                    <td><input type="text" id="2-9-3" class="contents"></td>
+                    <td><input type="text" id="2-9-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th class="bold brown">Ⅱ. 불입자본(후원금,회비)</th>
+                    <td><input type="text" id="2-10-1" class="contents"></td>
+                    <td><input type="text" id="2-10-2" class="contents"></td>
+                    <td><input type="text" id="2-10-3" class="contents"></td>
+                    <td><input type="text" id="2-10-4" class="contents"></td>
+
+                </tr>
+                <tr>
+                    <th>Ⅲ. 기타자본구성요소</th>
+                    <td><input type="text" id="2-11-1" class="contents"></td>
+                    <td><input type="text" id="2-11-2" class="contents"></td>
+                    <td><input type="text" id="2-11-3" class="contents"></td>
+                    <td><input type="text" id="2-11-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>Ⅳ. 이익잉여금(결손</th>
+                    <td><input type="text" id="2-12-1" class="contents"></td>
+                    <td><input type="text" id="2-12-2" class="contents"></td>
+                    <td><input type="text" id="2-12-3" class="contents"></td>
+                    <td><input type="text" id="2-12-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th class="bold brown">Ⅴ. 특별구성자본</th>
+                    <td><input type="text" id="2-13-1" class="contents"></td>
+                    <td><input type="text" id="2-13-2" class="contents"></td>
+                    <td><input type="text" id="2-13-3" class="contents"></td>
+                    <td><input type="text" id="2-13-4" class="contents"></td>
+                </tr>
+                <tr class="total">
+                    <th class="bold brown">자본총계(자본비율)</th>
+                    <td><input type="text" id="2-14-1" class="contents"></td>
+                    <td><input type="text" id="2-14-2" class="contents"></td>
+                    <td><input type="text" id="2-14-3" class="contents"></td>
+                    <td><input type="text" id="2-14-4" class="contents"></td>
+                </tr>
+                <tr class="total">
+                    <th class="bold brown">부채 및 자본 총계</th>
+                    <td><input type="text" id="2-15-1" class="contents"></td>
+                    <td><input type="text" id="2-15-2" class="contents"></td>
+                    <td><input type="text" id="2-15-3" class="contents"></td>
+                    <td><input type="text" id="2-15-4" class="contents"></td>
+                </tr>
+
+                <tr style="border-top:5px solid #e7e7e7">
+                    <th>자산</th>
+                    <td colspan="12">
+                        <input type="text" placeholder="내용을 입력해주세요." id="2-16-1" class="contents">
+                    </td>
+                </tr>
+                <tr>
+                    <th>Ⅰ. 유동자산</th>
+                    <td><input type="text" id="2-17-1" class="contents"></td>
+                    <td><input type="text" id="2-17-2" class="contents"></td>
+                    <td><input type="text" id="2-17-3" class="contents"></td>
+                    <td><input type="text" id="2-17-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>예수금총액</th>
+                    <td><input type="text" id="2-18-1" class="contents"></td>
+                    <td><input type="text" id="2-18-2" class="contents"></td>
+                    <td><input type="text" id="2-18-3" class="contents"></td>
+                    <td><input type="text" id="2-18-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>이익잉여금(결손금)</th>
+                    <td><input type="text" id="2-19-1" class="contents"></td>
+                    <td><input type="text" id="2-19-2" class="contents"></td>
+                    <td><input type="text" id="2-19-3" class="contents"></td>
+                    <td><input type="text" id="2-19-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>현금및현금성자산</th>
+                    <td><input type="text" id="2-20-1" class="contents"></td>
+                    <td><input type="text" id="2-20-2" class="contents"></td>
+                    <td><input type="text" id="2-20-3" class="contents"></td>
+                    <td><input type="text" id="2-20-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th class="bold brown">Ⅱ. 고정자산</th>
+                    <td><input type="text" id="2-21-1" class="contents"></td>
+                    <td><input type="text" id="2-21-2" class="contents"></td>
+                    <td><input type="text" id="2-21-3" class="contents"></td>
+                    <td><input type="text" id="2-21-4" class="contents"></td>
+                </tr>
+                <tr>
+                    <th>Ⅲ. 기타 유동자산</th>
+                    <td><input type="text" id="2-22-1" class="contents"></td>
+                    <td><input type="text" id="2-22-2" class="contents"></td>
+                    <td><input type="text" id="2-22-3" class="contents"></td>
+                    <td><input type="text" id="2-22-4" class="contents"></td>
+                </tr>
+
+                <tr class="total">
+                    <th class="bold brown">자산총계</th>
+                    <td><input type="text" id="2-23-1" class="contents"></td>
+                    <td><input type="text" id="2-23-2" class="contents"></td>
+                    <td><input type="text" id="2-23-3" class="contents"></td>
+                    <td><input type="text" id="2-23-4" class="contents"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://kit.fontawesome.com/5f4b51f7f0.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
+
+<script src="../js/script.js"></script>
+<script src="../js/admin.js"></script>
+<script src="../js/dev.js"></script>
+
+
+<script>
+    let today = new Date();
+    let year = today.getFullYear();
+    $(".year").text(year);
+    getAccountBook(year);
+
+    $(".arrow").on("click", function(){
+        if($(this).hasClass("arrow-prev")) {
+            year = year-1;
+            $(".year").text(year);
+            getAccountBook(year);
+        }else {
+            year = year+1;
+            /*let thisYear = new Date().getFullYear();
+            if(year>thisYear) {
+                toastModal("조회")
+                year = thisYear;
+            }*/
+            $(".year").text(year);
+            getAccountBook(year);
+        }
+    });
+
+    function getAccountBook(year) {
+        $.ajax({
+            type:"get",
+            url:"/api/admin/accounts/"+year,
+            success:function(data) {
+                let contents = data.contents;
+                if(contents!=null) {
+                    for(let key in contents) {
+                        $("#"+key).val(contents[key]);
+                    }
+                }else {
+                    $(".contents").val("");
+                }
+            },
+            error: function (request, status, error) {
+                console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+            }
+        });
+    }
+
+    function saveAccountBook() {
+        if(!confirm(year+"년 결산 내역을 저장하시겠습니까?")) return;
+        let objContents = new Object();
+        $(".contents").each(function(){
+            let key = $(this).attr("id");
+            let value = $(this).val();
+            objContents[key] = value;
+        });
+
+        $.ajax({
+            type:"post",
+            url:"/api/admin/accounts",
+            contentType:"application/json",
+            data:JSON.stringify({
+                "year":year,
+                "contents":objContents
+            }),
+            success:function(){
+                toastModal("결산 내역이 저장되었습니다.");
+                setTimeout(() => location.reload(), 1000);
+            },
+            error: function (request, status, error) {
+                console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+            }
+        });
+    }
+
+</script>
+
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

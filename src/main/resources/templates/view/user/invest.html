@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <div class="auto invent-wrap">
+        <div class="subP-title">
+            <p class="title">투자하기</p>
+            <ul class="menuPath">
+                <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                <li><a href="">투자하기</a></li>
+            </ul>
+        </div>
+
+        <div class="infoText-wrap">
+            <p class="text">
+                ※ <span class="brown strong">입금 후 미요청 시 투자 확인이 미처리될 수 있으니 투자 확인 요청을 해주시기 바랍니다.</span> 투자 내역은 납부 확인 요청 이후 약 2일 ~ 5일 후 반영됩니다.<br>
+                ※ <span class="brown strong">이자율은 투자금액 확인일에 따라 반영</span>되며, 이자율은 이전 월 말일까지의 총금액으로 계산됩니다.<br>
+                ※ 예금주 : 관리자 <br>
+                ※ 납부계좌 : 신한은행 000-000-000000
+            </p>
+            <p class="text">※문의 : 000-000-0000</p>
+        </div>
+
+
+
+        <div class="inventList-wrap">
+            <div class="subTitle2">
+                <p class="title">투자 내역</p>
+                <div class="btn-wrap">
+                    <a class="cupoint yellow-btn invent-btn comm-btn">투자 확인 요청</a>
+                </div>
+            </div>
+
+
+
+            <div id="search-wrap" class="search-wrap">
+                <input type="date" id="dateFrom" class="date">
+                <span>~</span>
+                <input type="date" id="dateTo" class="date">
+
+                <ul id="month-gap" class="period-wrap">
+                    <li><a class="cupoint" val=1>1개월</a></li>
+                    <li class="actived"><a class="cupoint" val="3">3개월</a></li>
+                    <li><a class="cupoint" val="6">6개월</a></li>
+                    <li><a class="cupoint" val="12">1년</a></li>
+                </ul>
+            </div>
+
+            <!--PC버전-->
+            <div class="inventList page-tableBox pc768-wrap">
+                <table class="page-table1">
+                    <colgroup>
+                        <col style = "width:10%">
+                        <col style = "width:*">
+                        <col style = "width:*">
+                        <col style = "width:*">
+                        <col style = "width:40%">
+                    </colgroup>
+
+                    <thead id="investListThead">
+                    <tr>
+                        <th>번호</th>
+                        <th><p class="sort" sort="createdAt">날짜</p></th>
+                        <th><p class="sort" sort="amount">납부금액</p></th>
+                        <th><p class="sort" sort="status">상태</p></th>
+                        <th>비고</th>
+                    </tr>
+                    </thead>
+                    <tbody id="investListTbody">
+                    <!--<tr>
+                        <td>50</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>49</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>48</td>
+                        <td>2022-07-10</td>
+                        <td>0P</td>
+                        <td><p class="disapproval stateText">미승인</p></td>
+                        <td>투자 금액 확인 불가</td>
+                    </tr>-->
+                    <!--<tr>
+                        <td>47</td>
+                        <td>2022-07-10</td>
+                        <td>0P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>46</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>45</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>44</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>43</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>42</td>
+                        <td>2022-07-10</td>
+                        <td>0P</td>
+                        <td><p class="disapproval stateText">미승인</p></td>
+                        <td>투자 금액 확인 불가</td>
+                    </tr>
+                    <tr>
+                        <td>41</td>
+                        <td>2022-07-10</td>
+                        <td>0P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>40</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>39</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>38</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>37</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>36</td>
+                        <td>2022-07-10</td>
+                        <td>0P</td>
+                        <td><p class="disapproval stateText">미승인</p></td>
+                        <td>투자 금액 확인 불가</td>
+                    </tr>
+                    <tr>
+                        <td>35</td>
+                        <td>2022-07-10</td>
+                        <td>0P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>34</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>33</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>32</td>
+                        <td>2022-08-10</td>
+                        <td>500,000P</td>
+                        <td><p class="approval stateText">승인</p></td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>31</td>
+                        <td>2022-08-09</td>
+                        <td>1,000,000P</td>
+                        <td><p class="stateText">확인요청</p></td>
+                        <td>-</td>
+                    </tr>-->
+                    </tbody>
+                </table>
+            </div>
+
+            <!--M 768px ~ -->
+            <ul id="mobileInvestList" class="inventList m768-wrap">
+                <!--<li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-08-10</p>
+                            <p class="price">500,000P</p>
+                        </div>
+                        <p class="approval stateText">승인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-08-10</p>
+                            <p class="price">500,000P</p>
+                        </div>
+                        <p class="stateText">확인요청</p>
+
+                    </div>
+
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-07-10</p>
+                            <p class="price">0P</p>
+                        </div>
+                        <p class="disapproval stateText">미승인</p>
+
+                    </div>
+                    <p class="disap-text">투자금액 확인 불가 투자금액 확인 불가 투자금액 확인 불가 투자금액 확인 불가 투자금액 확인 불가</p>
+                </li>-->
+                <!--<li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-07-10</p>
+                            <p class="price">500,000P</p>
+                        </div>
+                        <p class="stateText">확인요청</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-08-10</p>
+                            <p class="price">500,000P</p>
+                        </div>
+                        <p class="approval stateText">승인</p>
+
+                    </div>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-08-10</p>
+                            <p class="price">500,000P</p>
+                        </div>
+                        <p class="stateText">확인요청</p>
+
+                    </div>
+
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-07-10</p>
+                            <p class="price">0P</p>
+                        </div>
+                        <p class="disapproval stateText">미승인</p>
+
+                    </div>
+                    <p class="disap-text">투자금액 확인 불가</p>
+                </li>
+                <li>
+                    <div class="text-wrap">
+                        <div class="text">
+                            <p class="date">2022-07-10</p>
+                            <p class="price">500,000P</p>
+                        </div>
+                        <p class="stateText">확인요청</p>
+
+                    </div>
+                </li>-->
+            </ul>
+
+            <!--paging-->
+            <div id="pagination" class="paging">
+                <!--<a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+                <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+                <div class="page-num">
+                    <a href="#" class="actived">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                    <a href="#">8</a>
+                    <a href="#">9</a>
+                    <a href="#">10</a>
+                </div>
+                <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+                <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+            </div>
+
+        </div>
+    </div>
+
+    <div id="invest-modal" class="invent-modal modal">
+        <div class="modal-inner">
+            <div class="modal-title">
+                <p class="title">투자 확인 요청</p>
+                <a class="cupoint close-btn">닫기</a>
+            </div>
+
+            <div class="modal-text">
+                <div class="text">
+                    <p class="title">입금일 <span class="yellow">*</span></p>
+                    <input type="date" id="depositedAt">
+                </div>
+
+                <div class="text">
+                    <p class="title">투자금액 <span class="yellow">*</span></p>
+                    <input type="text" id="amount" placeholder="100,000" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+
+                <div class="userCheck">
+                    <label for="sameUser"><input type="checkbox" name="sameUser" id="sameUser" checked>회원정보와 동일</label>
+                </div>
+                <div class="text">
+                    <p class="title">예금주 <span class="yellow">*</span></p>
+                    <input type="text" id="name" disabled>
+                </div>
+
+                <div class="text">
+                    <p class="title">은행명 <span class="yellow">*</span></p>
+                    <select id="bankName">
+                        <option hidden selected>은행명</option>
+                        <option value="국민은행">국민은행</option>
+                        <option value="기업은행">기업은행</option>
+                        <option value="농협은행">농협은행</option>
+                        <option value="신한은행">신한은행</option>
+                        <option value="산업은행">산업은행</option>
+                        <option value="우리은행">우리은행</option>
+                        <option value="한국씨티은행">한국씨티은행</option>
+                        <option value="하나은행">하나은행</option>
+                        <option value="카카오뱅크">카카오뱅크</option>
+                    </select>
+                </div>
+                <div class="text">
+                    <p class="title">계좌번호 <span class="yellow">*</span></p>
+                    <input type="number" id="accountNumber" placeholder="숫자만 입력해주세요.">
+                </div>
+            </div>
+            <div class="modal-btn">
+                <a class="cupoint white-btn close-btn mr10">닫기</a>
+                <a id="request-btn" class="cupoint yellow-btn">투자 확인 요청하기</a>
+            </div>
+
+        </div>
+        <div class="modal-bg"></div>
+    </div>
+
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <!-- script START -->
+    <script>
+        let page=1;
+        let size= 20;
+        let sort = "createdAt,desc";
+        let today = new Date();
+        let preDay = new Date(new Date().setMonth(new Date().getMonth()-3));
+        $("#dateFrom").val(strDate(preDay));
+        $("#dateTo").val(strDate(today));
+
+        /** 모달 내 기능 START **/
+        $('.invent-btn').click(function(){
+            $("#invest-modal input").val('');
+            $("#sameUser").prop("checked", true);
+            $("#depositedAt").val(strDate(today));
+            getUserDetails();
+            $('.invent-modal').css('display','block');
+        });
+
+        // 요청하기 버튼 클릭 시
+        $("#request-btn").on("click", function(){
+            let depositedAt = $("#depositedAt").val();
+            let amount = uncomma($("#amount").val());
+            let bankName = $("#bankName").val();
+            let accountNumber = $("#accountNumber").val();
+
+            if(amount=="" || amount==null || amount==undefined || amount==0) {
+                toastModal("납부 금액을 확인해주세요.");
+                $("#amount").focus();
+                return;
+            }
+            if(accountNumber=="" || accountNumber==null || accountNumber==undefined || accountNumber==0) {
+                toastModal("계좌번호를 확인해주세요.");
+                $("#accountNumber").focus();
+                return;
+            }
+
+            if(!confirm("본인 명의의 계좌가 아닐 시 미승인 처리될 수 있습니다.\n입력한 금액과 계좌정보가 맞습니까?")) return;
+
+            $.ajax({
+                type:"post",
+                url:"/api/user/invest",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "amount":amount,
+                    "bankName":bankName,
+                    "accountNumber":accountNumber,
+                    "depositedAt":depositedAt,
+                    "name":$("#name").val()
+                }),
+                success:function() {
+                    toastModal("관리자에게 투자 확인을 요청했습니다.");
+                    setTimeout(() => location.reload(), 1000);
+                },
+                error:function(request, status, error) {
+                    toastModal("투자 확인 요청에 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        });
+
+        $("#depositedAt").on("change", function(){
+            let now = new Date();
+            now = strDate(now);
+            let paidAt = $(this).val();
+            if(now < paidAt) {
+                toastModal("입금일은 금일 이후로 선택할 수 없습니다.");
+                $("#depositedAt").val(now);
+            }
+        });
+
+        $("#amount").on("keyup", function(){
+            let amount = $(this).val();
+            $(this).val(fcomma(amount));
+        });
+
+        $("#bankName").on("change", function(){
+            $("#sameUser").prop("checked", false);
+        });
+
+        $("#accountNumber").on("keyup", function(){
+            $("#sameUser").prop("checked", false);
+        });
+
+        $("#sameUser").on("change", function(){
+            if($(this).prop("checked")) {
+                getUserDetails();
+            }
+        });
+
+        // 사용자 정보
+        function getUserDetails() {
+            $.ajax({
+                type:'get',
+                url:'/api/user/details',
+                async:false,
+                success:function(data){
+                    $("#name").val(data.name);
+                    $("#bankName").val(data.bankName);
+                    $("#accountNumber").val(data.accountNumber);
+                },
+                error:function(request, status, error) {
+                    toastModal("회원 정보를 불러오는데 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+        /** 모달 내 기능 END **/
+
+        if (matchMedia("screen and (max-width: 768px)").matches) {
+            getInvestListMobile();
+        } else {
+            getInvestList();
+        }
+
+        window.onresize = function(event){
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getInvestListMobile();
+            } else {
+                page = Math.round(page/2);
+                getInvestList();
+            }
+        };
+
+        // 투자 내역 목록
+        function getInvestList() {
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/invest",
+                data:{
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                async:false,
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list!=null && list.length!=0) {
+                        list.forEach(function(arg){
+                            let statusTag = '';
+                            if(arg.status==0) {
+                                statusTag = '<td><p class="stateText">확인요청</p></td>';
+                            }else if(arg.status==1) {
+                                statusTag = '<td><p class="approval stateText">승인</p></td>';
+                            }else if(arg.status==2) {
+                                statusTag = '<td><p class="disapproval stateText">미승인</p></td>';
+                            }
+
+                            let commentTag = '';
+                            if(arg.comment!=null && arg.comment!='') {
+                                commentTag = '<td>'+arg.comment+'</td>';
+                            }else {
+                                commentTag = "<td>-</td>";
+                            }
+
+                            tag += '<tr>' +
+                                    '<td>'+arg.rowNum+'</td>' +
+                                    '<td>'+arg.createdAt+'</td>' +
+                                    '<td>'+fcomma(arg.amount)+'P</td>' +
+                                    statusTag +
+                                    commentTag +
+                                    '</tr>';
+                        });
+                    }else {
+                        tag = '<tr><td colspan="5">투자 내역을 찾을 수 없습니다.</td></tr>';
+                    }
+                    fPagination2(data, page);
+                    $("#investListTbody").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 투자 내역 목록 모바일
+        function getInvestListMobile() {
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/invest",
+                data:{
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                async:false,
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list!=null && list.length!=0) {
+                        list.forEach(function(arg){
+                            let statusTag = '';
+                            if(arg.status==0) {
+                                statusTag = '<p class="stateText">확인요청</p>';
+                            }else if(arg.status==1) {
+                                statusTag = '<p class="approval stateText">승인</p>';
+                            }else if(arg.status==2) {
+                                statusTag = '<p class="disapproval stateText">미승인</p>';
+                            }
+
+                            let commentTag = '';
+                            if(arg.comment!=null && arg.comment!='') {
+                                commentTag = '<p>'+arg.comment+'</p>';
+                            }else {
+                                commentTag = '';
+                            }
+
+                            tag += '<li>' +
+                                    '<div class="text-wrap">' +
+                                    '<div class="text">' +
+                                    '<p class="date">'+arg.createdAt+'</p>' +
+                                    '<p class="price">'+fcomma(arg.amount)+'P</p>' +
+                                    '</div>' +
+                                    statusTag +
+                                    '</div>' +
+                                    commentTag +
+                                '</li>';
+                        });
+                    }else {
+                        tag = '<li style="text-align: center;">투자 내역을 찾을 수 없습니다.</li>';
+                    }
+                    fMobilePagination(data, page);
+                    $("#mobileInvestList").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 정렬
+        $("#investListThead").on("click", ".sort", function() {
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                sort="createdAt,desc";
+                getInvestListMobile();
+            } else {
+                getInvestList();
+            }
+        });
+
+        // 날짜 단위 변경 시
+        $("#month-gap").on("click", "a", function(){
+            let dateTo = $("#dateTo").val();
+            let gap = Number($(this).attr("val"));
+            let dateFrom = new Date(dateTo);
+            dateFrom = new Date(dateFrom.setMonth(dateFrom.getMonth()-gap));
+            $("#dateFrom").val(strDate(dateFrom));
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getInvestListMobile();
+            } else {
+                getInvestList();
+            }
+        });
+
+        // 날짜 직접 선택 시
+        $("#search-wrap").on("change", ".date", function(){
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+            if(dateTo < dateFrom) {
+                toastModal("조회 시작 날짜가 종료 날짜를 넘길 수 없습니다.");
+                $("#dateFrom").val(dateTo);
+            }
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getInvestListMobile();
+            } else {
+                getInvestList();
+            }
+        });
+
+
+        function strDate(date) {
+            let year = date.getFullYear() + "";
+            let month = (date.getMonth()+1) + "";
+            let day = date.getDate() + "";
+
+            if(month.length==1) {
+                month = "0" + month;
+            }
+            if(day.length==1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
+        }
+    </script>
+    <!-- script END -->
+</div>
+
+</html>

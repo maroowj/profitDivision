@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <div class="gray-bg">
+        <div class="auto">
+            <div class="login-wrap">
+                <h4>로그인</h4>
+
+                <div class="text-wrap">
+                    <input type="text" placeholder="아이디(이메일)" id="id">
+                </div>
+                <div class="text-wrap">
+                    <input type="password" placeholder="비밀번호(특수문자, 영문, 숫자 포함 8자 이상)" id="password">
+                </div>
+
+
+                <a id="btn-login" class="comm-btn login-btn yellow-btn cupoint">로그인</a>
+
+                <ul class="find-wrap">
+                    <li><a href="/find-id">아이디 찾기</a></li>
+                    <li><a href="/find-pw">비밀번호 찾기</a></li>
+                    <li><a href="/join">회원가입</a></li>
+                </ul>
+
+                <div class="sns-wrap">
+                    <p class="snsTitle">SNS 계정 로그인</p>
+
+                    <a class="cupoint kakao-btn"><i class="fa-solid fa-comment"></i> 카카오톡으로 로그인</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 스크립트 START -->
+    <script>
+        Kakao.init('47909a5c4961787419949b211ffbdfb6');
+
+
+        $("#password").on("keydown", function(e) {
+            if(e.keyCode==13) {
+                fnLogin();
+            }
+        });
+
+        $("#btn-login").on("click", function() {
+            fnLogin();
+        });
+
+        function fnLogin() {
+            let id = $("#id").val();
+            let password = $("#password").val();
+
+            $.ajax({
+                type: "post",
+                url: "/api/auth/user/login",
+                contentType: "application/json",
+                data: JSON.stringify({
+                    "id": id,
+                    "password": password
+                }),
+                success: function () {
+                    location.href = "/"
+                },
+                error: function (error) {
+                    alert("아이디와 비밀번호를 확인해주세요\n※카카오톡으로 가입하신 분은 카카오톡으로 로그인해주세요");
+                }
+            });
+
+        }
+
+        $(".kakao-btn").click(function() {
+            kakaoLogin();
+            // alert("카카오톡 인증 승인 대기중 입니다.\n 일반로그인을 이용해주세요.");
+        })
+
+        function kakaoLogin() {
+            Kakao.Auth.login({
+                scope: 'profile_nickname,profile_image,account_email',
+                success: function () {
+                    Kakao.API.request({
+                        url: '/v2/user/me',
+                        success: function (response) {
+                            console.log(response)
+                            let kakaoData = {
+                                email: response.kakao_account.email
+                            };
+                            location.href = '/login/kakao?provider=kakao' +
+                                '&sid=' + response.id +
+                                '&nickname=' + response.properties.nickname +
+                                '&thumbnailImageUrl=' + response.properties.thumbnail_image +
+                                '&email=' + kakaoData.email;
+                        },
+                        fail: function (error) {
+                            console.log(error);
+                        }
+                    })
+                },
+                fail: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+
+    </script>
+    <!-- 스크립트 END -->
+</div>
+
+</html>

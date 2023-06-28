@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <script>
+        function popupLogin(loginUrl) {
+            window.open(loginUrl, 'popupLogin', 'width=730,height=400,scrollbars=0,toolbar=0,menubar=no')
+            console.log(loginUrl)
+        }
+    </script>
+</head>
+<body>
+<button th:attr="onclick=|popupLogin('${kakaoLoginUri}')|">KakaoLogin</button><br />
+<button th:attr="onclick=|popupLogin('${googleLoginUri}')|">GoogleLogin</button><br />
+<button th:attr="onclick=|popupLogin('${naverLoginUri}')|">NaverLogin</button><br />
+<button th:attr="onclick=|popupLogin('${facebookLoginUri}')|">FacebookLogin</button><br />
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_admin}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_admin.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+    <!--컨텐츠 내용-->
+    <div class="admin">
+        <div class="pageTitle-wrap">
+            <h3 class="title">팝업관리</h3>
+            <ul class="contentMenu">
+                <li><a href="/management">HOME</a></li>
+                <li><a href="/management/popup">팝업관리</a></li>
+            </ul>
+        </div>
+
+        <div class="inventList page-tableBox pc768-wrap popupList">
+            <div class="wait-list-2">
+                <p>팝업 리스트</p>
+                <div class="search-wrap-admin search-wrap-userList">
+                    <button class="yellow-btn" onclick="location.href='/management/popup-new'">팝업 추가</button>
+                    <button class="white-btn" onclick="deletePopup();">팝업 삭제</button>
+                </div>
+            </div>
+            <div class="popup-search">
+                <div class="search">
+                    <select id="exposure" class="mr10">
+                        <option>전체</option>
+                        <option>노출</option>
+                        <option>미노출</option>
+                    </select>
+                    <select id="size" class="mr10">
+                        <option>10</option>
+                        <option>20</option>
+                        <option>30</option>
+                    </select>
+                </div>
+                <div class="searchBox">
+                    <input type="text" placeholder="제목으로 검색" id="query">
+                    <span id="search-icon" class="search-icon"></span>
+                </div>
+            </div>
+
+            <table class="page-table1 table-hover">
+                <colgroup>
+                    <col style = "width:5%">
+                    <col style = "width:*%">
+                    <col style = "width:30%">
+                    <col style = "width:*%">
+                    <col style = "width:10%">
+                </colgroup>
+
+                <thead id="popupListThead">
+                <tr>
+                    <th><input type="checkbox" id="all-chk"></th>
+                    <th><p class="sort" sort="mainTitle">제목</p></th>
+                    <th><p class="sort" sort="exposureStart">노출기간</p></th>
+                    <th><p class="sort" sort="createdAt">등록일</p></th>
+                    <th><p  class="sort" sort="exposure">노출상태</p></th>
+                </tr>
+                </thead>
+                <tbody id="popupListTbody">
+                <!--<tr>
+                    <td><input type="checkbox" class="chk"></td>
+                    <td class="info">팝업리스트 01</td>
+                    <td class="info">제한없음</td>
+                    <td class="info">2022-08-04</td>
+                    <td>
+                        <select class="mr10 w100 exposure">
+                            <option value=1>노출</option>
+                            <option value=0>미노출</option>
+                        </select>
+                    </td>
+                </tr>-->
+                </tbody>
+            </table>
+        </div>
+
+        <!--paging-->
+        <div id="pagination" class="paging">
+            <!--   <a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+               <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+               <div class="page-num">
+                   <a href="#" class="actived">1</a>
+                   <a href="#">2</a>
+                   <a href="#">3</a>
+                   <a href="#">4</a>
+                   <a href="#">5</a>
+                   <a href="#">6</a>
+                   <a href="#">7</a>
+                   <a href="#">8</a>
+                   <a href="#">9</a>
+                   <a href="#">10</a>
+               </div>
+               <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+               <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+        </div>
+    </div>
+
+
+    <script src="/js/script.js"></script>
+    <script src="/js/admin.js"></script>
+    <script src="/js/dev.js"></script>
+
+
+    <script>
+        let page = 1;
+        let sort = "createdAt,desc";
+
+        getPopupList();
+
+        $("#popupListTbody").on("change", ".exposure", function() {
+            let popupSeq = $(this).parent().parent().attr("seq");
+            let exposure = Number($(this).val());
+            let obj = {"exposure":exposure};
+
+            console.log(obj.exposure);
+            $.ajax({
+                type:"put",
+                url:"/api/admin/popup/exposure/"+popupSeq,
+                contentType:"application/json",
+                data:JSON.stringify(obj),
+                async:false,
+                success:function(data) {
+                    toastModal('노출 상태가 수정되었습니다.');
+                    setTimeout(() => getPopupList(), 700);
+                },
+                error: function (request, status, error) {
+                    toastModal('노출 상태 수정에 실패했습니다.');
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        });
+
+        $("#popupListTbody").on("click", ".info", function(){
+            let popupSeq = $(this).parent().attr("seq");
+            location.href='/management/popup-details?popupSeq='+popupSeq;
+        });
+
+        function getPopupList() {
+            let query = $("#query").val();
+            let size = $("#size").val();
+            let exposure = $("#exposure").val();
+
+            $.ajax({
+                type:'get',
+                url:'/api/admin/popup',
+                data: {
+                    'query':query,
+                    'exposure':exposure,
+                    'size':size,
+                    'page':page-1,
+                    'sort':sort
+                },
+                async:false,
+                success:function(data) {
+                    let list = data.content;
+                    let tag = '';
+                    if(list.length!=0) {
+                        list.forEach(function(arg) {
+                            let periodTag = '';
+                            if(arg.exposureStart != null) {
+                                periodTag = '<td class="info">'+arg.exposureStart+' ~ '+arg.exposureEnd+'</td>';
+                            }else {
+                                periodTag = '<td class="info">제한 없음</td>';
+                            }
+
+                            let oTag = '';
+                            if(arg.exposure==1) {
+                                oTag = '<option value=1 selectd>노출</option>' +
+                                    '<option value=0>미노출</option>';
+                            }else {
+                                oTag = '<option value=1>노출</option>' +
+                                    '<option value=0 selected>미노출</option>';
+                            }
+
+                            tag += '<tr seq="'+arg.popupSeq+'">' +
+                                '<td><input type="checkbox" class="chk"></td>' +
+                                '<td class="info">'+arg.mainTitle+'</td>' +
+                                periodTag +
+                                '<td class="info">'+arg.createdAt+'</td>' +
+                                '<td><select class="mr10 w100 exposure">' +
+                                oTag +
+                                '</select></td>' +
+                                '</tr>';
+                        });
+                        fPagination(data, page);
+                    }else {
+                        tag = '<tr><td colspan="5">팝업 목록이 존재하지 않습니다.</td></tr>';
+                    }
+                    $("#popupListTbody").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 체크박스 기능
+        $("#all-chk").on("click", function() {
+            if($(this).prop("checked")) {
+                $("#popupListTbody .chk").prop("checked", true);
+            }else {
+                $("#popupListTbody .chk").prop("checked", false);
+            }
+        });
+
+        $("#popupListTbody").on("click", ".chk", function() {
+            let chkLength = $("#popupListTbody .chk").length;
+            let checkedLength = $("#popupListTbody .chk:checked").length;
+
+            if(chkLength == checkedLength) {
+                $("#all-chk").prop("checked", true);
+            }else {
+                $("#all-chk").prop("checked", false);
+            }
+        });
+
+        function deletePopup() {
+            let checked = $("#popupListTbody .chk:checked").length;
+            if(checked==0) {
+                toastModal("삭제 하려는 팝업을 선택해주세요");
+                return;
+            }
+
+            if(!confirm("팝업을 삭제하시겠습니까?")) return;
+
+            let arrPopupSeq = new Array();
+            $("#popupListTbody .chk:checked").each(function() {
+                let popupSeq = $(this).parent().parent().attr("seq");
+                arrPopupSeq.push(popupSeq);
+            });
+
+            $.ajax({
+                type:'delete',
+                url:'/api/admin/popup/delete',
+                contentType:'application/json',
+                data:JSON.stringify({
+                    'popupSeq':arrPopupSeq
+                }),
+                success:function() {
+                    toastModal("팝업이 삭제되었습니다.");
+                    setTimeout(() => location.reload(), 700);
+                },
+                error:function(request, status, error) {
+                    toastModal("팝업 삭제에 실패했습니다.");
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 노출 여부 필터링
+        $("#exposure").on("change", function(){
+            page=1;
+            getPopupList();
+        });
+
+        // 정렬
+        $("#popupListThead").on("click", ".sort", function(){
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            getPopupList();
+        });
+
+        $("#search-icon").on("click", function() {
+            page=1;
+            getPopupList();
+        });
+
+        $("#query").on("keydown", function(e){
+            if(e.keyCode==13) {
+                $("#search-icon").click();
+            }
+        });
+
+        $("#size").on("change", function(){
+            getPopupList();
+        });
+
+        // 페이징 클릭 시 실행
+        $("#pagination").on("click", "a", function () {
+            page = parseInt($(this).attr("gopage"));
+            getPopupList();
+        });
+
+
+    </script>
+
+
+</div>
+
+
+</html>

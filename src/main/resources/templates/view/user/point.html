@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/default_layout_user}"
+      xmlns:th="http://www.thymeleaf.org">
+
+<style layout:fragment="css">
+</style>
+
+<!-- default_layout_user.html 에 정의한 main page 부분 -->
+<div layout:fragment="content">
+
+    <div class="gray-bg">
+        <div class="auto point-wrap">
+
+            <div class="subP-title">
+                <p class="title">적립금 관리</p>
+                <ul class="menuPath">
+                    <li><a href="/"><i class="fa-solid fa-house"></i></a></li>
+                    <li><a href="">적립금 관리</a></li>
+                </ul>
+            </div>
+
+            <div class="point-infoWrap">
+                <div class="level-wrap">
+                    <h5 class="title"><span id="userName" class="black"></span>님의 등급은 <span id="gradeAndLevel" class="yellow"></span>입니다.</h5>
+                    <p id="gradeAndLevel2" class="text"></p>
+
+                    <div class="rest-point">
+                        <p>다음 LEVEL까지 <span id="insufficient" class="black"></span> 남았습니다.</p>
+                    </div>
+                    <div class="level-chart">
+                        <div class="bar">
+                            <span class="level-now"></span>
+                        </div>
+                        <div class="level">
+                            <span id="prev-level" class="prev-level"></span>
+                            <span id="next-level" class="next-level"></span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="benefit-btn white-btn comm-btn">등급별 혜택 보기</a>
+                </div>
+
+                <div class="pointInfo-list">
+                    <h5 class="title">추천인 코드</h5>
+                    <p id="recommendCode" class="info"></p>
+                    <div class="text-wrap">
+                        <p class="text">초대한 친구의 수익 일부를 적립금으로 받을 수 있습니다.</p>
+                        <a id="copy-invite-link" class="cupoint comm-btn white-btn share-btn">친구 초대하고 적립금 받기</a>
+                    </div>
+
+                </div>
+                <div class="pointInfo-list">
+                    <h5 class="title">적립금</h5>
+                    <p id="reserves" class="info">5,000A</p>
+                    <div class="text-wrap">
+                        <p class="text">적립금 1,000A당 100P로 전환 가능합니다.</p>
+                        <a class="cupoint comm-btn white-btn point-btn">적립금 전환</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="auto point-wrap point-wrap2">
+        <div class="inventList-wrap">
+            <div class="subTitle2">
+                <p class="title">적립금 내역</p>
+
+            </div>
+
+
+
+            <div id="search-wrap" class="search-wrap">
+                <input type="date" id="dateFrom" class="date">
+                <span>~</span>
+                <input type="date" id="dateTo" class="date">
+
+                <ul id="month-gap" class="period-wrap">
+                    <li><a class="cupoint" val=1>1개월</a></li>
+                    <li class="actived"><a class="cupoint" val="3">3개월</a></li>
+                    <li><a class="cupoint" val="6">6개월</a></li>
+                    <li><a class="cupoint" val="12">1년</a></li>
+                </ul>
+            </div>
+
+            <!--PC버전-->
+            <div class="inventList pointList page-tableBox pc768-wrap">
+                <table class="page-table1">
+                    <colgroup>
+                        <col style = "width:10%">
+                        <col style = "width:*">
+                        <col style = "width:40%">
+                        <col style = "width:*">
+                        <col style = "width:*">
+
+                    </colgroup>
+
+                    <thead id="reservesListThead">
+                        <tr>
+                            <th>번호</th>
+                            <th><p class="sort" sort="createdAt">날짜</p></th>
+                            <th>내용</th>
+                            <th><p class="sort" sort="amount">적립/사용내역</p></th>
+                            <th><p class="sort" sort="residual">잔여 적립금</p></th>
+                        </tr>
+                    </thead>
+                    <tbody id="reservesListTbody">
+                        <!--<tr>
+                            <td>8</td>
+                            <td>2022-08-10</td>
+                            <td>관리자 지급</td>
+                            <td><p class="p-point point">+5,000A</p></td>
+                            <td>5,000A</td>
+                        </tr>
+                        <tr>
+                            <td>7</td>
+                            <td>2022-08-09</td>
+                            <td>적립금 전환 성공</td>
+                            <td><p class="point">-11,000A</p></td>
+                            <td>0A</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>2022-07-05</td>
+                            <td>적립금 전환 신청</td>
+                            <td><p class="point">-</p></td>
+                            <td>11,000A</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>2022-07-01</td>
+                            <td>추천인 수익 5% 지급</td>
+                            <td><p class="p-point point">+1,000A</p></td>
+                            <td>11,000A</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>2022-07-01</td>
+                            <td>추천인 수익 5% 지급</td>
+                            <td><p class="p-point point">+1,000A</p></td>
+                            <td>10,000A</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>2022-04-21</td>
+                            <td>관리자 지급</td>
+                            <td><p class="p-point point">+5,000A</p></td>
+                            <td>9,000A</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2021-12-27</td>
+                            <td>추천인 수익 5% 지급</td>
+                            <td><p class="p-point point">+1,000A</p></td>
+                            <td>4,000A</td>
+                        </tr>
+                        <tr>
+                            <td>1</td>
+                            <td>2021-12-24</td>
+                            <td>관리자 지급</td>
+                            <td><p class="p-point point">+3,000A</p></td>
+                            <td>3,000A</td>
+                        </tr>-->
+
+                    </tbody>
+                </table>
+            </div>
+
+            <!--M 768px ~ -->
+            <ul id="reservesListMobile" class="profitList m768-wrap">
+                <!--<li>
+                    <p class="date">2022-08-10</p>
+                    <p class="text">관리자 지급</p>
+                    <div class="text-wrap">
+                        <p class="p-price price">+5,000A</p>
+                        <p class="all-price">5,000A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2022-08-10</p>
+                    <p class="text">적립금 전환 성공</p>
+                    <div class="text-wrap">
+                        <p class="m-price price">-11,000A</p>
+                        <p class="all-price">0A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2022-07-05</p>
+                    <p class="text">적립금 전환 신청</p>
+                    <div class="text-wrap">
+                        <p class="price">-</p>
+                        <p class="all-price">11,000A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2022-07-01</p>
+                    <p class="text">추천인 수익 5% 지급</p>
+                    <div class="text-wrap">
+                        <p class="p-price price">+1,000A</p>
+                        <p class="all-price">11,000A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2022-07-01</p>
+                    <p class="text">추천인 수익 5% 지급</p>
+                    <div class="text-wrap">
+                        <p class="p-price price">+1,000A</p>
+                        <p class="all-price">10,000A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2022-04-21</p>
+                    <p class="text">관리자 지급</p>
+                    <div class="text-wrap">
+                        <p class="p-price price">+5,000A</p>
+                        <p class="all-price">9,000A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2021-12-27</p>
+                    <p class="text">추천인 수익 5% 지급</p>
+                    <div class="text-wrap">
+                        <p class="p-price price">+1,000A</p>
+                        <p class="all-price">4,000A</p>
+                    </div>
+                </li>
+                <li>
+                    <p class="date">2021-12-24</p>
+                    <p class="text">관리자 지급</p>
+                    <div class="text-wrap">
+                        <p class="p-price price">+3,000A</p>
+                        <p class="all-price">3,000A</p>
+                    </div>
+                </li>-->
+
+            </ul>
+
+            <!--paging-->
+            <div id="pagination" class="paging">
+                <!--<a href="#" class="page-arrow1 page-arrow pc-mr05">처음 게시물 목록</a>
+                <a href="#" class="page-arrow2 page-arrow">이전 게시물 목록</a>
+                <div class="page-num">
+                    <a href="#" class="actived">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <a href="#">6</a>
+                    <a href="#">7</a>
+                    <a href="#">8</a>
+                    <a href="#">9</a>
+                    <a href="#">10</a>
+                </div>
+                <a href="#" class="page-arrow3 page-arrow pc-mr05">다음 게시물 목록</a>
+                <a href="#" class="page-arrow4 page-arrow">마지막 게시물 목록</a>-->
+            </div>
+
+        </div>
+    </div>
+
+    <!--등급별혜택 모달-->
+    <div class="benefit-modal modal">
+        <div class="modal-inner">
+            <div class="modal-title">
+                <p class="title">등급별 혜택</p>
+                <a href="#" class="close-btn">닫기</a>
+            </div>
+            <div class="modal-text">
+                <p class="level-title">투자금액 <span class="yellow">1,000,000P당 1LEVEL</span> 등급 UP</p>
+
+                <ul class="benefit-wrap">
+                    <li>
+                        <p class="text">등급이 올라갈 때마다</p>
+                        <p class="benefit-info black">수익율이 <span class="yellow">증가</span></p>
+                    </li>
+                    <li>
+                        <p class="text">최초 등급 달성 시</p>
+                        <p class="benefit-info black"><span class="yellow">5,000A</span> 적립금 지급</p>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+        <div class="modal-bg"></div>
+    </div>
+
+    <!--적립금 전환 모달-->
+    <div class="point-modal modal">
+        <div class="modal-inner">
+            <div class="modal-title">
+                <p class="title">적립금 전환</p>
+                <a class="close-btn cupoint">닫기</a>
+            </div>
+            <div class="modal-text">
+                <div class="input-wrap">
+                    <p class="title">전환 가능 적립금 <span class="yellow"></span></p>
+                    <p id="nowPoints" class="text"></p>
+                </div>
+                <div class="input-wrap input-wrap2">
+                    <p class="title">전환 신청 적립금 <span class="yellow">*</span></p>
+                    <input type="text" id="amount" placeholder="1,000P 단위로 입력해주세요." oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+                </div>
+                <div class="input-wrap input-wrap2">
+                    <p class="title">예금주 <span class="yellow">*</span></p>
+                    <input type="text" id="name" placeholder="회원정보에서 이름을 변경해주세요." readonly>
+                </div>
+                <div class="input-wrap input-wrap2">
+                    <p class="title">은행명 <span class="yellow">*</span></p>
+                    <input type="text" id="bankName" placeholder="회원정보에서 계좌정보를 변경해주세요." readonly>
+                </div>
+                <div class="input-wrap input-wrap2">
+                    <p class="title">계좌번호 <span class="yellow">*</span></p>
+                    <input type="number" id="accountNumber" placeholder="회원정보에서 계좌정보를 변경해주세요." readonly>
+                </div>
+
+                <div class="text-wrap">
+                    <p class="text">적립금 신청 후 적립금은 <span class="brown">다음 달 10일에 전환</span>됩니다.</p>
+                    <p class="text">적립금은 1,000A당 100P로 전환됩니다. (텍스트 수정 요망)</p>
+                    <p class="text">적립금은 최소 100A 이상 전환 신청이 가능합니다. (텍스트 수정 요망)</p>
+                    <p class="text">적립금 전환 신청 후 적립금 취소 및 적립금 환불이 불가능합니다.</p>
+                </div>
+            </div>
+            <div class="modal-btn">
+                <a class="cupoint white-btn close-btn mr10">닫기</a>
+                <a id="btn-withdrawal" class="cupoint yellow-btn">전환하기</a>
+            </div>
+        </div>
+        <div class="modal-bg"></div>
+    </div>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/dev.js"></script>
+
+    <!-- script START -->
+    <script>
+        let sort = "createdAt,desc";
+        let page = 1;
+        let size = 20;
+        let today = new Date();
+        let preDay = new Date(new Date().setMonth(new Date().getMonth()-3));
+        $("#dateFrom").val(strDate(preDay));
+        $("#dateTo").val(strDate(today));
+        let available;
+
+
+        //적립금관리 높이
+        let levelH = $('.point-infoWrap .level-wrap').outerHeight();
+
+        $('.point-infoWrap .pointInfo-list').outerHeight(levelH);
+
+        getReservesOverview();
+        if (matchMedia("screen and (max-width: 768px)").matches) {
+            getReservesMobile();
+        } else {
+            getReserves();
+        }
+
+        window.onresize = function(event){
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getReservesMobile();
+            } else {
+                page = Math.round(page/2);
+                getReserves();
+            }
+        };
+
+        //모달
+        $('.benefit-btn').click(function(){
+            $('.benefit-modal').css('display','block');
+        });
+
+        $('.point-btn').click(function(){
+            $("#amount").val("");
+            $('.point-modal').css('display','block');
+        });
+
+        $("#amount").on("keyup", function(){
+            if($(this).val()>available) {
+                toastModal("전환 가능 적립금을 초과 할 수 없습니다.");
+                $(this).val(fcomma(available));
+                return;
+            }
+            $("#amount").val(fcomma($(this).val()));
+        });
+
+        // 적립금 출금 신청하기
+        $("#btn-withdrawal").on("click", function() {
+            let amount = uncomma($("#amount").val());
+            let bankName = $("#bankName").val();
+            let accountNumber = $("#accountNumber").val();
+
+            if(amount==0 || amount.length<4) {
+                toastModal("출금 신청 금액을 확인해주세요.");
+                return;
+            }
+            if(bankName=="" || accountNumber=="") {
+                toastModal("내 계좌정보를 변경해주세요.");
+                return;
+            }
+            let odd = Number(amount.slice(-3, amount.length));
+            if(odd>0) {
+                toastModal("출금 신청 금액은 1,000P 단위로 입력해주세요.");
+                return;
+            }
+            if(amount > available) {
+                toastModal("출금 가능 금액을 초과 할 수 없습니다.");
+                return;
+            }
+
+            if(!confirm("입력하신 금액은 "+fcomma(amount)+"P 입니다.\n출금을 신청하시겠습니까?")) return;
+
+
+            $.ajax({
+                type:"post",
+                url:"/api/user/reserves",
+                contentType:"application/json",
+                data:JSON.stringify({
+                    "amount":amount,
+                    "bankName":bankName,
+                    "accountNumber":accountNumber
+                }),
+                success:function() {
+                    toastModal("출금이 신청되었습니다.");
+                    setTimeout(() => location.reload(), 700);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                    let errorJson = JSON.parse(request.responseText)
+                    if(errorJson.code == "MZS-1020"){
+                        toastModal("아직 처리가 되지 않은 요청이 있습니다.");
+                        setTimeout(() => location.reload(), 700);
+                    }
+                }
+            });
+        });
+
+        function getReservesOverview() {
+            $.ajax({
+                type:'get',
+                url:'/api/user/reserves/overview',
+                success:function(data) {
+                    // console.log(data);
+                    let gradeAndLevel = data.grade+'(LEVEL'+data.level+')';
+                    let gradeAndLevel2 = '등급 : '+data.grade+' / 레벨 : LEVEL'+data.level;
+                    $("#userName").text(data.name);
+                    $("#gradeAndLevel").text(gradeAndLevel);
+                    $("#gradeAndLevel2").text(gradeAndLevel2);
+                    let prevLevel = 'LEVEL'+data.level;
+                    let nextLevel = 'LEVEL'+(data.level+1);
+                    $("#prev-level").text(prevLevel);
+                    $("#next-level").text(nextLevel);
+                    let conversionRate = data.conversionRate;
+                    let strConversionRate = data.conversionRate+'';
+                    let nowInvest = data.investment+'';
+                    nowInvest = nowInvest.slice((strConversionRate.length*-1)+1, nowInvest.length);
+                    let invest = Number(nowInvest);
+                    let insufficient = conversionRate - nowInvest;
+                    $("#insufficient").text(fcomma(insufficient)+'P');
+                    $("#recommendCode").text(data.recommendCode);
+                    $("#reserves").text(fcomma(data.reserves)+'P');
+                    let percent = (invest / conversionRate) * 100
+                    $(".level-now").css("width", percent+"%");
+                    available = Number(data.reserves);
+
+                    // modal
+                    if(data.name!=null && data.name!="") {
+                        $("#name").val(data.name);
+                    }
+                    if(data.bankName!=null && data.bankName!="") {
+                        $("#bankName").val(data.bankName);
+                    }
+                    if(data.accountNumber!=null && data.accountNumber!="") {
+                        $("#accountNumber").val(data.accountNumber);
+                    }
+                    $("#nowPoints").text(fcomma(data.reserves)+"P");
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 추천인 코드 복사
+        $("#copy-invite-link").on("click", function(){
+            let recommendCode = $("#recommendCode").text();
+            let select = document.createElement("textarea");
+            document.body.appendChild(select);
+            select.value = recommendCode;
+            select.select();
+            document.execCommand("copy");
+            document.body.removeChild(select);
+            alert("추천인 코드가 복사 되었습니다.");
+        });
+
+        // 적립금 내역 목록
+        function getReserves() {
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/reserves",
+                async:false,
+                data:{
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":size
+                },
+                success:function(data) {
+                    // console.log(data);
+                    let list = data.content;
+                    let tag = '';
+                    if(list!=null && list.length!=0) {
+                        list.forEach(function(arg){
+                            let typeTag = '';
+                            if (arg.type==1) {
+                                typeTag  = '<td><p class="p-point point">+'+fcomma(arg.amount)+'</p></td>';
+                            }else if(arg.type==2) {
+                                typeTag  = '<td><p class="m-point point">-'+fcomma(arg.amount)+'</p></td>';
+                            }else if(arg.type==0) {
+                                typeTag  = '<td><p class="point">'+fcomma(arg.amount)+'</p></td>';
+                            }
+
+                            tag += '<tr>' +
+                                    '<td>'+arg.rowNum+'</td>' +
+                                    '<td>'+arg.createdAt+'</td>' +
+                                    '<td>'+arg.content+'</td>' +
+                                    typeTag +
+                                    '<td>'+fcomma(arg.residual)+'</td>' +
+                                    '</tr>';
+                        });
+                    }else {
+                        tag = '<tr><td colspan="5" style="text-align: center;">적립금 내역이 존재하지 않습니다.</td></tr>';
+                    }
+                    fPagination2(data, page);
+                    $("#reservesListTbody").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 적립금 내역 목록 모바일
+        function getReservesMobile() {
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+
+            $.ajax({
+                type:"get",
+                url:"/api/user/reserves",
+                async:false,
+                data:{
+                    "dateFrom":dateFrom + " 00:00:00",
+                    "dateTo":dateTo + " 23:59:59",
+                    "sort":sort,
+                    "page":page-1,
+                    "size":10
+                },
+                success:function(data) {
+                    console.log(data);
+                    let list = data.content;
+                    let tag = '';
+                    if(list!=null && list.length!=0) {
+                        list.forEach(function(arg){
+                            let typeTag = '';
+                            if (arg.type==1) {
+                                typeTag  = '<p class="p-price price">+'+fcomma(arg.amount)+'</p>';
+                            }else if(arg.type==2) {
+                                typeTag  = '<p class="m-point point">-'+fcomma(arg.amount)+'</p>';
+                            }else if(arg.type==0) {
+                                typeTag  = '<p class="point">'+fcomma(arg.amount)+'</p>';
+                            }
+
+                            tag += '<li>' +
+                                '<p class="date">'+arg.createdAt+'</p>' +
+                                '<p class="text">'+arg.content+'</p>' +
+                                '<div class="text-wrap">' +
+                                typeTag +
+                                '<p class="all-price">'+fcomma(arg.residual)+'</p>' +
+                                '</div>' +
+                                '</li>';
+                        });
+                    }else {
+                        tag = '<li><p style="text-align: center;">적립금 내역이 존재하지 않습니다.</p></li>';
+
+                    }
+                    fMobilePagination(data, page);
+                    $("#reservesListMobile").html(tag);
+                },
+                error:function(request, status, error) {
+                    console.log(request.status + ' ' + error.statusText + ' ' + request.responseText);
+                }
+            });
+        }
+
+        // 날짜 단위 변경 시
+        $("#month-gap").on("click", "a", function(){
+            let dateTo = $("#dateTo").val();
+            let gap = Number($(this).attr("val"));
+            let dateFrom = new Date(dateTo);
+            dateFrom = new Date(dateFrom.setMonth(dateFrom.getMonth()-gap));
+            $("#dateFrom").val(strDate(dateFrom));
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getReservesMobile();
+            } else {
+                getReserves();
+            }
+        });
+
+        // 날짜 직접 선택 시
+        $("#search-wrap").on("change", ".date", function(){
+            let dateFrom = $("#dateFrom").val();
+            let dateTo = $("#dateTo").val();
+            if(dateTo < dateFrom) {
+                toastModal("조회 시작 날짜가 종료 날짜를 넘길 수 없습니다.");
+                $("#dateFrom").val(dateTo);
+            }
+
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getReservesMobile();
+            } else {
+                getReserves();
+            }
+        });
+
+        // 페이지 클릭 시
+        $("#pagination").on("click", "a", function(){
+            page = $(this).attr("gopage");
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                getReservesMobile();
+            } else {
+                getReserves();
+            }
+        });
+
+        // 정렬
+        $("#reservesListThead").on("click", ".sort", function() {
+            sort=$(this).attr('sort');
+
+            if(!$(this).is('.actived')) {
+                $(this).removeClass('actived');
+                sort=sort+',desc'
+            }else{
+                $(this).addClass('actived');
+                sort=sort;
+            }
+
+            $('.sort').not(this).removeClass('actived');
+            page=1;
+            if (matchMedia("screen and (max-width: 768px)").matches) {
+                sort="createdAt,desc";
+                getReservesMobile();
+            } else {
+                getReserves();
+            }
+        });
+
+        function strDate(date) {
+            let year = date.getFullYear() + "";
+            let month = (date.getMonth()+1) + "";
+            let day = date.getDate() + "";
+
+            if(month.length==1) {
+                month = "0" + month;
+            }
+            if(day.length==1) {
+                day = "0" + day;
+            }
+            return year + "-" + month + "-" + day;
+        }
+    </script>
+    <!-- script END -->
+</div>
+
+</html>
